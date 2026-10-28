@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import textwrap
+from depth_motion import depth_filter
 
 FPS = 24
 
@@ -19,7 +20,20 @@ def media_duration(path):
 
 
 def wrapped(text, columns):
-    return '\n'.join(textwrap.wrap(text, width=columns, break_long_words=False, break_on_hyphens=False))
+    # Balance two-line titles instead of leaving a single orphan word.
+    lines = textwrap.wrap(text, width=columns, break_long_words=False, break_on_hyphens=False)
+    if len(lines) == 2:
+        words = text.split()
+        candidates = []
+        for split in range(1, len(words)):
+            left, right = ' '.join(words[:split]), ' '.join(words[split:])
+            if max(len(left), len(right)) <= columns:
+                punctuation = -3 if left.endswith((',', ';', ':')) else 0
+                candidates.append((abs(len(left)-len(right)) + punctuation, left, right))
+        if candidates:
+            _, left, right = min(candidates)
+            return left + '\n' + right
+    return '\n'.join(lines)
 
 
 def music_mix(music, index, duration):
@@ -103,10 +117,19 @@ def main():
                 zoom = float(clip.get('zoom', .08))
                 progress = f'on/{max(1, int(length * FPS)-1)}'
                 z = f'1+{zoom}*({progress})' if index % 2 else f'1+{zoom}*(1-({progress}))'
-                video_filter = f'{crop}scale={width*2}:{height*2}:force_original_aspect_ratio=increase,crop={width*2}:{height*2},zoompan=z=\'{z}\':x=\'iw/2-iw/zoom/2\':y=\'ih/2-ih/zoom/2\':d=1:s={width}x{height}:fps={FPS}'
+                fit = clip.get('framing') == 'fit'
+                if fit:
+                    canvas = f'scale={width*2}:{height*2}:force_original_aspect_ratio=decrease,pad={width*2}:{height*2}:(ow-iw)/2:(oh-ih)/2:black'
+                else:
+                    canvas = f'scale={width*2}:{height*2}:force_original_aspect_ratio=increase,crop={width*2}:{height*2}'
+                video_filter = f'{crop}{canvas},zoompan=z=\'{z}\':x=\'iw/2-iw/zoom/2\':y=\'ih/2-ih/zoom/2\':d=1:s={width}x{height}:fps={FPS}'
             else:
                 video_filter = f'{crop}setpts=(PTS-STARTPTS)/{speed},{framing}'
-            video_filter += f",setsar=1,eq=saturation={float(clip.get('saturation', .65))}:contrast=1.04:brightness=-0.02,fps={FPS},format=yuv420p"
+            video_filter += f",setsar=1,eq=saturation={float(clip.get('saturation', .90))}:contrast={float(clip.get('contrast', 1.035))}:brightness=-0.008:gamma={float(clip.get('gamma', 1))},fps={FPS}"
+            if recipe.get('motion') == 'orbital-depth':
+                video_filter += ',' + depth_filter(width, height, length, index, FPS, .8)
+            # Bias the optical shade upward to protect lower-third captions.
+            video_filter += ',vignette=angle=PI/3:x0=w/2:y0=h*.15,format=yuv420p'
             run(['ffmpeg', '-hide_banner', '-v', 'error', '-threads', '2', *inputs, '-vf', video_filter, '-filter_threads', '2', '-an', '-t', str(length), '-c:v', 'libx264', '-threads', '2', '-preset', 'fast', '-crf', '19', '-pix_fmt', 'yuv420p', str(path)])
             normalized.append(path)
             print(f'Shot {index+1}/{len(clips)} ready', flush=True)
@@ -121,23 +144,23 @@ def main():
             filters.append(f'[{last}][v{index}]xfade=transition=fade:duration={dissolve}:offset={running-dissolve},fps={FPS}[{label}]')
             last, running = label, running + lengths[index] - dissolve
         # The quote, French translation and author share a single readable composition.
-        typography = f'[{last}]drawbox=x=0:y=0:w=iw:h=ih:color=black@0.36:t=fill'
+        typography = f'[{last}]drawbox=x=0:y=0:w=iw:h=ih:color=black@0.10:t=fill'
         for index, title in enumerate(recipe.get('titles', [])):
             start, end = float(title['start']), float(title['end'])
             kind = title.get('kind', 'quote')
             if kind == 'quote':
-                size = 52 if args.portrait else 68
+                size = 48 if args.portrait else 56
                 if len(title['text']) < 12:
-                    size = 86 if args.portrait else 112
-                quote = wrapped(title['text'], 23 if args.portrait else 36)
+                    size = 64 if args.portrait else 76
+                quote = wrapped(title['text'], 24 if args.portrait else 37)
                 lines = quote.count('\n') + 1
-                y = f'(h-text_h)/2-{42 if args.portrait else 38}'
+                y = '(h-text_h)/2+100'
                 rows = [(quote, size, serif, y, '0xf8f5f0', 12)]
                 translation = wrapped(title['translation'], 35 if args.portrait else 66)
-                trans_y = f'h/2+{(lines*size+(lines-1)*12)/2 + (12 if args.portrait else 10)}'
-                rows.append((translation, 25 if args.portrait else 28, font, trans_y, '0xe8e3d8', 8))
+                trans_y = f'h/2+{100 + (lines*size+(lines-1)*12)/2 + 22}'
+                rows.append((translation, 25, font, trans_y, '0xe8e3d8', 8))
                 author_y = f'{trans_y}+{(translation.count(chr(10))+1)*34+26}'
-                rows.append((title['author'], 16 if args.portrait else 17, font, author_y, '0xbca979', 0))
+                rows.append((title['author'], 16, font, author_y, '0xc4c7d0', 0))
             else:
                 size = (118 if args.portrait else 156) if kind == 'brand' else (30 if args.portrait else 36)
                 rows = [(title['text'], size, font, title.get('y', '(h-text_h)/2'), '0xf8f5f0', 0)]

@@ -4,10 +4,10 @@
   const root = document.documentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const MEDIA = 'assets/latin-intro.mp4?v=5';
-  const POSTER = 'assets/latin-intro-poster.webp?v=5';
-  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=5';
-  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=5';
+  const MEDIA = 'assets/latin-intro.mp4?v=6';
+  const POSTER = 'assets/latin-intro-poster.webp?v=6';
+  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=6';
+  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=6';
   const LOAD_TIMEOUT_MS = 12000;
   const HIDE_DELAY_MS = 2600;
   let current = null;
@@ -16,13 +16,10 @@
   const icons = {
     play: '<path d="m9 5 11 7-11 7z" fill="currentColor" stroke="none"/>',
     pause: '<path d="M8 5v14M16 5v14" stroke-width="3.5"/>',
-    stop: '<rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor" stroke="none"/>',
-    restart: '<path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/>',
     sound: '<path d="m11 5-5 4H3v6h3l5 4zM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/>',
     muted: '<path d="m11 5-5 4H3v6h3l5 4zM16 9l5 6M16 15l5-6"/>',
     expand: '<path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/>',
     contract: '<path d="M3 8h5V3M21 8h-5V3M8 21v-5H3M16 21v-5h5"/>',
-    chapters: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
     settings: '<path d="m10 3-.5 2a7 7 0 0 0-1.8 1L5.8 5.5 3.9 8.8l1.5 1.4a7 7 0 0 0 0 2.1L3.9 14l1.9 3.3 1.9-.5a7 7 0 0 0 1.8 1l.5 2.1h4l.5-2.1a7 7 0 0 0 1.8-1l1.9.5 1.9-3.3-1.5-1.6a7 7 0 0 0 0-2.1l1.5-1.5-1.9-3.3-1.9.5a7 7 0 0 0-1.8-1L14 3z"/><circle cx="12" cy="11.5" r="3"/>',
     close: '<path d="m6 6 12 12M6 18 18 6"/>',
     arrow: '<path d="M4 12h15m-6-6 6 6-6 6"/>'
@@ -36,9 +33,9 @@
     .latin-film.is-cover .latin-film-poster, .latin-film.is-cover .latin-film-video { object-fit:cover; }
     .latin-film-poster { display:none; }
     .latin-film-video { transition:opacity .45s; }
-    .latin-film.is-launch .latin-film-video, .latin-film.is-stopped .latin-film-video, .latin-film.has-ended .latin-film-video { opacity:0; }
+    .latin-film.is-launch .latin-film-video, .latin-film.has-ended .latin-film-video { opacity:0; }
     .latin-film-shade { position:absolute; inset:0; pointer-events:none; background:linear-gradient(transparent 66%,#0009 100%); transition:opacity .35s; }
-    .latin-film.is-launch .latin-film-shade, .latin-film.is-stopped .latin-film-shade, .latin-film.has-ended .latin-film-shade { background:none; }
+    .latin-film.is-launch .latin-film-shade, .latin-film.has-ended .latin-film-shade { background:none; }
     .latin-film button, .latin-film a, .latin-film input { font:inherit; }
     .latin-film button, .latin-film a { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
     .latin-film button { display:inline-flex; align-items:center; justify-content:center; gap:11px; color:inherit; border:0; background:none; cursor:pointer; }
@@ -98,9 +95,6 @@
     .latin-film-speeds button { min-height:40px; padding:7px 2px; border-radius:7px; color:#aaa; font-size:12px; }
     .latin-film-speeds button:hover { background:#ffffff10; }
     .latin-film-speeds button[aria-pressed="true"] { color:#fff; background:#ffffff18; }
-    .latin-film-setting-action { width:100%; min-height:44px; justify-content:flex-start!important; padding:10px 12px!important; border-radius:7px; font-size:12px!important; text-align:left; }
-    .latin-film-setting-action:hover { background:#ffffff0b; }
-    .latin-film-setting-action svg { width:18px; height:18px; }
     .latin-film-credit { display:flex; align-items:center; min-height:42px; padding:10px 12px; margin-top:5px; border-top:1px solid #ffffff10; color:#999!important; font-size:11px!important; }
     .latin-film-credit:hover { color:#fff!important; }
     .latin-film.is-controls-hidden { cursor:none; }
@@ -121,7 +115,6 @@
       .latin-film-volume { width:58px; }
       .latin-film-volume-value { width:28px; font-size:9px; }
       .latin-film-time { margin-left:8px; padding:9px 12px; gap:3px; font-size:10px; }
-      .latin-film-secondary-control { display:none!important; }
       .latin-film-settings { right:50px; width:235px; }
     }
     @media(max-width:380px) {
@@ -246,9 +239,8 @@
   function updateState(state) {
     if (!isActive(state)) return;
     const mode = state.mode;
-    const cardVisible = ['launch', 'stopped', 'ended'].includes(mode);
+    const cardVisible = ['launch', 'ended'].includes(mode);
     state.overlay.classList.toggle('is-launch', mode === 'launch');
-    state.overlay.classList.toggle('is-stopped', mode === 'stopped');
     state.overlay.classList.toggle('has-ended', mode === 'ended');
     state.card.hidden = !cardVisible || state.loading;
     state.explore.hidden = mode !== 'ended';
@@ -256,7 +248,7 @@
     state.primaryLabel.textContent = primaryLabel;
     state.primary.setAttribute('aria-label', primaryLabel);
     const playing = !state.video.paused && mode === 'playing';
-    setButton(state.play, playing ? 'Mettre le film en pause' : (state.started && mode !== 'stopped' && mode !== 'ended' ? 'Reprendre le film' : 'Lire le film'), playing ? 'pause' : 'play');
+    setButton(state.play, playing ? 'Mettre le film en pause' : (state.started && mode !== 'ended' ? 'Reprendre le film' : 'Lire le film'), playing ? 'pause' : 'play');
     const audible = !state.video.muted && state.video.volume > 0;
     setButton(state.sound, audible ? 'Couper le son' : 'Activer le son', audible ? 'sound' : 'muted');
     state.sound.setAttribute('aria-pressed', String(audible));
@@ -270,10 +262,10 @@
     } else scheduleHide(state);
   }
 
-  async function playFilm(state, restart = false) {
+  async function playFilm(state) {
     if (!isActive(state) || document.hidden) return;
     if (state.card.contains(document.activeElement)) state.overlay.focus({ preventScroll: true });
-    if (restart || state.mode === 'ended') state.video.currentTime = 0;
+    if (state.mode === 'ended') state.video.currentTime = 0;
     state.userPaused = false;
     state.mode = 'playing';
     state.loading = !state.started && state.video.readyState < 3;
@@ -307,19 +299,6 @@
     updateState(state);
   }
 
-  function stopFilm(state) {
-    if (!isActive(state)) return;
-    state.mode = 'stopped';
-    state.userPaused = true;
-    state.loading = false;
-    state.scrubbing = false;
-    state.status.hidden = true;
-    clearLoadTimer(state);
-    state.video.pause();
-    if (state.video.readyState > 0) state.video.currentTime = 0;
-    updateState(state);
-  }
-
   function togglePlayback(state) {
     if (!isActive(state)) return;
     if (state.video.paused || state.mode === 'ended') playFilm(state);
@@ -329,7 +308,7 @@
   function toggleSound(state) {
     if (!isActive(state)) return;
     if (state.video.muted || !state.video.volume) {
-      if (!state.video.volume) state.video.volume = state.lastVolume || .75;
+      if (!state.video.volume) state.video.volume = state.lastVolume || 1;
       state.video.muted = false;
     } else state.video.muted = true;
     updateState(state);
@@ -339,7 +318,7 @@
   function seekTo(state, value) {
     if (!isActive(state) || !Number.isFinite(state.video.duration)) return;
     state.video.currentTime = Math.max(0, Math.min(state.video.duration, value));
-    if (state.mode === 'ended' || state.mode === 'stopped' || state.mode === 'launch') state.mode = 'paused';
+    if (state.mode === 'ended' || state.mode === 'launch') state.mode = 'paused';
     updateTimeline(state);
     updateState(state);
     showControls(state);
@@ -372,7 +351,6 @@
     state.settingsView = view === 'chapters' && state.chapterButtons.length ? 'chapters' : 'playback';
     state.settings.hidden = false;
     state.settingsToggle.setAttribute('aria-expanded', 'true');
-    state.chaptersToggle.setAttribute('aria-expanded', String(state.settingsView === 'chapters'));
     state.playbackSettings.hidden = state.settingsView !== 'playback';
     state.chapterSettings.hidden = state.settingsView !== 'chapters';
     state.playbackTab.setAttribute('aria-pressed', String(state.settingsView === 'playback'));
@@ -386,7 +364,6 @@
     const containedFocus = state.settings.contains(document.activeElement);
     state.settings.hidden = true;
     state.settingsToggle.setAttribute('aria-expanded', 'false');
-    state.chaptersToggle.setAttribute('aria-expanded', 'false');
     if (restoreFocus && containedFocus) state.settingsToggle.focus({ preventScroll: true });
     showControls(state);
   }
@@ -468,7 +445,7 @@
     const state = {
       closing: false, started: false, userPaused: true, mode: 'launch', loading: false,
       scrubbing: false, resumeAfterScrub: false, resumeAfterVisibility: false,
-      keyboardMode: false, pointerOverControls: false, lastVolume: .75, settingsView: 'playback', chapterButtons: [],
+      keyboardMode: false, pointerOverControls: false, lastVolume: 1, settingsView: 'playback', chapterButtons: [],
       loadTimer: 0, hideTimer: 0, inertElements: [], events: new AbortController(),
       previousOverflow: document.body.style.overflow, previousFocus: document.activeElement,
       portrait: window.matchMedia('(max-aspect-ratio: 3/4)').matches
@@ -498,7 +475,7 @@
       state.video.setAttribute('playsinline', '');
       state.video.defaultMuted = false;
       state.video.muted = false;
-      state.video.volume = .75;
+      state.video.volume = 1;
       state.video.poster = poster.src;
       state.video.tabIndex = -1;
       state.video.setAttribute('aria-label', 'LATIN — le film des treize citations');
@@ -510,7 +487,7 @@
       const description = document.createElement('p');
       description.id = 'latin-film-description';
       description.className = 'latin-film-description';
-      description.textContent = 'Treize citations latines et leurs traductions, avec musique instrumentale. Le son est activé au lancement. Vous pouvez mettre en pause, arrêter ou recommencer le film, choisir une citation, régler le volume, la vitesse et le plein écran. Raccourcis : espace ou K pour la lecture, flèches pour avancer ou reculer, M pour le son, F pour le plein écran, Échap pour fermer. Les sources figurent dans les crédits.';
+      description.textContent = 'Treize citations latines et leurs traductions, avec musique instrumentale. Le son est activé à 100 % au lancement. Vous pouvez mettre en pause, choisir une citation dans les paramètres, régler le volume, la vitesse et le plein écran. Raccourcis : espace ou K pour la lecture, flèches pour avancer ou reculer, M pour le son, F pour le plein écran, Échap pour fermer. Les sources figurent dans les crédits.';
       state.overlay.append(description);
 
       const header = document.createElement('div');
@@ -532,7 +509,7 @@
       state.primaryLabel.className = 'latin-film-primary-label';
       state.primaryLabel.textContent = 'Lancer le film';
       state.primary.append(icon('play'), state.primaryLabel);
-      state.primary.addEventListener('click', () => playFilm(state, state.mode === 'ended'));
+      state.primary.addEventListener('click', () => playFilm(state));
       state.explore = document.createElement('button');
       state.explore.type = 'button';
       state.explore.className = 'latin-film-explore';
@@ -573,7 +550,7 @@
       state.volume = document.createElement('input');
       state.volume.type = 'range';
       state.volume.className = 'latin-film-range latin-film-volume';
-      state.volume.min = '0'; state.volume.max = '100'; state.volume.step = '1'; state.volume.value = '75';
+      state.volume.min = '0'; state.volume.max = '100'; state.volume.step = '1'; state.volume.value = '100';
       state.volume.setAttribute('aria-label', 'Volume');
       state.volume.addEventListener('input', () => {
         state.video.volume = Number(state.volume.value) / 100;
@@ -594,15 +571,6 @@
       state.duration.textContent = '—:—';
       time.append(state.elapsed, document.createTextNode(' / '), state.duration);
       left.append(state.play, audio, time);
-      const stop = iconButton('Arrêter le film', 'stop', 'latin-film-secondary-control');
-      stop.addEventListener('click', () => stopFilm(state));
-      const restart = iconButton('Recommencer le film', 'restart', 'latin-film-secondary-control');
-      restart.addEventListener('click', () => playFilm(state, true));
-      state.chaptersToggle = iconButton('Chapitres', 'chapters', 'latin-film-secondary-control');
-      state.chaptersToggle.hidden = true;
-      state.chaptersToggle.setAttribute('aria-expanded', 'false');
-      state.chaptersToggle.setAttribute('aria-controls', 'latin-film-settings');
-      state.chaptersToggle.addEventListener('click', () => openSettings(state, 'chapters'));
       state.settingsToggle = iconButton('Réglages du film', 'settings');
       state.settingsToggle.setAttribute('aria-expanded', 'false');
       state.settingsToggle.setAttribute('aria-controls', 'latin-film-settings');
@@ -613,7 +581,7 @@
       state.fullscreen = iconButton('Plein écran', 'expand', 'latin-film-fullscreen');
       state.fullscreen.hidden = !state.overlay.requestFullscreen && !state.video.webkitEnterFullscreen;
       state.fullscreen.addEventListener('click', () => toggleFullscreen(state));
-      right.append(stop, restart, state.chaptersToggle, state.settingsToggle, state.fullscreen);
+      right.append(state.settingsToggle, state.fullscreen);
       row.append(left, right);
       state.settings = document.createElement('div');
       state.settings.id = 'latin-film-settings';
@@ -648,21 +616,15 @@
         speeds.append(button);
         return { button, rate };
       });
-      const menuRestart = document.createElement('button'); menuRestart.type = 'button';
-      menuRestart.className = 'latin-film-setting-action'; menuRestart.append(icon('restart'), document.createTextNode('Recommencer le film'));
-      menuRestart.addEventListener('click', () => { closeSettings(state); playFilm(state, true); });
-      const menuStop = document.createElement('button'); menuStop.type = 'button';
-      menuStop.className = 'latin-film-setting-action'; menuStop.append(icon('stop'), document.createTextNode('Arrêter le film'));
-      menuStop.addEventListener('click', () => { closeSettings(state); stopFilm(state); });
       const credit = document.createElement('a');
       credit.className = 'latin-film-credit'; credit.href = 'media-credits.html'; credit.target = '_blank'; credit.rel = 'noopener';
       credit.textContent = 'Sources et crédits'; credit.setAttribute('aria-label', 'Crédits du film, nouvel onglet');
-      state.playbackSettings.append(speedTitle, speeds, menuRestart, menuStop, credit);
+      state.playbackSettings.append(speedTitle, speeds, credit);
       state.chapterSettings = document.createElement('div'); state.chapterSettings.className = 'latin-film-chapters'; state.chapterSettings.hidden = true;
       state.settings.append(tabs, state.playbackSettings, state.chapterSettings);
       state.panel.append(state.seek, row, state.settings);
       state.overlay.append(state.panel);
-      fetch(new URL('film/chapters.json?v=5', document.baseURI), { signal: state.events.signal })
+      fetch(new URL('film/chapters.json?v=6', document.baseURI), { signal: state.events.signal })
         .then(response => { if (!response.ok) throw new Error('Chapters unavailable'); return response.json(); })
         .then(data => {
           if (!isActive(state) || !Array.isArray(data.chapters)) return;
@@ -675,14 +637,14 @@
             button.addEventListener('click', () => { closeSettings(state); seekTo(state, chapter.start); playFilm(state); });
             state.chapterSettings.append(button); state.chapterButtons.push({ button, chapter });
           });
-          state.chaptersToggle.hidden = !chapters.length; state.chaptersTab.hidden = !chapters.length;
+          state.chaptersTab.hidden = !chapters.length;
           updateTimeline(state);
         }).catch(() => {});
 
       listen(state, state.overlay, 'pointermove', () => showControls(state), { passive: true });
       listen(state, state.overlay, 'pointerdown', event => {
         state.keyboardMode = false;
-        if (!state.settings.hidden && !state.settings.contains(event.target) && !state.settingsToggle.contains(event.target) && !state.chaptersToggle.contains(event.target)) closeSettings(state, false);
+        if (!state.settings.hidden && !state.settings.contains(event.target) && !state.settingsToggle.contains(event.target)) closeSettings(state, false);
         showControls(state);
       }, { passive: true });
       listen(state, state.overlay, 'focusin', () => showControls(state));
@@ -690,7 +652,7 @@
       listen(state, state.panel, 'pointerenter', () => { if (finePointer.matches) { state.pointerOverControls = true; showControls(state); } }, { passive: true });
       listen(state, state.panel, 'pointerleave', () => { state.pointerOverControls = false; scheduleHide(state); }, { passive: true });
       listen(state, state.video, 'click', () => {
-        if (state.mode === 'launch' || state.mode === 'stopped' || state.mode === 'ended') return;
+        if (state.mode === 'launch' || state.mode === 'ended') return;
         if (finePointer.matches) togglePlayback(state);
         else if (state.overlay.classList.contains('is-controls-hidden')) showControls(state);
         else if (canHideControls(state)) { clearHideTimer(state); state.overlay.classList.add('is-controls-hidden'); }
