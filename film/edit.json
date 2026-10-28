@@ -1,0 +1,111 @@
+{
+  "title": "LATIN — Pour la vie",
+  "clips": [
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/urban-triptych.mp4",
+      "duration": 4.8,
+      "saturation": 0,
+      "title": "Archives urbaines de New York,1941 — triptyque",
+      "source_details": "Arteries of New York City; mirror film41.55..46.35,15.02..17.32 and28.30..30.50; two shorter panels slowed to4.8s"
+    },
+    {
+      "license": "CC0-1.0",
+      "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE",
+      "path": "film/sources/flower.mp4",
+      "duration": 4.8,
+      "start": 0.05,
+      "saturation": 0.8,
+      "title": "Flower",
+      "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4"
+    },
+    {
+      "license": "CC0-1.0",
+      "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE",
+      "path": "film/sources/stream.mp4",
+      "duration": 3.6,
+      "speed": 0.85,
+      "saturation": 0.75,
+      "title": "Stream of water",
+      "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/examples/stream-of-water.mp4"
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 4.4,
+      "start": 0.15,
+      "speed": 0.9,
+      "framing": "portrait",
+      "saturation": 0.9,
+      "title": "NASA — visualisation de la Terre la nuit,2017",
+      "source_details": "NASA GSFC_20170412_Lights_m12573_EarthAtNight; mirror film0.15..4.11 corresponds source27.75..31.71"
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 4.4,
+      "start": 41.65,
+      "framing": "portrait",
+      "saturation": 0,
+      "title": "New York — skyline,1941",
+      "source_details": "Arteries of New York City; mirror film41.65..46.05, source47.32..51.72"
+    }
+  ],
+  "music": {
+    "title": "Adventure",
+    "artist": "Rafael Krux, CinematicWaves.com",
+    "album": "FreePD Music",
+    "duration_seconds": 84.7238,
+    "license": "CC0-1.0",
+    "license_url": "https://github.com/0lhi/FreePD/blob/cf011c7016595833b550a88ff127f089188b25f8/LICENSE",
+    "source_url": "https://github.com/0lhi/FreePD/blob/cf011c7016595833b550a88ff127f089188b25f8/Epic/Adventure.mp3",
+    "download_url": "https://raw.githubusercontent.com/0lhi/FreePD/cf011c7016595833b550a88ff127f089188b25f8/Epic/Adventure.mp3",
+    "original_catalog": "https://freepd.com/epic.php",
+    "sha256": "18432184e1a3acf8095b8b45b688fe08f7afb2447fc6e3adc98cc944c541a733",
+    "license_evidence": "Repository contains music MP3s, cover PNGs, and root CC0 LICENSE, no software. Original catalog not reached due network policy; mirrored source license inspected.",
+    "path": "film/music/adventure.mp3",
+    "start": 12
+  },
+  "titles": [
+    {
+      "text": "Carpe diem.",
+      "start": 2.0,
+      "end": 7.8,
+      "size": 76,
+      "serif": true
+    },
+    {
+      "text": "Cueille le jour.",
+      "start": 7.8,
+      "end": 10.8,
+      "size": 38
+    },
+    {
+      "text": "Ad astra per ardua.",
+      "start": 12.6,
+      "end": 16.0,
+      "size": 66,
+      "serif": true
+    },
+    {
+      "text": "LATIN.",
+      "start": 16.4,
+      "end": 20.0,
+      "size": 148,
+      "y": "(h-text_h)/2-30"
+    },
+    {
+      "text": "Pour la vie.",
+      "start": 16.8,
+      "end": 20.0,
+      "size": 36,
+      "y": "(h-text_h)/2+88"
+    }
+  ]
+}

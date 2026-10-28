@@ -119,6 +119,7 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 .site-footer { background: var(--ink); color: var(--paper); overflow: clip; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-block: 30px; border-bottom: 1px solid #ffffff20; }
 .footer-top .text-button { color: #c9cbbf; font-size: 11px; }
+.film-credits-link { font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top { display: flex; align-items: center; gap: 14px; font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top .icon { width: 17px; height: 17px; transform: rotate(-90deg); }
 .footer-word { position: relative; display: block; padding-block: 85px 0; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; outline-offset: -2px; }
@@ -207,7 +208,8 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
   .row-arrow { grid-column: 3; grid-row: 1 / 3; width: 29px; height: 29px; align-self: start; margin-top: 3px; }
   .row-arrow .icon { width: 15px; height: 15px; }
   .footer-top { padding-block: 18px; }
-  .footer-top .text-button, .back-top { font-size: 10px; }
+  .footer-top { gap: 12px; }
+  .footer-top .text-button, .back-top, .film-credits-link { font-size: 10px; }
   .footer-word { font-size: 24vw; padding-block: 55px 0; }
   .footer-word-gold { padding-top: 55px; }
   .reader { padding-inline: 6%; }

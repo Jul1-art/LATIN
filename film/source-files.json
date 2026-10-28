@@ -1,0 +1,22 @@
+[
+  {
+    "file": "city-film.mp4",
+    "url": "https://raw.githubusercontent.com/195440/lax-kreativ-city-waking-up/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+    "sha256": "eace7992d1fc96f8e2d71baae959a47fbca638481bd5a131b7f2e5261c1ccef4",
+    "license_evidence": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt"
+  },
+  {
+    "file": "flower.mp4",
+    "url": "https://raw.githubusercontent.com/mdn/interactive-examples/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4",
+    "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451",
+    "license": "CC0-1.0",
+    "license_evidence": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE"
+  },
+  {
+    "file": "stream.mp4",
+    "url": "https://raw.githubusercontent.com/mdn/interactive-examples/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/examples/stream-of-water.mp4",
+    "sha256": "d492f9092c4cde2e74d1cde3ec10662141412a466769d1b53070e63611238652",
+    "license": "CC0-1.0",
+    "license_evidence": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE"
+  }
+]

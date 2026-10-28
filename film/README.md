@@ -1,29 +1,34 @@
-# Film d’introduction — préparation
+# LATIN — le film
 
-Le lecteur MP4, le script de montage et la musique sont préparés. Le film final n’est pas encore produit : les séquences d’archives de Rome et leurs droits doivent être vérifiés et téléchargés. Internet Archive et Wikimedia sont actuellement bloqués par la configuration réseau de l’environnement.
+Montage de **20,6 secondes**, intégré à l’introduction du site, avec une bande musicale et deux exports :
 
-Ces fichiers ne sont pas chargés par le site. L’introduction actuelle reste active jusqu’à l’intégration du véritable film.
+- `assets/latin-intro.mp4` : paysage, 1280 × 720, H.264/AAC, 24 images/s.
+- `assets/latin-intro-mobile.mp4` : vertical, 720 × 1280, mêmes durée et bande-son.
 
-## Contenu
+Le lecteur démarre sans son pour respecter les règles des navigateurs. « Activer le son » lance la bande musicale après une action de l’utilisateur. Pause, relecture, crédits, fin automatique et bouton « Passer » sont disponibles. La préférence de réduction des animations désactive le lancement automatique.
 
-- `intro-player.js` : lecteur plein écran pour un MP4 réel, avec lecture silencieuse automatique, activation du son, pause, relecture, crédits et sortie à la fin du film. Le clavier, la réduction des mouvements et les erreurs de chargement sont pris en charge.
-- `build_film.py` : export H.264/AAC, 1280 × 720 à 24 images/s, recadrage, fondus entre plans, titres et mixage musical. Le rendu a été vérifié avec des mires internes ; aucun de ces médias de test n’est inclus ici.
-- `music/adventure.mp3` : « Adventure », Rafael Krux / CinematicWaves.com, collection FreePD Music. Licence CC0 ; provenance et empreinte SHA-256 dans `music/provenance.json`, texte de licence dans `music/LICENSE.txt`.
+## Images et musique
 
-Le lecteur a été vérifié dans Chromium avec un MP4 de test : lecture au-delà de six secondes, son activable, pause, fin automatique, relecture, clavier et retour propre en cas de média manquant.
+Les séquences d’archives montrent **New York en 1941**, jamais présentée comme Rome. Les images de la Terre la nuit sont une **visualisation NASA**. Elles accompagnent les idées des citations latines, avec deux séquences de nature issues de la collection CC0 de MDN.
 
-## Terminer le montage
+Les extraits d’archives proviennent d’un fichier réellement hébergé sur GitHub, dont les notices citent *Arteries of New York City* (Encyclopaedia Britannica Films / Prelinger Archives) et NASA Goddard. Leurs statuts de réutilisation sont documentés dans les notices de ce miroir ; les pages originales d’Internet Archive n’ont pas été directement consultées depuis cet environnement.
 
-1. Activer les accès réseau préparés dans l’environnement : `archive.org`, `*.archive.org`, `commons.wikimedia.org`, `upload.wikimedia.org`.
-2. Sélectionner des vidéos d’archives réellement réutilisables. Pour chaque extrait, conserver l’auteur, la source, la licence ou preuve de domaine public, les timecodes et les modifications.
-3. Compléter une copie de `manifest.example.json`. Exécuter depuis la racine du dépôt, avec Python 3, FFmpeg (libx264, AAC, drawtext, xfade, libwebp) et Fontconfig :
+Musique : **Adventure**, Rafael Krux / CinematicWaves.com, collection FreePD Music, CC0. Licence et provenance dans `music/`.
 
-   ```sh
-   python3 film/build_film.py film/manifest.json /tmp/latin-film-export
-   ```
+Tous les auteurs, liens, licences et transformations sont détaillés dans [la page des crédits](../media-credits.html). Aucun son des vidéos sources ni la musique du montage miroir n’est utilisé.
 
-   Le script refuse de produire un film sans au moins trois extraits et leurs métadonnées de provenance. Il refuse aussi d’écraser une sortie existante.
+## Reproduire le montage
 
-4. Vérifier le véritable montage et les crédits, puis copier le MP4 et son affiche dans `assets/latin-intro.mp4` et `assets/latin-intro-poster.webp`.
-5. Préparer `media-credits.html`, remplacer `intro.js` par le lecteur préparé et actualiser la version des assets dans `index.html`. Le lecteur conserve les événements `latin:intro-reveal` et `latin:intro-finished` utilisés par `motion.js`.
-6. Vérifier le fichier final sur ordinateur et mobile avant publication.
+Prérequis : Python 3.11+, FFmpeg avec libx264/AAC/libwebp/drawtext/xfade et Fontconfig avec Liberation Sans/Serif. Les sources sont téléchargées depuis leurs fichiers GitHub publics, à des commits précis ; leurs empreintes SHA-256 sont vérifiées avant utilisation.
+
+Depuis la racine du dépôt :
+
+```sh
+python3 film/prepare_sources.py
+python3 film/build_film.py film/edit.json film/render/landscape
+python3 film/build_film.py film/edit.json film/render/portrait --portrait
+```
+
+`source-files.json` fixe les URL et les empreintes. `edit.json` documente les plans, leurs timecodes, les ralentis, les titres et la musique. Les sources brutes et exports de travail sont ignorés par Git. Le script refuse d’écraser une sortie existante.
+
+L’export comprend un triptyque d’archives, un recadrage adapté au format, des ralentis documentés, une colorimétrie modérée, des fondus, les titres et un mixage musical normalisé avec fondu d’entrée/sortie. Les deux fichiers finaux sont livrés directement dans `assets/` ; les scripts ne sont pas nécessaires pour regarder le film.

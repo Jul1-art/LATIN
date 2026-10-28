@@ -5,17 +5,20 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const MEDIA = 'assets/latin-intro.mp4';
   const POSTER = 'assets/latin-intro-poster.webp';
+  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4';
+  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp';
   const LOAD_TIMEOUT_MS = 12000;
   let current = null;
   let pendingReplay = false;
 
   const css = `
     .latin-film { position:fixed; inset:0; z-index:1000; overflow:hidden; background:#121414; color:#f8f5f0; outline:none; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
-    .latin-film-video { display:block; width:100%; height:100%; object-fit:cover; background:#121414; }
+    .latin-film-video { display:block; width:100%; height:100%; object-fit:contain; background:#121414; }
     .latin-film-top, .latin-film-bottom { position:absolute; left:0; right:0; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 5.5vw; pointer-events:none; }
     .latin-film-top { top:0; background:linear-gradient(#121414ba,transparent); }
     .latin-film-bottom { bottom:3px; padding-top:55px; background:linear-gradient(transparent,#121414d9); }
     .latin-film-controls { display:flex; align-items:center; gap:24px; }
+    .latin-film-controls button:first-child { padding-inline:15px; border:1px solid #ffffff60; border-radius:24px; background:#12141470; }
     .latin-film button, .latin-film a { pointer-events:auto; color:inherit; font:500 11px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; text-decoration:none; }
     .latin-film button { display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:10px 0; border:0; background:transparent; cursor:pointer; }
     .latin-film a { display:inline-flex; align-items:center; min-height:44px; }
@@ -176,14 +179,15 @@
       state.video.defaultMuted = true;
       state.video.muted = true;
       state.video.volume = 0.7;
-      state.video.poster = POSTER;
-      state.video.setAttribute('aria-label', 'Montage d’archives de Rome avec musique instrumentale');
+      const portrait = window.matchMedia('(max-aspect-ratio: 3/4)').matches;
+      state.video.poster = portrait ? MOBILE_POSTER : POSTER;
+      state.video.setAttribute('aria-label', 'Film LATIN : archives de New York, nature et visualisation de la Terre par la NASA');
       state.overlay.append(state.video);
 
       const description = document.createElement('p');
       description.id = 'latin-film-description';
       description.className = 'latin-film-description';
-      description.textContent = 'Un montage d’archives de Rome, accompagné de musique instrumentale. Le film peut être mis en pause ou passé. Les images et la musique sont détaillées dans les crédits.';
+      description.textContent = 'Archives de New York, séquences de nature et visualisation NASA de la Terre la nuit, accompagnées de musique instrumentale. Titres : « Carpe diem. », « LATIN. Pour la vie. ». Le film peut être mis en pause ou passé. Les sources et les licences sont détaillées dans les crédits.';
       state.overlay.append(description);
 
       const top = document.createElement('div');
@@ -203,8 +207,12 @@
       state.sound = button('Activer le son');
       state.sound.setAttribute('aria-pressed', 'false');
       state.sound.addEventListener('click', () => {
-        state.video.muted = !state.video.muted;
+        const enablingSound = state.video.muted;
+        state.video.muted = !enablingSound;
         updateButtons(state);
+        // Retry inside this user gesture when muted autoplay was denied.
+        // Preserve an intentional pause made with the pause button.
+        if (enablingSound && !state.userPaused) tryPlay(state);
       });
       state.pause = button('Pause');
       state.pause.addEventListener('click', () => {
@@ -289,7 +297,7 @@
       root.classList.add('intro-running');
       window.latinIntroState = 'running';
       state.overlay.focus({ preventScroll: true });
-      state.video.src = MEDIA;
+      state.video.src = portrait ? MOBILE_MEDIA : MEDIA;
       tryPlay(state);
     } catch {
       // A partial setup must never leave the application hidden or inert.
