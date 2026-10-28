@@ -1,185 +1,189 @@
 {
   "title": "LATIN — Pour la vie",
+  "duration": 105,
+  "dissolve": 0.5,
   "clips": [
     {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/urban-triptych-clean.mp4",
-      "duration": 4.8,
-      "saturation": 0,
-      "title": "Archives urbaines de New York,1941 — triptyque",
-      "source_details": "Arteries of New York City; mirror film41.55..46.35,15.02..17.32 and28.30..30.50; two shorter panels slowed to4.8s; baked background padding cropped before panel composition"
+      "path": "film/sources/colosseum.jpg",
+      "duration": 3.3,
+      "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/5.jpg",
+      "license": "Public domain, as explicitly declared for this photograph in the pinned mirror README",
+      "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+      "type": "image",
+      "zoom": 0.09,
+      "saturation": 0.4,
+      "title": "Colisée — ouverture"
     },
     {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 2.5,
-      "start": 17.45,
-      "saturation": 0,
-      "title": "Quai de gare, New York,1941",
-      "speed": 0.92,
-      "framing": "fill",
-      "source_details": "Mirror17.45..19.75, source242.08..244.38",
+      "path": "assets/roman-portrait.webp",
+      "duration": 5.5,
+      "source_url": "https://github.com/Jul1-art/LATIN/blob/e14aebc0bb736fdc4bccee2f7593d396fc3f6c96/assets/roman-portrait.webp",
+      "license": "Original AI-generated illustration created for LATIN; not archival material",
+      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/media-credits.html#artwork",
+      "type": "image",
+      "zoom": 0.1,
+      "saturation": 0.35,
+      "title": "Ave — portrait illustré de marbre"
+    },
+    {
+      "path": "film/sources/pompeii-fresco-pd.jpg",
+      "duration": 7.5,
+      "source_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/images/pompeii-fresco-pd.jpg",
+      "license": "Public domain",
+      "license_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/ATTRIBUTION.md",
+      "type": "image",
+      "zoom": 0.09,
+      "saturation": 0.65,
+      "title": "Pompéi — reproduction de Geremia Discanno, 1882"
+    },
+    {
+      "path": "film/sources/waves.mp4",
+      "duration": 6.5,
+      "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/2.mp4",
+      "license": "Public domain as explicitly declared for the footage in the pinned mirror README, also present in the 2019-07-25 commit c88b24e345b532c47ca03297afaffbcefe1644d8",
+      "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+      "speed": 0.75,
+      "saturation": 0.6,
+      "title": "Vagues — le sort en mouvement"
+    },
+    {
+      "path": "film/sources/colosseum.jpg",
+      "duration": 6.7,
+      "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/5.jpg",
+      "license": "Public domain, as explicitly declared for this photograph in the pinned mirror README",
+      "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+      "type": "image",
+      "zoom": 0.17,
+      "saturation": 0.25,
       "crop_source": [
-        0,
-        288,
-        1080,
-        1344
-      ]
+        160,
+        330,
+        1660,
+        900
+      ],
+      "title": "Colisée — détail des arches"
     },
     {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 2.8,
-      "start": 19.9,
-      "saturation": 0,
-      "title": "Le train part, New York,1941",
-      "speed": 0.7857142857142858,
-      "framing": "fill",
-      "source_details": "Mirror19.90..22.10, source248.62..250.82",
-      "crop_source": [
-        0,
-        288,
-        1080,
-        1344
-      ]
-    },
-    {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 2.8,
-      "start": 22.25,
-      "saturation": 0,
-      "title": "Voyageur à la fenêtre,1941",
-      "speed": 0.8035714285714286,
-      "framing": "fill",
-      "source_details": "Mirror22.25..24.50, source252.78..255.03",
-      "crop_source": [
-        0,
-        288,
-        1080,
-        1344
-      ]
-    },
-    {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 2.8,
-      "start": 28.3,
-      "saturation": 0,
-      "title": "Le ferry traverse le fleuve,1941",
-      "speed": 0.7678571428571429,
-      "framing": "fill",
-      "source_details": "Mirror28.30..30.45, source307.07..309.22",
-      "crop_source": [
-        0,
-        288,
-        1080,
-        1344
-      ]
-    },
-    {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 2.8,
-      "start": 30.6,
-      "saturation": 0,
-      "title": "Des voyageurs regardent la ville,1941",
-      "speed": 0.85,
-      "framing": "fill",
-      "source_details": "Mirror30.60..32.98, source313.77..316.15",
-      "crop_source": [
-        0,
-        288,
-        1080,
-        1344
-      ]
-    },
-    {
+      "path": "film/sources/doric-column-cc0.jpg",
+      "duration": 7.5,
+      "source_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/images/doric-column-cc0.jpg",
       "license": "CC0-1.0",
-      "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE",
+      "license_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/ATTRIBUTION.md",
+      "type": "image",
+      "zoom": 0.09,
+      "saturation": 0.4,
+      "title": "Colonne dorique des Propylées, Athènes"
+    },
+    {
+      "path": "film/sources/pompeii-fresco-pd.jpg",
+      "duration": 8.5,
+      "source_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/images/pompeii-fresco-pd.jpg",
+      "license": "Public domain",
+      "license_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/ATTRIBUTION.md",
+      "type": "image",
+      "zoom": 0.15,
+      "saturation": 0.5,
+      "crop_source": [
+        850,
+        400,
+        1050,
+        1350
+      ],
+      "title": "Pompéi — détail du décor"
+    },
+    {
+      "path": "film/sources/birth-of-venus-pd.jpg",
+      "duration": 7.9,
+      "source_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/images/birth-of-venus-pd.jpg",
+      "license": "Public domain",
+      "license_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/ATTRIBUTION.md",
+      "type": "image",
+      "zoom": 0.09,
+      "saturation": 0.55,
+      "title": "Botticelli — La Naissance de Vénus"
+    },
+    {
+      "path": "film/sources/school-of-athens-pd.jpg",
+      "duration": 10.5,
+      "source_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/images/school-of-athens-pd.jpg",
+      "license": "Public domain",
+      "license_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/ATTRIBUTION.md",
+      "type": "image",
+      "zoom": 0.09,
+      "saturation": 0.48,
+      "title": "Raphaël — L’École d’Athènes"
+    },
+    {
+      "path": "assets/roman-portrait.webp",
+      "duration": 7.5,
+      "source_url": "https://github.com/Jul1-art/LATIN/blob/e14aebc0bb736fdc4bccee2f7593d396fc3f6c96/assets/roman-portrait.webp",
+      "license": "Original AI-generated illustration created for LATIN; not archival material",
+      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/media-credits.html#artwork",
+      "type": "image",
+      "zoom": 0.1,
+      "saturation": 0.35,
+      "crop_source": [
+        190,
+        70,
+        760,
+        1120
+      ],
+      "title": "Marbre — Memento mori"
+    },
+    {
+      "path": "film/sources/wheat.mp4",
+      "duration": 8.5,
+      "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/3.mp4",
+      "license": "Public domain as explicitly declared for the footage in the pinned mirror README, also present in the 2019-07-25 commit c88b24e345b532c47ca03297afaffbcefe1644d8",
+      "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+      "speed": 0.58,
+      "saturation": 0.65,
+      "title": "Le blé — le temps qui passe"
+    },
+    {
       "path": "film/sources/flower.mp4",
-      "duration": 5.0,
-      "start": 0.02,
-      "saturation": 0.8,
-      "title": "Flower",
-      "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4",
-      "speed": 0.99
-    },
-    {
+      "duration": 7.5,
+      "source_url": "https://raw.githubusercontent.com/mdn/interactive-examples/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4",
       "license": "CC0-1.0",
       "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE",
-      "path": "film/sources/stream.mp4",
-      "duration": 3.5,
-      "speed": 0.88,
-      "saturation": 0.75,
-      "title": "Stream of water",
-      "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/examples/stream-of-water.mp4"
+      "start": 0.02,
+      "speed": 0.65,
+      "saturation": 0.65,
+      "title": "Une fleur — Carpe diem"
     },
     {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/urban-triptych-2-clean.mp4",
-      "duration": 4.0,
-      "saturation": 0,
-      "title": "La ville se met en mouvement,1941 — triptyque",
-      "source_details": "Mirror34.25..38.85,9.10..12.55,24.65..28.20 in three panels, respective speeds1.15,.8625,.8875; baked background padding cropped before panel composition"
+      "path": "film/sources/waves.mp4",
+      "duration": 8.5,
+      "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/2.mp4",
+      "license": "Public domain as explicitly declared for the footage in the pinned mirror README, also present in the 2019-07-25 commit c88b24e345b532c47ca03297afaffbcefe1644d8",
+      "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+      "start": 0.05,
+      "speed": 0.57,
+      "saturation": 0.6,
+      "title": "L’horizon — Audacibus fortuna juvat"
     },
     {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
       "path": "film/sources/city-film.mp4",
-      "duration": 4.4,
-      "start": 0.15,
-      "speed": 0.9,
-      "framing": "fill",
-      "saturation": 0.9,
-      "title": "NASA — visualisation de la Terre la nuit,2017",
-      "source_details": "NASA GSFC_20170412_Lights_m12573_EarthAtNight; mirror film0.15..4.11 corresponds source27.75..31.71"
+      "duration": 10.1,
+      "source_url": "https://raw.githubusercontent.com/195440/lax-kreativ-city-waking-up/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "NASA footage; reuse status documented in source notice",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "start": 0,
+      "speed": 0.64,
+      "saturation": 0.7,
+      "title": "NASA — Terre et Nil, visualisation nocturne de 2017",
+      "source_details": "Only the first 6.464 seconds of the mirror are used, exclusively NASA Earth at Night. All New York archive excerpts, beginning at 6.53 seconds, are excluded."
     },
     {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 2.6,
-      "start": 4.25,
-      "speed": 0.8461538461538461,
-      "framing": "fill",
-      "saturation": 0.9,
-      "title": "NASA — visualisation du Nil la nuit,2017",
-      "source_details": "Mirror4.25..6.45, originalNASA40.08..42.28"
-    },
-    {
-      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
-      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/city-film.mp4",
-      "duration": 5.7,
-      "start": 41.45,
-      "framing": "fill",
-      "saturation": 0,
-      "title": "New York — skyline,1941",
-      "source_details": "Mirror41.45..47.15, source47.12..52.82",
-      "crop_source": [
-        0,
-        288,
-        1080,
-        1344
-      ]
+      "path": "film/sources/doric-column-cc0.jpg",
+      "duration": 6.0,
+      "source_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/images/doric-column-cc0.jpg",
+      "license": "CC0-1.0",
+      "license_url": "https://github.com/LawrenceChung0822/classical-bg-applier/blob/42ac3624a208cca23bfe6ba2ea86ab1edbff2abd/assets/ATTRIBUTION.md",
+      "type": "image",
+      "zoom": 0.06,
+      "saturation": 0.25,
+      "title": "LATIN — Pour la vie"
     }
   ],
   "music": {
@@ -195,55 +199,136 @@
     "sha256": "18432184e1a3acf8095b8b45b688fe08f7afb2447fc6e3adc98cc944c541a733",
     "license_evidence": "Repository contains music MP3s, cover PNGs, and root CC0 LICENSE, no software. Original catalog not reached due network policy; mirrored source license inspected.",
     "path": "film/music/adventure.mp3",
-    "start": 12
+    "start": 0,
+    "loop_crossfade_seconds": 4
   },
   "titles": [
     {
-      "text": "Audacibus fortuna juvat.",
-      "start": 5.0,
-      "end": 10.8,
-      "size": 56,
-      "serif": true
+      "text": "LATIN.",
+      "kind": "brand",
+      "start": 0.65,
+      "end": 2.6
     },
     {
-      "text": "La fortune sourit aux audacieux.",
-      "start": 10.9,
-      "end": 15.3,
-      "size": 29
+      "text": "Ave !",
+      "translation": "Salut ! / Je te salue !",
+      "author": "Salutation Romaine",
+      "kind": "quote",
+      "start": 3.3,
+      "end": 7.45
+    },
+    {
+      "text": "Tu quoque, mi fili !",
+      "translation": "Toi aussi, mon fils !",
+      "author": "Jules César, 44 av. J.-C.",
+      "kind": "quote",
+      "start": 8.3,
+      "end": 14.45
+    },
+    {
+      "text": "Alea jacta est.",
+      "translation": "Le sort en est jeté.",
+      "author": "Jules César, 49 av. J.-C.",
+      "kind": "quote",
+      "start": 15.3,
+      "end": 20.45
+    },
+    {
+      "text": "Veni, vidi, vici.",
+      "translation": "Je suis venu, j'ai vu, j'ai vaincu.",
+      "author": "Jules César, 47 av. J.-C.",
+      "kind": "quote",
+      "start": 21.3,
+      "end": 26.65
+    },
+    {
+      "text": "Dura lex, sed lex.",
+      "translation": "La loi est dure, mais c'est la loi.",
+      "author": "Maxime Juridique",
+      "kind": "quote",
+      "start": 27.5,
+      "end": 33.65
+    },
+    {
+      "text": "Si vis pacem, para bellum.",
+      "translation": "Si tu veux la paix, prépare la guerre.",
+      "author": "Végèce, IVe siècle",
+      "kind": "quote",
+      "start": 34.5,
+      "end": 41.65
+    },
+    {
+      "text": "Mens sana in corpore sano.",
+      "translation": "Un esprit sain dans un corps sain.",
+      "author": "Juvénal, Ier-IIe siècle",
+      "kind": "quote",
+      "start": 42.5,
+      "end": 49.05
+    },
+    {
+      "text": "Errare humanum est, perseverare diabolicum.",
+      "translation": "L'erreur est humaine, persévérer est diabolique.",
+      "author": "Sénèque (attribué)",
+      "kind": "quote",
+      "start": 49.9,
+      "end": 59.05
+    },
+    {
+      "text": "Memento mori.",
+      "translation": "Souviens-toi que tu vas mourir.",
+      "author": "Tradition Stoïcienne",
+      "kind": "quote",
+      "start": 59.9,
+      "end": 66.05
+    },
+    {
+      "text": "Omnes vulnerant, ultima necat.",
+      "translation": "Toutes blessent, la dernière tue.",
+      "author": "Inscription de cadran solaire",
+      "kind": "quote",
+      "start": 66.9,
+      "end": 74.05
     },
     {
       "text": "Carpe diem.",
-      "start": 16.7,
-      "end": 21.1,
-      "size": 76,
-      "serif": true
+      "translation": "Cueille le jour.",
+      "author": "Horace, 23 av. J.-C.",
+      "kind": "quote",
+      "start": 74.9,
+      "end": 81.05
     },
     {
-      "text": "Cueille le jour.",
-      "start": 21.2,
-      "end": 24.3,
-      "size": 38
+      "text": "Audacibus fortuna juvat.",
+      "translation": "La fortune sourit aux audacieux.",
+      "author": "Virgile, Ier siècle av. J.-C.",
+      "kind": "quote",
+      "start": 81.9,
+      "end": 89.05
     },
     {
       "text": "Ad astra per ardua.",
-      "start": 28.3,
-      "end": 34.0,
-      "size": 66,
-      "serif": true
+      "translation": "Vers les étoiles à travers les difficultés.",
+      "author": "Devise latine",
+      "kind": "quote",
+      "start": 89.9,
+      "end": 98.65
     },
     {
       "text": "LATIN.",
-      "start": 35.1,
-      "end": 39.25,
-      "size": 148,
-      "y": "(h-text_h)/2-30"
+      "kind": "brand",
+      "start": 99.7,
+      "end": 104.15,
+      "y": "(h-text_h)/2-32"
     },
     {
       "text": "Pour la vie.",
-      "start": 35.6,
-      "end": 39.25,
-      "size": 36,
-      "y": "(h-text_h)/2+88"
+      "kind": "subtitle",
+      "start": 100.2,
+      "end": 104.15,
+      "y": "h/2+80"
     }
-  ]
+  ],
+  "width": 1280,
+  "height": 720,
+  "notes": "All thirteen original site quotations and exact translations. Heritage photographs/art reproductions are animated still images; nature and NASA are moving footage. No New York footage."
 }

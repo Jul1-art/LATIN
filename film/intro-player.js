@@ -4,10 +4,10 @@
   const root = document.documentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const MEDIA = 'assets/latin-intro.mp4?v=4';
-  const POSTER = 'assets/latin-intro-poster.webp?v=4';
-  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=4';
-  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=4';
+  const MEDIA = 'assets/latin-intro.mp4?v=5';
+  const POSTER = 'assets/latin-intro-poster.webp?v=5';
+  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=5';
+  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=5';
   const LOAD_TIMEOUT_MS = 12000;
   const HIDE_DELAY_MS = 2600;
   let current = null;
@@ -22,98 +22,121 @@
     muted: '<path d="m11 5-5 4H3v6h3l5 4zM16 9l5 6M16 15l5-6"/>',
     expand: '<path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/>',
     contract: '<path d="M3 8h5V3M21 8h-5V3M8 21v-5H3M16 21v-5h5"/>',
+    chapters: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+    settings: '<path d="m10 3-.5 2a7 7 0 0 0-1.8 1L5.8 5.5 3.9 8.8l1.5 1.4a7 7 0 0 0 0 2.1L3.9 14l1.9 3.3 1.9-.5a7 7 0 0 0 1.8 1l.5 2.1h4l.5-2.1a7 7 0 0 0 1.8-1l1.9.5 1.9-3.3-1.5-1.6a7 7 0 0 0 0-2.1l1.5-1.5-1.9-3.3-1.9.5a7 7 0 0 0-1.8-1L14 3z"/><circle cx="12" cy="11.5" r="3"/>',
     close: '<path d="m6 6 12 12M6 18 18 6"/>',
     arrow: '<path d="M4 12h15m-6-6 6 6-6 6"/>'
   };
 
   const css = `
     html.intro-running { scrollbar-gutter:auto; }
-    .latin-film { position:fixed; inset:0; width:100vw; height:100vh; height:100dvh; z-index:1000; overflow:hidden; isolation:isolate; background:#080a09; color:#f8f5f0; outline:none; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+    .latin-film { position:fixed; inset:0; width:100vw; height:100vh; height:100dvh; z-index:1000; overflow:hidden; isolation:isolate; background:#000; color:#fff; outline:none; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
     .latin-film *, .latin-film *::before, .latin-film *::after { box-sizing:border-box; }
-    .latin-film-poster, .latin-film-video { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; background:#080a09; }
+    .latin-film-poster, .latin-film-video { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; background:#000; }
     .latin-film.is-cover .latin-film-poster, .latin-film.is-cover .latin-film-video { object-fit:cover; }
-    .latin-film-poster { opacity:.68; animation:latin-film-poster-in 1.1s cubic-bezier(.16,1,.3,1) backwards; }
-    .latin-film-video { transition:opacity .6s; }
+    .latin-film-poster { display:none; }
+    .latin-film-video { transition:opacity .45s; }
     .latin-film.is-launch .latin-film-video, .latin-film.is-stopped .latin-film-video, .latin-film.has-ended .latin-film-video { opacity:0; }
-    .latin-film-shade { position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,#080a0970 0%,transparent 30%,transparent 60%,#080a0980 100%); }
-    .latin-film.is-launch .latin-film-shade, .latin-film.is-stopped .latin-film-shade, .latin-film.has-ended .latin-film-shade { background:linear-gradient(180deg,#080a0960,#080a0940 35%,#080a09b8); }
+    .latin-film-shade { position:absolute; inset:0; pointer-events:none; background:linear-gradient(transparent 66%,#0009 100%); transition:opacity .35s; }
+    .latin-film.is-launch .latin-film-shade, .latin-film.is-stopped .latin-film-shade, .latin-film.has-ended .latin-film-shade { background:none; }
     .latin-film button, .latin-film a, .latin-film input { font:inherit; }
     .latin-film button, .latin-film a { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
     .latin-film button { display:inline-flex; align-items:center; justify-content:center; gap:11px; color:inherit; border:0; background:none; cursor:pointer; }
     .latin-film button:disabled { cursor:default; opacity:.4; }
     .latin-film a { color:inherit; text-decoration:none; }
-    .latin-film :is(button,a,input):focus-visible { outline:2px solid #d4af37; outline-offset:5px; }
-    .latin-film svg { display:block; width:21px; height:21px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-    .latin-film-top { position:absolute; inset:0 0 auto; z-index:3; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px clamp(20px,4vw,64px); background:linear-gradient(#080a0980,transparent); transition:opacity .35s,transform .35s; }
-    .latin-film-brand { font-size:21px; font-weight:650; letter-spacing:-.065em; }
-    .latin-film-brand span { color:#b59a45; }
-    .latin-film-close { min-height:44px; padding:9px 0 9px 16px; font-size:11px!important; }
-    .latin-film-close svg { width:18px; height:18px; }
-    .latin-film-card { animation:latin-film-card-in .8s cubic-bezier(.16,1,.3,1) .1s backwards; position:absolute; z-index:2; top:44%; left:20px; right:20px; transform:translateY(-50%); text-align:center; }
-    .latin-film-overline { margin:0 0 18px; color:#d1c08a; font-size:9px; line-height:1.6; letter-spacing:.23em; text-transform:uppercase; }
-    .latin-film-title { margin:0; font-size:clamp(64px,9vw,132px); font-weight:500; line-height:1; letter-spacing:-.075em; }
-    .latin-film-subtitle { margin:14px 0 28px; font-size:clamp(15px,2vw,22px); letter-spacing:-.02em; color:#e0dfd4; }
-    .latin-film-card-actions { display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:wrap; }
-    .latin-film-primary { min-height:54px; padding:15px 25px!important; border-radius:999px; background:#f8f5f0!important; color:#121414!important; font-size:12px!important; font-weight:550!important; transition:transform .4s cubic-bezier(.16,1,.3,1),background .25s; }
-    .latin-film-primary:hover { transform:translateY(-3px); background:#e8e2d2!important; }
-    .latin-film-primary svg { width:19px; height:19px; }
-    .latin-film-explore { min-height:48px; padding:12px 4px!important; font-size:11px!important; }
-    .latin-film-card-note { margin:18px 0 0; color:#c9cbbf; font-size:10px; letter-spacing:.03em; }
-    .latin-film-center-play { position:absolute; z-index:2; left:50%; top:45%; transform:translate(-50%,-50%); width:76px; height:76px; border:1px solid #ffffff60!important; border-radius:50%; background:#080a0980!important; backdrop-filter:blur(10px); }
-    .latin-film-center-play svg { width:28px; height:28px; margin-left:3px; }
-    .latin-film-status { position:absolute; z-index:4; left:20px; right:20px; top:48%; margin:0; transform:translateY(-50%); color:#f8f5f0; font-size:12px; text-align:center; }
-    .latin-film-panel { animation:latin-film-panel-in .7s cubic-bezier(.16,1,.3,1) .2s backwards; position:absolute; z-index:3; bottom:max(22px,env(safe-area-inset-bottom)); left:clamp(16px,4vw,64px); right:clamp(16px,4vw,64px); max-width:1150px; margin-inline:auto; padding:15px 18px 12px; border:1px solid #ffffff24; border-radius:18px; background:#121414b8; backdrop-filter:blur(18px); box-shadow:0 12px 40px #0003; transition:opacity .35s,transform .35s; }
-    .latin-film-timeline-labels { display:flex; align-items:center; justify-content:space-between; gap:20px; margin:0 2px 0; color:#c9ccbf; font-size:10px; font-variant-numeric:tabular-nums; }
-    .latin-film-range { display:block; appearance:none; -webkit-appearance:none; min-width:0; height:44px; margin:0; border:0; border-radius:3px; background:transparent; cursor:pointer; accent-color:#b59a45; }
-    .latin-film-range::-webkit-slider-runnable-track { height:3px; border-radius:3px; background:linear-gradient(to right,#b59a45 0 var(--range-progress,0%),#ffffff30 var(--range-progress,0%) 100%); }
-    .latin-film-range::-moz-range-track { height:3px; border-radius:3px; background:linear-gradient(to right,#b59a45 0 var(--range-progress,0%),#ffffff30 var(--range-progress,0%) 100%); }
-    .latin-film-range::-webkit-slider-thumb { appearance:none; -webkit-appearance:none; width:12px; height:12px; margin-top:-4.5px; border:0; border-radius:50%; background:#f8f5f0; box-shadow:0 0 0 3px #f8f5f010; }
-    .latin-film-range::-moz-range-thumb { width:12px; height:12px; border:0; border-radius:50%; background:#f8f5f0; }
-    .latin-film-seek { width:100%; height:44px; margin-block:0 2px; }
+    .latin-film :is(button,a,input):focus-visible { outline:2px solid #fff; outline-offset:4px; }
+    .latin-film svg { display:block; width:22px; height:22px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .latin-film-top { position:absolute; inset:0 0 auto; z-index:3; display:flex; align-items:center; justify-content:flex-end; padding:20px 24px; pointer-events:none; transition:opacity .3s,transform .3s; }
+    .latin-film-close { width:44px; height:44px; padding:12px; border-radius:50%; pointer-events:auto; opacity:.7; transition:opacity .2s,background .2s; }
+    .latin-film-close:hover { opacity:1; background:#ffffff16; }
+    .latin-film-close svg { width:20px; height:20px; }
+    .latin-film-card { position:absolute; z-index:2; top:50%; left:20px; right:20px; transform:translateY(-50%); text-align:center; animation:latin-film-card-in .7s cubic-bezier(.16,1,.3,1) backwards; }
+    .latin-film-card-actions { display:flex; justify-content:center; align-items:center; flex-direction:column; gap:24px; }
+    .latin-film-primary { width:88px; height:88px; padding:16px!important; border-radius:50%; transition:transform .45s cubic-bezier(.16,1,.3,1),background .25s; }
+    .latin-film-primary:hover { transform:scale(1.12); background:#ffffff0c; }
+    .latin-film-primary svg { width:50px; height:50px; margin-left:5px; }
+    .latin-film-primary-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    .latin-film.has-ended .latin-film-primary { width:auto; min-height:54px; height:auto; padding:14px 24px!important; border:1px solid #ffffff40; border-radius:999px; font-size:13px; }
+    .latin-film.has-ended .latin-film-primary svg { width:20px; height:20px; margin:0; }
+    .latin-film.has-ended .latin-film-primary-label { position:static; width:auto; height:auto; clip-path:none; }
+    .latin-film-explore { min-height:44px; padding:10px 15px!important; font-size:12px!important; color:#aaa!important; transition:color .2s; }
+    .latin-film-explore:hover { color:#fff!important; }
+    .latin-film-explore svg { width:17px; height:17px; }
+    .latin-film-status { position:absolute; z-index:4; left:20px; right:20px; top:50%; margin:0; transform:translateY(-50%); color:#aaa; font-size:12px; text-align:center; }
+    .latin-film-panel { position:absolute; z-index:3; bottom:0; left:0; right:0; margin:0; padding:0 max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left)); transition:opacity .3s,transform .3s; animation:latin-film-panel-in .65s cubic-bezier(.16,1,.3,1) .15s backwards; }
+    .latin-film-range { display:block; appearance:none; -webkit-appearance:none; min-width:0; height:44px; margin:0; padding:0; border:0; background:transparent; cursor:pointer; accent-color:#fff; }
+    .latin-film-range::-webkit-slider-runnable-track { height:3px; border-radius:3px; background:linear-gradient(to right,#fff 0 var(--range-progress,0%),#ffffff38 var(--range-progress,0%) 100%); }
+    .latin-film-range::-moz-range-track { height:3px; border-radius:3px; background:linear-gradient(to right,#fff 0 var(--range-progress,0%),#ffffff38 var(--range-progress,0%) 100%); }
+    .latin-film-range::-webkit-slider-thumb { appearance:none; -webkit-appearance:none; width:12px; height:12px; margin-top:-4.5px; border:0; border-radius:50%; background:#fff; }
+    .latin-film-range::-moz-range-thumb { width:12px; height:12px; border:0; border-radius:50%; background:#fff; }
+    .latin-film-seek { width:100%; height:36px; margin:0; }
+    .latin-film-seek::-webkit-slider-thumb { width:11px; height:11px; margin-top:-4px; background:#ddd; }
+    .latin-film-seek::-moz-range-thumb { width:11px; height:11px; background:#ddd; }
     .latin-film-seek:disabled { cursor:default; opacity:.35; }
-    .latin-film-controls-row { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px; }
-    .latin-film-transport, .latin-film-audio { display:flex; align-items:center; gap:4px; }
-    .latin-film-audio { justify-content:flex-end; gap:9px; }
-    .latin-film-icon-button { width:44px; height:44px; padding:10px; border-radius:50%; transition:background .25s; }
+    .latin-film-controls-row { display:flex; align-items:center; justify-content:space-between; min-height:44px; gap:16px; }
+    .latin-film-left, .latin-film-right, .latin-film-audio { display:flex; align-items:center; gap:5px; }
+    .latin-film-left { min-width:0; }
+    .latin-film-right { flex-shrink:0; gap:8px; }
+    .latin-film-audio { gap:9px; }
+    .latin-film-icon-button { width:44px; height:44px; padding:10px; border-radius:8px; transition:background .2s,opacity .2s; }
     .latin-film-icon-button:hover { background:#ffffff12; }
-    .latin-film-play { background:#f8f5f0!important; color:#121414!important; }
-    .latin-film-play:hover { background:#e8e2d2!important; }
-    .latin-film-volume { width:86px; }
-    .latin-film-credit { display:inline-flex; align-items:center; min-height:44px; padding:10px 13px; color:#c9ccbf!important; font-size:10px!important; }
-    .latin-film.is-controls-hidden .latin-film-top { opacity:0; transform:translateY(-10px); pointer-events:none; }
-    .latin-film.is-controls-hidden .latin-film-panel { opacity:0; transform:translateY(16px); pointer-events:none; }
+    .latin-film-play svg { width:24px; height:24px; }
+    .latin-film-volume { width:95px; }
+    .latin-film-volume-value { width:34px; margin-left:1px; color:#bbb; font-size:10px; text-align:left; font-variant-numeric:tabular-nums; }
+    .latin-film-time { display:flex; align-items:center; gap:4px; flex-shrink:0; margin-left:16px; padding:10px 17px; border-radius:999px; color:#ddd; background:#ffffff0b; font-size:11px; font-weight:550; font-variant-numeric:tabular-nums; line-height:1.5; white-space:nowrap; }
+    .latin-film-settings { position:absolute; right:68px; bottom:calc(100% - 6px); width:245px; max-height:calc(100dvh - 130px); overflow:auto; padding:8px; border:1px solid #ffffff18; border-radius:12px; background:#161616f5; box-shadow:0 14px 60px #0008; backdrop-filter:blur(16px); }
+    .latin-film-tabs { display:flex; gap:3px; padding:3px 3px 7px; border-bottom:1px solid #ffffff10; margin-bottom:5px; }
+    .latin-film-tabs button { min-height:36px; flex:1; border-radius:7px; font-size:11px; color:#999; }
+    .latin-film-tabs button[aria-pressed="true"] { background:#ffffff0d; color:#fff; }
+    .latin-film-chapters { max-height:min(380px,calc(100dvh - 205px)); overflow-y:auto; scrollbar-width:thin; scrollbar-color:#555 transparent; }
+    .latin-film-chapter { width:100%; min-height:48px; display:grid!important; grid-template-columns:32px 1fr; gap:9px!important; padding:9px 9px!important; border-radius:7px; text-align:left; font-size:12px!important; line-height:1.45; }
+    .latin-film-chapter:hover, .latin-film-chapter.is-current { background:#ffffff0c; }
+    .latin-film-chapter.is-current { color:#fff; }
+    .latin-film-chapter-time { align-self:start; padding-top:2px; color:#888; font-size:9px; font-variant-numeric:tabular-nums; }
+    .latin-film-settings-title { margin:10px 10px 9px; color:#888; font-size:10px; letter-spacing:.06em; }
+    .latin-film-speeds { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; margin:0 4px 8px; }
+    .latin-film-speeds button { min-height:40px; padding:7px 2px; border-radius:7px; color:#aaa; font-size:12px; }
+    .latin-film-speeds button:hover { background:#ffffff10; }
+    .latin-film-speeds button[aria-pressed="true"] { color:#fff; background:#ffffff18; }
+    .latin-film-setting-action { width:100%; min-height:44px; justify-content:flex-start!important; padding:10px 12px!important; border-radius:7px; font-size:12px!important; text-align:left; }
+    .latin-film-setting-action:hover { background:#ffffff0b; }
+    .latin-film-setting-action svg { width:18px; height:18px; }
+    .latin-film-credit { display:flex; align-items:center; min-height:42px; padding:10px 12px; margin-top:5px; border-top:1px solid #ffffff10; color:#999!important; font-size:11px!important; }
+    .latin-film-credit:hover { color:#fff!important; }
+    .latin-film.is-controls-hidden { cursor:none; }
+    .latin-film.is-controls-hidden .latin-film-top { opacity:0; transform:translateY(-6px); pointer-events:none; }
+    .latin-film.is-controls-hidden .latin-film-top button { pointer-events:none; }
+    .latin-film.is-controls-hidden .latin-film-panel { opacity:0; transform:translateY(8px); pointer-events:none; }
+    .latin-film.is-controls-hidden .latin-film-shade { opacity:0; }
     .latin-film-description { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
     .latin-film [hidden] { display:none!important; }
-    @keyframes latin-film-poster-in { from { opacity:.25; transform:scale(1.035); } to { opacity:.68; transform:scale(1); } }
-    @keyframes latin-film-card-in { from { opacity:0; transform:translateY(calc(-50% + 14px)); } to { opacity:1; transform:translateY(-50%); } }
-    @keyframes latin-film-panel-in { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-    @media(max-width:600px) {
-      .latin-film-top { padding:12px 20px; }
-      .latin-film-brand { font-size:20px; }
-      .latin-film-card { top:37%; }
-      .latin-film-overline { margin-bottom:15px; font-size:8px; }
-      .latin-film-subtitle { margin:12px 0 23px; }
-      .latin-film-primary { min-height:50px; padding:14px 21px!important; font-size:11px!important; }
-      .latin-film-card-actions { gap:8px 16px; }
-      .latin-film-card-note { font-size:9px; margin-top:14px; }
-      .latin-film-panel { bottom:max(14px,env(safe-area-inset-bottom)); padding:13px 13px 8px; border-radius:15px; }
-      .latin-film-controls-row { grid-template-columns:1fr auto; gap:3px 12px; }
-      .latin-film-transport { grid-column:1; grid-row:1; }
-      .latin-film-fullscreen { grid-column:2; grid-row:1; }
-      .latin-film-audio { grid-column:1 / -1; grid-row:2; justify-content:flex-start; gap:9px; border-top:1px solid #ffffff16; padding-top:4px; }
-      .latin-film-volume { flex:1; width:auto; }
-      .latin-film-credit { margin-left:5px; padding-inline:5px; }
-      .latin-film-center-play { top:40%; width:68px; height:68px; }
+    @keyframes latin-film-card-in { from { opacity:0; } to { opacity:1; } }
+    @keyframes latin-film-panel-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @media(max-width:700px) {
+      .latin-film-top { padding:12px; }
+      .latin-film-panel { padding-inline:12px; padding-bottom:max(8px,env(safe-area-inset-bottom)); }
+      .latin-film-controls-row { gap:2px; }
+      .latin-film-left, .latin-film-right { gap:0; }
+      .latin-film-audio { gap:4px; }
+      .latin-film-volume { width:58px; }
+      .latin-film-volume-value { width:28px; font-size:9px; }
+      .latin-film-time { margin-left:8px; padding:9px 12px; gap:3px; font-size:10px; }
+      .latin-film-secondary-control { display:none!important; }
+      .latin-film-settings { right:50px; width:235px; }
     }
-    @media(max-height:520px) {
-      .latin-film-card { top:39%; }
-      .latin-film-title { font-size:56px; }
-      .latin-film-overline, .latin-film-subtitle { display:none; }
-      .latin-film-card-actions { margin-top:15px; }
-      .latin-film-card-note { margin-top:9px; }
-      .latin-film-top { padding-block:8px; }
-      .latin-film-panel { bottom:12px; padding-block:10px 5px; }
-      .latin-film-seek { margin-block:-3px 0; }
+    @media(max-width:380px) {
+      .latin-film-panel { padding-inline:8px; }
+      .latin-film-volume { width:44px; }
+      .latin-film-volume-value { display:none; }
+      .latin-film-time { margin-left:5px; padding:9px 8px; font-size:9px; }
+      .latin-film-audio { gap:2px; }
+      .latin-film-right .latin-film-icon-button { width:40px; }
+    }
+    @media(max-height:450px) {
+      .latin-film-top { padding-block:5px; }
+      .latin-film-panel { padding-bottom:4px; }
+      .latin-film-seek { height:28px; }
+      .latin-film-settings { max-height:calc(100dvh - 110px); }
     }
     @media(prefers-reduced-motion:reduce) { .latin-film, .latin-film * { animation:none!important; transition:none!important; } }
   `;
@@ -174,7 +197,7 @@
   }
 
   function canHideControls(state) {
-    return isActive(state) && state.mode === 'playing' && !state.video.paused && !state.loading && !state.scrubbing && !state.pointerOverControls && !(state.keyboardMode && state.overlay.contains(document.activeElement) && document.activeElement !== state.overlay && document.activeElement !== state.video);
+    return isActive(state) && state.mode === 'playing' && !state.video.paused && !state.loading && !state.scrubbing && !state.pointerOverControls && state.settings.hidden && !(state.keyboardMode && state.overlay.contains(document.activeElement) && document.activeElement !== state.overlay && document.activeElement !== state.video);
   }
 
   function scheduleHide(state) {
@@ -212,7 +235,12 @@
       state.seek.style.setProperty('--range-progress', `${time / duration * 100}%`);
       state.seek.setAttribute('aria-valuetext', `${formatTime(time)} sur ${formatTime(duration)}`);
     }
-    state.cardNote.textContent = state.mode === 'ended' ? `${formatTime(duration)} · Le latin, pour la vie.` : `Son ${state.video.muted || !state.video.volume ? 'coupé' : 'activé'}${duration ? ` · ${formatTime(duration)}` : ''}`;
+    state.chapterButtons?.forEach(({ button, chapter }) => {
+      const active = time >= chapter.start && time < chapter.end;
+      button.classList.toggle('is-current', active);
+      if (active) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
   }
 
   function updateState(state) {
@@ -223,15 +251,17 @@
     state.overlay.classList.toggle('is-stopped', mode === 'stopped');
     state.overlay.classList.toggle('has-ended', mode === 'ended');
     state.card.hidden = !cardVisible || state.loading;
-    state.centerPlay.hidden = mode !== 'paused' || state.loading || state.scrubbing;
     state.explore.hidden = mode !== 'ended';
-    state.primaryLabel.textContent = mode === 'ended' ? 'Revoir le film' : 'Lancer le film';
+    const primaryLabel = mode === 'ended' ? 'Revoir le film' : 'Lancer le film';
+    state.primaryLabel.textContent = primaryLabel;
+    state.primary.setAttribute('aria-label', primaryLabel);
     const playing = !state.video.paused && mode === 'playing';
     setButton(state.play, playing ? 'Mettre le film en pause' : (state.started && mode !== 'stopped' && mode !== 'ended' ? 'Reprendre le film' : 'Lire le film'), playing ? 'pause' : 'play');
     const audible = !state.video.muted && state.video.volume > 0;
     setButton(state.sound, audible ? 'Couper le son' : 'Activer le son', audible ? 'sound' : 'muted');
     state.sound.setAttribute('aria-pressed', String(audible));
     state.volume.value = String(Math.round(state.video.volume * 100));
+    state.volumeValue.textContent = `${state.video.muted ? 0 : Math.round(state.video.volume * 100)}%`;
     state.volume.style.setProperty('--range-progress', `${state.video.volume * 100}%`);
     updateTimeline(state);
     if (mode !== 'playing' || state.loading) {
@@ -337,6 +367,30 @@
     showControls(state);
   }
 
+  function openSettings(state, view) {
+    if (!isActive(state)) return;
+    state.settingsView = view === 'chapters' && state.chapterButtons.length ? 'chapters' : 'playback';
+    state.settings.hidden = false;
+    state.settingsToggle.setAttribute('aria-expanded', 'true');
+    state.chaptersToggle.setAttribute('aria-expanded', String(state.settingsView === 'chapters'));
+    state.playbackSettings.hidden = state.settingsView !== 'playback';
+    state.chapterSettings.hidden = state.settingsView !== 'chapters';
+    state.playbackTab.setAttribute('aria-pressed', String(state.settingsView === 'playback'));
+    state.chaptersTab.setAttribute('aria-pressed', String(state.settingsView === 'chapters'));
+    showControls(state);
+    if (state.keyboardMode) (state.settingsView === 'chapters' ? state.chaptersTab : state.playbackTab).focus();
+  }
+
+  function closeSettings(state, restoreFocus = true) {
+    if (!isActive(state)) return;
+    const containedFocus = state.settings.contains(document.activeElement);
+    state.settings.hidden = true;
+    state.settingsToggle.setAttribute('aria-expanded', 'false');
+    state.chaptersToggle.setAttribute('aria-expanded', 'false');
+    if (restoreFocus && containedFocus) state.settingsToggle.focus({ preventScroll: true });
+    showControls(state);
+  }
+
   function updateFit(state) {
     if (!isActive(state)) return;
     const videoRatio = state.video.videoWidth && state.video.videoHeight ? state.video.videoWidth / state.video.videoHeight : state.portrait ? 9 / 16 : 16 / 9;
@@ -398,7 +452,7 @@
   }
 
   function trapFocus(state, event) {
-    const elements = [...state.overlay.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled)')].filter(element => !element.closest('[hidden]'));
+    const elements = [...state.overlay.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled)')].filter(element => !element.closest('[hidden]') && element.getClientRects().length);
     const first = elements[0];
     const last = elements[elements.length - 1];
     if (!first) return;
@@ -414,7 +468,7 @@
     const state = {
       closing: false, started: false, userPaused: true, mode: 'launch', loading: false,
       scrubbing: false, resumeAfterScrub: false, resumeAfterVisibility: false,
-      keyboardMode: false, pointerOverControls: false, lastVolume: .75,
+      keyboardMode: false, pointerOverControls: false, lastVolume: .75, settingsView: 'playback', chapterButtons: [],
       loadTimer: 0, hideTimer: 0, inertElements: [], events: new AbortController(),
       previousOverflow: document.body.style.overflow, previousFocus: document.activeElement,
       portrait: window.matchMedia('(max-aspect-ratio: 3/4)').matches
@@ -447,7 +501,7 @@
       state.video.volume = .75;
       state.video.poster = poster.src;
       state.video.tabIndex = -1;
-      state.video.setAttribute('aria-label', 'Film LATIN : archives de New York, nature et visualisation NASA de la Terre');
+      state.video.setAttribute('aria-label', 'LATIN — le film des treize citations');
       state.overlay.append(state.video);
       const shade = document.createElement('div');
       shade.className = 'latin-film-shade';
@@ -456,58 +510,38 @@
       const description = document.createElement('p');
       description.id = 'latin-film-description';
       description.className = 'latin-film-description';
-      description.textContent = 'Archives urbaines de New York, séquences de nature et visualisation NASA de la Terre la nuit, avec musique instrumentale. Le film se lance avec le son. Vous pouvez le mettre en pause, l’arrêter, le relancer, choisir un passage, régler le volume ou couper le son. Les sources sont détaillées dans les crédits.';
+      description.textContent = 'Treize citations latines et leurs traductions, avec musique instrumentale. Le son est activé au lancement. Vous pouvez mettre en pause, arrêter ou recommencer le film, choisir une citation, régler le volume, la vitesse et le plein écran. Raccourcis : espace ou K pour la lecture, flèches pour avancer ou reculer, M pour le son, F pour le plein écran, Échap pour fermer. Les sources figurent dans les crédits.';
       state.overlay.append(description);
 
       const header = document.createElement('div');
       header.className = 'latin-film-top';
-      const brand = document.createElement('span');
-      brand.className = 'latin-film-brand';
-      brand.innerHTML = 'LATIN<span>.</span>';
-      const close = document.createElement('button');
-      close.type = 'button';
-      close.className = 'latin-film-close';
-      close.setAttribute('aria-label', 'Fermer le film');
-      close.append(document.createTextNode('Passer'), icon('close'));
+      const close = iconButton('Fermer le film', 'close', 'latin-film-close');
       close.addEventListener('click', () => closeFilm(state));
-      header.append(brand, close);
+      header.append(close);
       state.overlay.append(header);
 
       state.card = document.createElement('div');
       state.card.className = 'latin-film-card';
-      const overline = document.createElement('p');
-      overline.className = 'latin-film-overline';
-      overline.textContent = 'Le film';
-      const title = document.createElement('h2');
-      title.className = 'latin-film-title';
-      title.textContent = 'LATIN.';
-      const subtitle = document.createElement('p');
-      subtitle.className = 'latin-film-subtitle';
-      subtitle.textContent = 'Pour la vie.';
       const actions = document.createElement('div');
       actions.className = 'latin-film-card-actions';
-      const primary = document.createElement('button');
-      primary.type = 'button';
-      primary.className = 'latin-film-primary';
+      state.primary = document.createElement('button');
+      state.primary.type = 'button';
+      state.primary.className = 'latin-film-primary';
+      state.primary.setAttribute('aria-label', 'Lancer le film');
       state.primaryLabel = document.createElement('span');
+      state.primaryLabel.className = 'latin-film-primary-label';
       state.primaryLabel.textContent = 'Lancer le film';
-      primary.append(icon('play'), state.primaryLabel);
-      primary.addEventListener('click', () => playFilm(state, state.mode === 'ended'));
+      state.primary.append(icon('play'), state.primaryLabel);
+      state.primary.addEventListener('click', () => playFilm(state, state.mode === 'ended'));
       state.explore = document.createElement('button');
       state.explore.type = 'button';
       state.explore.className = 'latin-film-explore';
       state.explore.append(document.createTextNode('Explorer le site'), icon('arrow'));
       state.explore.hidden = true;
       state.explore.addEventListener('click', () => closeFilm(state));
-      actions.append(primary, state.explore);
-      state.cardNote = document.createElement('p');
-      state.cardNote.className = 'latin-film-card-note';
-      state.card.append(overline, title, subtitle, actions, state.cardNote);
+      actions.append(state.primary, state.explore);
+      state.card.append(actions);
       state.overlay.append(state.card);
-      state.centerPlay = iconButton('Reprendre le film', 'play', 'latin-film-center-play');
-      state.centerPlay.hidden = true;
-      state.centerPlay.addEventListener('click', () => playFilm(state));
-      state.overlay.append(state.centerPlay);
       state.status = document.createElement('p');
       state.status.className = 'latin-film-status';
       state.status.setAttribute('role', 'status');
@@ -517,14 +551,6 @@
 
       state.panel = document.createElement('div');
       state.panel.className = 'latin-film-panel';
-      const timeLabels = document.createElement('div');
-      timeLabels.className = 'latin-film-timeline-labels';
-      timeLabels.setAttribute('aria-hidden', 'true');
-      state.elapsed = document.createElement('span');
-      state.elapsed.textContent = '0:00';
-      state.duration = document.createElement('span');
-      state.duration.textContent = '—:—';
-      timeLabels.append(state.elapsed, state.duration);
       state.seek = document.createElement('input');
       state.seek.type = 'range';
       state.seek.className = 'latin-film-range latin-film-seek';
@@ -533,15 +559,12 @@
       state.seek.setAttribute('aria-label', 'Progression du film');
       const row = document.createElement('div');
       row.className = 'latin-film-controls-row';
-      const transport = document.createElement('div');
-      transport.className = 'latin-film-transport';
+      const left = document.createElement('div');
+      left.className = 'latin-film-left';
+      const right = document.createElement('div');
+      right.className = 'latin-film-right';
       state.play = iconButton('Lire le film', 'play', 'latin-film-play');
       state.play.addEventListener('click', () => togglePlayback(state));
-      const stop = iconButton('Arrêter le film', 'stop');
-      stop.addEventListener('click', () => stopFilm(state));
-      const restart = iconButton('Recommencer le film', 'restart');
-      restart.addEventListener('click', () => playFilm(state, true));
-      transport.append(state.play, stop, restart);
       const audio = document.createElement('div');
       audio.className = 'latin-film-audio';
       state.sound = iconButton('Couper le son', 'sound');
@@ -558,21 +581,110 @@
         if (state.video.volume) state.lastVolume = state.video.volume;
         updateState(state); showControls(state);
       });
-      const credit = document.createElement('a');
-      credit.className = 'latin-film-credit';
-      credit.href = 'media-credits.html'; credit.target = '_blank'; credit.rel = 'noopener';
-      credit.textContent = 'Crédits';
-      credit.setAttribute('aria-label', 'Crédits du film, nouvel onglet');
-      audio.append(state.sound, state.volume, credit);
+      state.volumeValue = document.createElement('span');
+      state.volumeValue.className = 'latin-film-volume-value';
+      state.volumeValue.setAttribute('aria-hidden', 'true');
+      audio.append(state.sound, state.volume, state.volumeValue);
+      const time = document.createElement('div');
+      time.className = 'latin-film-time';
+      time.setAttribute('aria-hidden', 'true');
+      state.elapsed = document.createElement('span');
+      state.elapsed.textContent = '0:00';
+      state.duration = document.createElement('span');
+      state.duration.textContent = '—:—';
+      time.append(state.elapsed, document.createTextNode(' / '), state.duration);
+      left.append(state.play, audio, time);
+      const stop = iconButton('Arrêter le film', 'stop', 'latin-film-secondary-control');
+      stop.addEventListener('click', () => stopFilm(state));
+      const restart = iconButton('Recommencer le film', 'restart', 'latin-film-secondary-control');
+      restart.addEventListener('click', () => playFilm(state, true));
+      state.chaptersToggle = iconButton('Chapitres', 'chapters', 'latin-film-secondary-control');
+      state.chaptersToggle.hidden = true;
+      state.chaptersToggle.setAttribute('aria-expanded', 'false');
+      state.chaptersToggle.setAttribute('aria-controls', 'latin-film-settings');
+      state.chaptersToggle.addEventListener('click', () => openSettings(state, 'chapters'));
+      state.settingsToggle = iconButton('Réglages du film', 'settings');
+      state.settingsToggle.setAttribute('aria-expanded', 'false');
+      state.settingsToggle.setAttribute('aria-controls', 'latin-film-settings');
+      state.settingsToggle.addEventListener('click', () => {
+        if (!state.settings.hidden) closeSettings(state);
+        else openSettings(state, 'playback');
+      });
       state.fullscreen = iconButton('Plein écran', 'expand', 'latin-film-fullscreen');
       state.fullscreen.hidden = !state.overlay.requestFullscreen && !state.video.webkitEnterFullscreen;
       state.fullscreen.addEventListener('click', () => toggleFullscreen(state));
-      row.append(transport, audio, state.fullscreen);
-      state.panel.append(timeLabels, state.seek, row);
+      right.append(stop, restart, state.chaptersToggle, state.settingsToggle, state.fullscreen);
+      row.append(left, right);
+      state.settings = document.createElement('div');
+      state.settings.id = 'latin-film-settings';
+      state.settings.className = 'latin-film-settings';
+      state.settings.setAttribute('role', 'group');
+      state.settings.setAttribute('aria-label', 'Réglages et chapitres du film');
+      state.settings.hidden = true;
+      const tabs = document.createElement('div');
+      tabs.className = 'latin-film-tabs';
+      state.playbackTab = document.createElement('button');
+      state.playbackTab.type = 'button'; state.playbackTab.textContent = 'Lecture';
+      state.playbackTab.addEventListener('click', () => openSettings(state, 'playback'));
+      state.chaptersTab = document.createElement('button');
+      state.chaptersTab.type = 'button'; state.chaptersTab.textContent = 'Chapitres'; state.chaptersTab.hidden = true;
+      state.chaptersTab.addEventListener('click', () => openSettings(state, 'chapters'));
+      tabs.append(state.playbackTab, state.chaptersTab);
+      state.playbackSettings = document.createElement('div');
+      const speedTitle = document.createElement('p');
+      speedTitle.className = 'latin-film-settings-title'; speedTitle.textContent = 'Vitesse de lecture';
+      const speeds = document.createElement('div');
+      speeds.className = 'latin-film-speeds';
+      state.speedButtons = [.75, 1, 1.25, 1.5].map(rate => {
+        const button = document.createElement('button'); button.type = 'button';
+        button.textContent = `${String(rate).replace('.', ',')}×`;
+        button.setAttribute('aria-label', `Vitesse ${String(rate).replace('.', ',')} fois`);
+        button.setAttribute('aria-pressed', String(rate === 1));
+        button.addEventListener('click', () => {
+          state.video.playbackRate = rate;
+          state.speedButtons.forEach(({ button: option, rate: value }) => option.setAttribute('aria-pressed', String(value === rate)));
+          showControls(state);
+        });
+        speeds.append(button);
+        return { button, rate };
+      });
+      const menuRestart = document.createElement('button'); menuRestart.type = 'button';
+      menuRestart.className = 'latin-film-setting-action'; menuRestart.append(icon('restart'), document.createTextNode('Recommencer le film'));
+      menuRestart.addEventListener('click', () => { closeSettings(state); playFilm(state, true); });
+      const menuStop = document.createElement('button'); menuStop.type = 'button';
+      menuStop.className = 'latin-film-setting-action'; menuStop.append(icon('stop'), document.createTextNode('Arrêter le film'));
+      menuStop.addEventListener('click', () => { closeSettings(state); stopFilm(state); });
+      const credit = document.createElement('a');
+      credit.className = 'latin-film-credit'; credit.href = 'media-credits.html'; credit.target = '_blank'; credit.rel = 'noopener';
+      credit.textContent = 'Sources et crédits'; credit.setAttribute('aria-label', 'Crédits du film, nouvel onglet');
+      state.playbackSettings.append(speedTitle, speeds, menuRestart, menuStop, credit);
+      state.chapterSettings = document.createElement('div'); state.chapterSettings.className = 'latin-film-chapters'; state.chapterSettings.hidden = true;
+      state.settings.append(tabs, state.playbackSettings, state.chapterSettings);
+      state.panel.append(state.seek, row, state.settings);
       state.overlay.append(state.panel);
+      fetch(new URL('film/chapters.json?v=5', document.baseURI), { signal: state.events.signal })
+        .then(response => { if (!response.ok) throw new Error('Chapters unavailable'); return response.json(); })
+        .then(data => {
+          if (!isActive(state) || !Array.isArray(data.chapters)) return;
+          const chapters = data.chapters.filter(chapter => Number.isFinite(chapter.start) && Number.isFinite(chapter.end) && chapter.end > chapter.start && typeof chapter.latin === 'string');
+          chapters.forEach((chapter, index) => {
+            const button = document.createElement('button'); button.type = 'button'; button.className = 'latin-film-chapter';
+            const stamp = document.createElement('span'); stamp.className = 'latin-film-chapter-time'; stamp.textContent = formatTime(chapter.start);
+            const text = document.createElement('span'); text.textContent = chapter.latin;
+            button.append(stamp, text); button.setAttribute('aria-label', `${index + 1}. ${chapter.latin} À ${formatTime(chapter.start)}`);
+            button.addEventListener('click', () => { closeSettings(state); seekTo(state, chapter.start); playFilm(state); });
+            state.chapterSettings.append(button); state.chapterButtons.push({ button, chapter });
+          });
+          state.chaptersToggle.hidden = !chapters.length; state.chaptersTab.hidden = !chapters.length;
+          updateTimeline(state);
+        }).catch(() => {});
 
       listen(state, state.overlay, 'pointermove', () => showControls(state), { passive: true });
-      listen(state, state.overlay, 'pointerdown', () => { state.keyboardMode = false; showControls(state); }, { passive: true });
+      listen(state, state.overlay, 'pointerdown', event => {
+        state.keyboardMode = false;
+        if (!state.settings.hidden && !state.settings.contains(event.target) && !state.settingsToggle.contains(event.target) && !state.chaptersToggle.contains(event.target)) closeSettings(state, false);
+        showControls(state);
+      }, { passive: true });
       listen(state, state.overlay, 'focusin', () => showControls(state));
       listen(state, state.overlay, 'focusout', () => queueMicrotask(() => { if (isActive(state)) scheduleHide(state); }));
       listen(state, state.panel, 'pointerenter', () => { if (finePointer.matches) { state.pointerOverControls = true; showControls(state); } }, { passive: true });
@@ -593,6 +705,7 @@
         showControls(state);
         if (event.key === 'Tab') { trapFocus(state, event); return; }
         if (event.key === 'Escape') {
+          if (!state.settings.hidden) { event.preventDefault(); closeSettings(state); return; }
           if (document.fullscreenElement || state.video.webkitDisplayingFullscreen) return;
           event.preventDefault(); closeFilm(state); return;
         }
