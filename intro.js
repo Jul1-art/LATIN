@@ -1,7 +1,6 @@
 'use strict';
 
 (() => {
-  const SESSION_KEY = 'latin-intro-seen-v1';
   const root = document.documentElement;
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   let overlay = null;
@@ -35,6 +34,7 @@
     clearTimeout(endTimer);
     beginReveal();
     animations.forEach(animation => animation.cancel());
+    animations.length = 0;
     root.classList.remove('intro-running');
     if (overlay) {
       document.body.style.overflow = previousOverflow;
@@ -45,8 +45,10 @@
       }
     }
     style?.remove();
+    overlay = null;
+    style = null;
+    inertElements.length = 0;
     window.latinIntroState = 'finished';
-    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch { /* Private storage can be unavailable. */ }
     emit('latin:intro-finished');
   }
 
@@ -73,16 +75,21 @@
     }
   }
 
-  function start() {
-    if (finished) return;
-    let seen = false;
-    try { seen = sessionStorage.getItem(SESSION_KEY) === '1'; } catch { /* Continue without persistence. */ }
-    const deepLink = location.hash && location.hash !== '#accueil';
-    if (seen || deepLink || window.scrollY > 60 || document.hidden || motionPreference.matches || typeof Element.prototype.animate !== 'function') {
+  function start(replay = false) {
+    if (overlay) return;
+    if (document.hidden) {
+      window.latinIntroState = 'pending';
+      return;
+    }
+    const deepLink = !replay && location.hash && location.hash !== '#accueil';
+    const staticIntro = motionPreference.matches || typeof Element.prototype.animate !== 'function';
+    if (deepLink || (staticIntro && !replay)) {
       finish();
       return;
     }
 
+    finished = false;
+    revealStarted = false;
     try {
       previousFocus = document.activeElement;
       previousOverflow = document.body.style.overflow;
@@ -131,7 +138,7 @@
         image.src = source;
         image.alt = '';
         image.decoding = 'async';
-        image.addEventListener('error', finish, { once: true });
+        image.addEventListener('error', () => { if (overlay?.contains(image)) finish(); }, { once: true });
         scene.append(image);
         const shade = document.createElement('div');
         shade.className = 'latin-intro-shade';
@@ -173,6 +180,7 @@
       document.body.append(overlay);
       document.body.style.overflow = 'hidden';
       overlay.focus({ preventScroll: true });
+      if (staticIntro) return;
       overlay.querySelectorAll('.latin-intro-image').forEach(image => {
         animate(image, [
           { opacity: 0, transform: 'scale(1.26) translate3d(2%,1%,0)' },
@@ -194,11 +202,15 @@
     }
   }
 
-  document.addEventListener('visibilitychange', () => { if (document.hidden && overlay) finish(); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && overlay) finish();
+    else if (!document.hidden && window.latinIntroState === 'pending') start();
+  });
+  document.querySelectorAll('[data-intro-replay]').forEach(button => button.addEventListener('click', () => start(true)));
   window.addEventListener('pagehide', () => { if (overlay) finish(); }, { once: true });
   const onPreferenceChange = () => { if (motionPreference.matches) finish(); };
   if (typeof motionPreference.addEventListener === 'function') motionPreference.addEventListener('change', onPreferenceChange);
   else if (typeof motionPreference.addListener === 'function') motionPreference.addListener(onPreferenceChange);
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => start(), { once: true });
   else start();
 })();

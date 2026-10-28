@@ -153,8 +153,7 @@
         const distance = (footer.x - geometry.center) / Math.max(geometry.width * 1.15, 60);
         const influence = Math.exp(-distance * distance * 1.5) * footer.opacity;
         letter.style.setProperty('--letter-x', `${(clamp(distance, -1, 1) * 6 * influence).toFixed(2)}px`);
-        letter.style.setProperty('--letter-skew', `${(clamp(distance, -1, 1) * -4 * influence).toFixed(3)}deg`);
-        letter.style.setProperty('--letter-scale', (1 + influence * 0.24).toFixed(4));
+        letter.style.setProperty('--letter-scale', (1 + influence * 0.32).toFixed(4));
       });
     }
 
@@ -247,7 +246,7 @@
       try {
         setupReveals();
         root.classList.add('motion-ready');
-        if (!heroPlayed && window.latinIntroState !== 'running') playHero();
+        if (!heroPlayed && !['running', 'pending'].includes(window.latinIntroState)) playHero();
         else if (portraitImage) portraitImage.style.transform = 'scale(1.04)';
         measureFooter();
         queueScene();
