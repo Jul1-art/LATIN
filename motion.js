@@ -55,7 +55,7 @@
           { transform: 'translate3d(0,0,0)' }
         ], { duration: 1250, delay: 100 + index * 140 });
       });
-      [document.querySelector('.hero-description'), document.querySelector('.hero .button')].forEach((element, index) => {
+      [document.querySelector('.hero-description'), document.querySelector('.hero .button'), document.querySelector('.hero-film-button')].forEach((element, index) => {
         animate(element, [
           { opacity: 0, transform: 'translate3d(0,18px,0)' },
           { opacity: 1, transform: 'translate3d(0,0,0)' }

@@ -5,31 +5,137 @@
       "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
       "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
       "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
-      "path": "film/sources/urban-triptych.mp4",
+      "path": "film/sources/urban-triptych-clean.mp4",
       "duration": 4.8,
       "saturation": 0,
       "title": "Archives urbaines de New York,1941 — triptyque",
-      "source_details": "Arteries of New York City; mirror film41.55..46.35,15.02..17.32 and28.30..30.50; two shorter panels slowed to4.8s"
+      "source_details": "Arteries of New York City; mirror film41.55..46.35,15.02..17.32 and28.30..30.50; two shorter panels slowed to4.8s; baked background padding cropped before panel composition"
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 2.5,
+      "start": 17.45,
+      "saturation": 0,
+      "title": "Quai de gare, New York,1941",
+      "speed": 0.92,
+      "framing": "fill",
+      "source_details": "Mirror17.45..19.75, source242.08..244.38",
+      "crop_source": [
+        0,
+        288,
+        1080,
+        1344
+      ]
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 2.8,
+      "start": 19.9,
+      "saturation": 0,
+      "title": "Le train part, New York,1941",
+      "speed": 0.7857142857142858,
+      "framing": "fill",
+      "source_details": "Mirror19.90..22.10, source248.62..250.82",
+      "crop_source": [
+        0,
+        288,
+        1080,
+        1344
+      ]
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 2.8,
+      "start": 22.25,
+      "saturation": 0,
+      "title": "Voyageur à la fenêtre,1941",
+      "speed": 0.8035714285714286,
+      "framing": "fill",
+      "source_details": "Mirror22.25..24.50, source252.78..255.03",
+      "crop_source": [
+        0,
+        288,
+        1080,
+        1344
+      ]
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 2.8,
+      "start": 28.3,
+      "saturation": 0,
+      "title": "Le ferry traverse le fleuve,1941",
+      "speed": 0.7678571428571429,
+      "framing": "fill",
+      "source_details": "Mirror28.30..30.45, source307.07..309.22",
+      "crop_source": [
+        0,
+        288,
+        1080,
+        1344
+      ]
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 2.8,
+      "start": 30.6,
+      "saturation": 0,
+      "title": "Des voyageurs regardent la ville,1941",
+      "speed": 0.85,
+      "framing": "fill",
+      "source_details": "Mirror30.60..32.98, source313.77..316.15",
+      "crop_source": [
+        0,
+        288,
+        1080,
+        1344
+      ]
     },
     {
       "license": "CC0-1.0",
       "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE",
       "path": "film/sources/flower.mp4",
-      "duration": 4.8,
-      "start": 0.05,
+      "duration": 5.0,
+      "start": 0.02,
       "saturation": 0.8,
       "title": "Flower",
-      "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4"
+      "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4",
+      "speed": 0.99
     },
     {
       "license": "CC0-1.0",
       "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE",
       "path": "film/sources/stream.mp4",
-      "duration": 3.6,
-      "speed": 0.85,
+      "duration": 3.5,
+      "speed": 0.88,
       "saturation": 0.75,
       "title": "Stream of water",
       "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/examples/stream-of-water.mp4"
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/urban-triptych-2-clean.mp4",
+      "duration": 4.0,
+      "saturation": 0,
+      "title": "La ville se met en mouvement,1941 — triptyque",
+      "source_details": "Mirror34.25..38.85,9.10..12.55,24.65..28.20 in three panels, respective speeds1.15,.8625,.8875; baked background padding cropped before panel composition"
     },
     {
       "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
@@ -39,7 +145,7 @@
       "duration": 4.4,
       "start": 0.15,
       "speed": 0.9,
-      "framing": "portrait",
+      "framing": "fill",
       "saturation": 0.9,
       "title": "NASA — visualisation de la Terre la nuit,2017",
       "source_details": "NASA GSFC_20170412_Lights_m12573_EarthAtNight; mirror film0.15..4.11 corresponds source27.75..31.71"
@@ -49,12 +155,31 @@
       "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
       "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
       "path": "film/sources/city-film.mp4",
-      "duration": 4.4,
-      "start": 41.65,
-      "framing": "portrait",
+      "duration": 2.6,
+      "start": 4.25,
+      "speed": 0.8461538461538461,
+      "framing": "fill",
+      "saturation": 0.9,
+      "title": "NASA — visualisation du Nil la nuit,2017",
+      "source_details": "Mirror4.25..6.45, originalNASA40.08..42.28"
+    },
+    {
+      "source_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
+      "license": "Public-domain source footage; source/edit declarations in mirror SOURCES.txt and CC0 README",
+      "license_url": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt",
+      "path": "film/sources/city-film.mp4",
+      "duration": 5.7,
+      "start": 41.45,
+      "framing": "fill",
       "saturation": 0,
       "title": "New York — skyline,1941",
-      "source_details": "Arteries of New York City; mirror film41.65..46.05, source47.32..51.72"
+      "source_details": "Mirror41.45..47.15, source47.12..52.82",
+      "crop_source": [
+        0,
+        288,
+        1080,
+        1344
+      ]
     }
   ],
   "music": {
@@ -74,36 +199,49 @@
   },
   "titles": [
     {
+      "text": "Audacibus fortuna juvat.",
+      "start": 5.0,
+      "end": 10.8,
+      "size": 56,
+      "serif": true
+    },
+    {
+      "text": "La fortune sourit aux audacieux.",
+      "start": 10.9,
+      "end": 15.3,
+      "size": 29
+    },
+    {
       "text": "Carpe diem.",
-      "start": 2.0,
-      "end": 7.8,
+      "start": 16.7,
+      "end": 21.1,
       "size": 76,
       "serif": true
     },
     {
       "text": "Cueille le jour.",
-      "start": 7.8,
-      "end": 10.8,
+      "start": 21.2,
+      "end": 24.3,
       "size": 38
     },
     {
       "text": "Ad astra per ardua.",
-      "start": 12.6,
-      "end": 16.0,
+      "start": 28.3,
+      "end": 34.0,
       "size": 66,
       "serif": true
     },
     {
       "text": "LATIN.",
-      "start": 16.4,
-      "end": 20.0,
+      "start": 35.1,
+      "end": 39.25,
       "size": 148,
       "y": "(h-text_h)/2-30"
     },
     {
       "text": "Pour la vie.",
-      "start": 16.8,
-      "end": 20.0,
+      "start": 35.6,
+      "end": 39.25,
       "size": 36,
       "y": "(h-text_h)/2+88"
     }

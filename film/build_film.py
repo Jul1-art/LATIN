@@ -55,7 +55,9 @@ def main():
             if speed <= 0:
                 raise SystemExit('Playback speed must be positive.')
             inputs += ['-threads', '2', '-ss', str(float(clip.get('start', 0))), '-t', str(length * speed), '-i', clip['path']]
-            normalize = f'setpts=(PTS-STARTPTS)/{speed},setsar=1'
+            crop = clip.get('crop_source')
+            source_crop = f'crop={int(crop[2])}:{int(crop[3])}:{int(crop[0])}:{int(crop[1])},' if crop else ''
+            normalize = source_crop + f'setpts=(PTS-STARTPTS)/{speed},setsar=1'
             grade = f"eq=saturation={float(clip.get('saturation', 0.7))}:contrast=1.06:brightness=-0.025,fps=24,format=yuv420p"
             if clip.get('framing') == 'portrait':
                 filters.append(f'[{index}:v]{normalize},split=2[bg{index}][fg{index}]')
@@ -83,7 +85,7 @@ def main():
             textfile = work / f'title-{index}.txt'
             textfile.write_text(text)
             alpha = f"if(lt(t,{start}),0,if(lt(t,{start+.5}),(t-{start})/.5,if(lt(t,{end-.5}),1,if(lt(t,{end}),({end}-t)/.5,0))))"
-            typography += f",drawtext=fontfile='{family}':textfile='{textfile}':fontsize={size}:fontcolor=0xf8f5f0:shadowcolor=black@0.6:shadowx=1:shadowy=2:x=(w-text_w)/2:y={y}:alpha='{alpha}'"
+            typography += f",drawtext=fontfile='{family}':textfile='{textfile}':fontsize={size}:fontcolor=0xf8f5f0:shadowcolor=black@0.6:shadowx=1:shadowy=2:x=(w-text_w)/2:y='({y})+14*(1-clip((t-{start})/0.7,0,1))':alpha='{alpha}'"
         typography += f',fade=t=in:st=0:d=0.5,fade=t=out:st={duration-.7}:d=0.7[film]'
         filters.append(typography)
         filters.append(f'[{len(clips)}:a]atrim=duration={duration},asetpts=PTS-STARTPTS,loudnorm=I=-18:TP=-1.5:LRA=9,afade=t=in:st=0:d=1.2,afade=t=out:st={duration-2}:d=2[sound]')

@@ -57,14 +57,19 @@ h1 { font-size: clamp(76px, 7.5vw, 112px); line-height: 1.03; font-weight: 500; 
 .hero-line-inner { display: block; transform-origin: left bottom; }
 .hero-line-accent { color: #927b32; white-space: nowrap; }
 .hero-description { color: var(--muted); font-size: 16px; line-height: 1.7; letter-spacing: -.02em; margin-block: 32px; }
-.button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 29px; min-height: 54px; padding: 16px 23px; font-size: 12px; font-weight: 500; border-radius: 4px; overflow: hidden; isolation: isolate; }
+.button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 29px; min-height: 54px; padding: 16px 23px; font-size: 12px; font-weight: 500; border-radius: 999px; overflow: hidden; isolation: isolate; }
 .button::before { content: ""; position: absolute; inset: 0; background: #34382d; z-index: -1; transform: translateY(102%); border-radius: 50% 50% 0 0; transition: transform .65s var(--ease-out), border-radius .65s var(--ease-out); }
 .button:hover::before { transform: translateY(0); border-radius: 0; }
 .button-dark { background: var(--ink); color: var(--paper); }
 .button .icon { width: 19px; height: 19px; transition: transform .5s var(--ease-out); }
 .button:hover .icon { transform: translateX(4px); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.hero-film-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 15px 18px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: transparent; font-size: 12px; transition: background .4s, border-color .4s; }
+.hero-film-button:hover { background: var(--stone); border-color: #c9c1a7; }
+.hero-film-button .icon { width: 18px; height: 18px; }
+.film-duration { color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; padding-left: 5px; }
 .hero-visual { min-width: 0; perspective: 1200px; }
-.portrait-frame { position: relative; overflow: hidden; background: var(--stone); border-radius: 3px; }
+.portrait-frame { position: relative; overflow: hidden; background: var(--stone); border-radius: 16px; box-shadow: 0 20px 45px #302a1510; }
 .portrait-parallax { transform: translate3d(0, var(--portrait-y, 0px), 0) rotateX(var(--portrait-rx, 0deg)) rotateY(var(--portrait-ry, 0deg)); transform-origin: center; }
 .portrait-frame img { display: block; width: 100%; height: 610px; object-fit: cover; object-position: 50% 48%; transform: scale(1.04); }
 
@@ -181,6 +186,8 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
   .hero { grid-template-columns: 1fr; gap: 38px; padding-block: 48px 55px; }
   .hero-copy { padding: 0; }
   h1 { font-size: clamp(63px, 13vw, 98px); line-height: 1.03; letter-spacing: -.07em; }
+  .hero-actions { gap: 10px; }
+  .hero-film-button { min-height: 50px; padding: 13px 16px; font-size: 11px; }
   .hero-description { margin: 23px 0 25px; font-size: 14px; }
   .button { min-height: 50px; font-size: 11px; padding: 15px 20px; gap: 28px; }
   .portrait-frame img { height: auto; max-height: 500px; aspect-ratio: 1; object-position: 50% 42%; }

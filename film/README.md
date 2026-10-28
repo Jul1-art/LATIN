@@ -1,11 +1,11 @@
 # LATIN — le film
 
-Montage de **20,6 secondes**, intégré à l’introduction du site, avec une bande musicale et deux exports :
+Montage de **39,85 secondes**, intégré à l’introduction du site, avec une bande musicale et deux exports :
 
 - `assets/latin-intro.mp4` : paysage, 1280 × 720, H.264/AAC, 24 images/s.
 - `assets/latin-intro-mobile.mp4` : vertical, 720 × 1280, mêmes durée et bande-son.
 
-Le lecteur démarre sans son pour respecter les règles des navigateurs. « Activer le son » lance la bande musicale après une action de l’utilisateur. Pause, relecture, crédits, fin automatique et bouton « Passer » sont disponibles. La préférence de réduction des animations désactive le lancement automatique.
+Le lecteur présente un écran de lancement. « Lancer le film » démarre la vidéo avec le son activé après ce clic, conformément aux règles des navigateurs. Lecture/pause, arrêt, reprise depuis le début, déplacement dans la vidéo, volume, coupure du son, plein écran et fermeture sont disponibles. La fin du film propose une relecture ou le retour au site. La préférence de réduction des animations désactive le lancement automatique.
 
 ## Images et musique
 
@@ -31,4 +31,4 @@ python3 film/build_film.py film/edit.json film/render/portrait --portrait
 
 `source-files.json` fixe les URL et les empreintes. `edit.json` documente les plans, leurs timecodes, les ralentis, les titres et la musique. Les sources brutes et exports de travail sont ignorés par Git. Le script refuse d’écraser une sortie existante.
 
-L’export comprend un triptyque d’archives, un recadrage adapté au format, des ralentis documentés, une colorimétrie modérée, des fondus, les titres et un mixage musical normalisé avec fondu d’entrée/sortie. Les deux fichiers finaux sont livrés directement dans `assets/` ; les scripts ne sont pas nécessaires pour regarder le film.
+L’export comprend deux triptyques d’archives, un recadrage adapté au format, des ralentis documentés, une colorimétrie modérée, des fondus, les titres et un mixage musical normalisé avec fondu d’entrée/sortie. Les deux fichiers finaux sont livrés directement dans `assets/` ; les scripts ne sont pas nécessaires pour regarder le film.
