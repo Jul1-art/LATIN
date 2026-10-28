@@ -1,0 +1,13 @@
+{
+  "note": "À compléter avec au moins trois extraits d’archives vérifiés. Aucun film final ne peut être produit avec ce modèle incomplet.",
+  "clips": [],
+  "music": {
+    "title": "Adventure",
+    "artist": "Rafael Krux, CinematicWaves.com",
+    "source_url": "https://github.com/0lhi/FreePD/blob/cf011c7016595833b550a88ff127f089188b25f8/Epic/Adventure.mp3",
+    "license": "CC0-1.0",
+    "license_url": "https://github.com/0lhi/FreePD/blob/cf011c7016595833b550a88ff127f089188b25f8/LICENSE",
+    "path": "film/music/adventure.mp3",
+    "start": 0
+  }
+}
