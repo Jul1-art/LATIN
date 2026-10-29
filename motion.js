@@ -13,22 +13,17 @@
     const animations = new Set();
     const pendingReveals = new Map();
     const revealed = new WeakSet();
-    const footerLetters = footerWord ? [...footerWord.querySelectorAll('.footer-letter')] : [];
     const footerBaseLetters = footerWord ? [...footerWord.querySelectorAll('.footer-word-base .footer-letter')] : [];
-    const footerCenters = new Map();
-    const footerSprings = new Map(footerBaseLetters.map(letter => [letter.dataset.position, { value: 0, velocity: 0 }]));
+    const footerBounces = new Map();
+    let lastFooterLetter = null;
     const ease = 'cubic-bezier(.16,1,.3,1)';
     const supported = typeof Element.prototype.animate === 'function' && typeof IntersectionObserver === 'function' && typeof requestAnimationFrame === 'function';
-    const footer = { x: 0, y: 0, vx: 0, vy: 0, trailX: 0, trailY: 0, opacity: 0, targetX: 0, targetY: 0, targetOpacity: 0 };
     const tilt = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let enabled = false;
     let heroPlayed = false;
     let revealObserver = null;
     let sceneFrame = 0;
     let pointerFrame = 0;
-    let touchTimer = 0;
-    let lastPointerTime = 0;
-    let footerWidth = 1;
 
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -126,86 +121,41 @@
       if (enabled && !sceneFrame) sceneFrame = requestAnimationFrame(updateScene);
     }
 
-    function measureFooter() {
-      if (!footerWord) return;
-      const bounds = footerWord.getBoundingClientRect();
-      footerWidth = Math.max(bounds.width, 1);
-      footerCenters.clear();
-      footerBaseLetters.forEach(letter => {
-        footerCenters.set(letter.dataset.position, {
-          center: letter.offsetLeft + letter.offsetWidth / 2,
-          width: Math.max(letter.offsetWidth, 35)
-        });
-      });
+    function bounceFooterLetter(letter, delay = 0) {
+      if (!enabled || !letter || footerBounces.has(letter)) return;
+      const lift = Math.min(42, Math.max(18, letter.offsetHeight * 0.16));
+      const direction = Number(letter.dataset.position) % 2 ? 1 : -1;
+      const animation = animate(letter, [
+        { offset: 0, transform: 'translate3d(0,0,0) scale(1,1)' },
+        { offset: 0.12, transform: 'translate3d(0,0,0) scale(1.08,.90)', easing: 'cubic-bezier(.2,.65,.35,1)' },
+        { offset: 0.35, transform: `translate3d(0,${-lift}px,0) rotate(${direction * 2}deg) scale(.96,1.07)`, easing: 'cubic-bezier(.55,0,.8,.4)' },
+        { offset: 0.55, transform: 'translate3d(0,0,0) scale(1.06,.93)', easing: 'cubic-bezier(.2,.65,.35,1)' },
+        { offset: 0.72, transform: `translate3d(0,${-lift * 0.38}px,0) rotate(${-direction * 0.8}deg) scale(.99,1.03)`, easing: 'cubic-bezier(.55,0,.8,.4)' },
+        { offset: 0.87, transform: 'translate3d(0,0,0) scale(1.02,.98)' },
+        { offset: 0.94, transform: `translate3d(0,${-lift * 0.10}px,0)` },
+        { offset: 1, transform: 'translate3d(0,0,0) scale(1,1)' }
+      ], { duration: 900, delay, easing: 'linear' }, () => footerBounces.delete(letter));
+      if (animation) footerBounces.set(letter, animation);
     }
 
-    function renderFooter() {
-      if (!footerWord) return;
-      footerWord.style.setProperty('--spot-x', `${footer.x.toFixed(2)}px`);
-      footerWord.style.setProperty('--spot-y', `${footer.y.toFixed(2)}px`);
-      footerWord.style.setProperty('--spot-opacity', footer.opacity.toFixed(4));
-      footerWord.style.setProperty('--trail-x', `${footer.trailX.toFixed(2)}px`);
-      footerWord.style.setProperty('--trail-y', `${footer.trailY.toFixed(2)}px`);
-      footerWord.style.setProperty('--sheen-position', `${(15 + footer.x / footerWidth * 70).toFixed(2)}%`);
-      footerLetters.forEach(letter => {
-        const geometry = footerCenters.get(letter.dataset.position);
-        if (!geometry) return;
-        const distance = (footer.x - geometry.center) / Math.max(geometry.width * 1.15, 60);
-        const bounce = clamp(footerSprings.get(letter.dataset.position).value, -0.35, 1.35);
-        letter.style.setProperty('--letter-x', `${(clamp(distance, -1, 1) * 6 * bounce).toFixed(2)}px`);
-        letter.style.setProperty('--letter-y', `${(-Math.min(10, geometry.width * 0.08) * Math.max(0, bounce)).toFixed(2)}px`);
-        letter.style.setProperty('--letter-scale-x', (1 + bounce * 0.18).toFixed(4));
-        letter.style.setProperty('--letter-scale-y', (1 + bounce * 0.20).toFixed(4));
-        letter.style.setProperty('--letter-rotate', `${(-clamp(distance, -1, 1) * 2.3 * bounce).toFixed(2)}deg`);
-      });
+    function bounceFooter() {
+      footerBaseLetters.forEach((letter, index) => bounceFooterLetter(letter, index * 55));
     }
 
-    function updatePointers(timestamp) {
+    function updatePointers() {
       pointerFrame = 0;
       if (!enabled || !precisePointer.matches) return;
-      const dt = Math.min(1 / 30, Math.max(1 / 240, (timestamp - (lastPointerTime || timestamp - 16.67)) / 1000));
-      lastPointerTime = timestamp;
-      const damping = Math.exp(-17 * dt);
-      footer.vx = (footer.vx + (footer.targetX - footer.x) * 240 * dt) * damping;
-      footer.vy = (footer.vy + (footer.targetY - footer.y) * 240 * dt) * damping;
-      footer.x += footer.vx * dt;
-      footer.y += footer.vy * dt;
-      const trailEase = 1 - Math.exp(-7 * dt);
-      footer.trailX += (footer.x - footer.trailX) * trailEase;
-      footer.trailY += (footer.y - footer.trailY) * trailEase;
-      footer.opacity += (footer.targetOpacity - footer.opacity) * (1 - Math.exp(-10 * dt));
-      let lettersUnsettled = false;
-      // One spring per position keeps the two colour layers perfectly aligned.
-      footerSprings.forEach((spring, position) => {
-        const geometry = footerCenters.get(position);
-        if (!geometry) return;
-        const distance = (footer.x - geometry.center) / Math.max(geometry.width * 1.15, 60);
-        const target = Math.exp(-distance * distance * 1.5) * footer.targetOpacity;
-        spring.velocity = (spring.velocity + (target - spring.value) * 220 * dt) * Math.exp(-10 * dt);
-        spring.value += spring.velocity * dt;
-        if (Math.abs(target - spring.value) > 0.001 || Math.abs(spring.velocity) > 0.01) lettersUnsettled = true;
-        else { spring.value = target; spring.velocity = 0; }
-      });
       tilt.x += (tilt.targetX - tilt.x) * 0.1;
       tilt.y += (tilt.targetY - tilt.y) * 0.1;
-      renderFooter();
       if (portrait) {
         portrait.style.setProperty('--portrait-rx', `${tilt.x.toFixed(3)}deg`);
         portrait.style.setProperty('--portrait-ry', `${tilt.y.toFixed(3)}deg`);
       }
-      const unsettled = Math.abs(footer.targetX - footer.x) > 0.05 || Math.abs(footer.targetY - footer.y) > 0.05 || Math.abs(footer.targetOpacity - footer.opacity) > 0.004 || Math.abs(tilt.targetX - tilt.x) > 0.008 || Math.abs(tilt.targetY - tilt.y) > 0.008 || Math.abs(footer.vx) > 0.15 || Math.abs(footer.vy) > 0.15 || Math.abs(footer.x - footer.trailX) > 0.1 || Math.abs(footer.y - footer.trailY) > 0.1;
-      if (unsettled || lettersUnsettled) pointerFrame = requestAnimationFrame(updatePointers);
-      else {
-        footer.x = footer.targetX;
-        footer.y = footer.targetY;
-        footer.opacity = footer.targetOpacity;
-        footer.vx = footer.vy = 0;
-        footer.trailX = footer.x;
-        footer.trailY = footer.y;
-        lastPointerTime = 0;
+      if (Math.abs(tilt.targetX - tilt.x) > 0.008 || Math.abs(tilt.targetY - tilt.y) > 0.008) {
+        pointerFrame = requestAnimationFrame(updatePointers);
+      } else {
         tilt.x = tilt.targetX;
         tilt.y = tilt.targetY;
-        renderFooter();
         if (portrait) {
           portrait.style.setProperty('--portrait-rx', `${tilt.x}deg`);
           portrait.style.setProperty('--portrait-ry', `${tilt.y}deg`);
@@ -220,12 +170,10 @@
     function resetPointers() {
       cancelAnimationFrame(pointerFrame);
       pointerFrame = 0;
-      lastPointerTime = 0;
-      footer.vx = footer.vy = 0;
-      footer.opacity = footer.targetOpacity = 0;
-      footerSprings.forEach(spring => { spring.value = spring.velocity = 0; });
+      footerBounces.forEach(animation => { animation.cancel(); animations.delete(animation); });
+      footerBounces.clear();
+      lastFooterLetter = null;
       tilt.x = tilt.y = tilt.targetX = tilt.targetY = 0;
-      renderFooter();
       if (portrait) {
         portrait.style.setProperty('--portrait-rx', '0deg');
         portrait.style.setProperty('--portrait-ry', '0deg');
@@ -264,7 +212,6 @@
         root.classList.add('motion-ready');
         if (!heroPlayed && !['running', 'pending'].includes(window.latinIntroState)) playHero();
         else if (portraitImage) portraitImage.style.transform = 'scale(1.04)';
-        measureFooter();
         queueScene();
       } catch {
         disableMotion();
@@ -292,39 +239,21 @@
     if (footerWord) {
       footerWord.addEventListener('pointerenter', event => {
         if (!enabled || !precisePointer.matches || event.pointerType === 'touch') return;
-        measureFooter();
-        const rect = footerWord.getBoundingClientRect();
-        footer.trailX = footer.x = footer.targetX = clamp(event.clientX - rect.left, 0, rect.width);
-        footer.trailY = footer.y = footer.targetY = clamp(event.clientY - rect.top, 0, rect.height);
-        footer.vx = footer.vy = 0;
-        footer.targetOpacity = 1;
-        queuePointers();
+        lastFooterLetter = null;
+        bounceFooter();
       }, { passive: true });
       footerWord.addEventListener('pointermove', event => {
         if (!enabled || !precisePointer.matches || event.pointerType === 'touch') return;
-        const rect = footerWord.getBoundingClientRect();
-        footer.targetX = clamp(event.clientX - rect.left, 0, rect.width);
-        footer.targetY = clamp(event.clientY - rect.top, 0, rect.height);
-        footer.targetOpacity = 1;
-        queuePointers();
+        const x = event.clientX - footerWord.getBoundingClientRect().left;
+        const letter = footerBaseLetters.find(item => x >= item.offsetLeft && x <= item.offsetLeft + item.offsetWidth);
+        if (letter && letter !== lastFooterLetter) bounceFooterLetter(letter);
+        lastFooterLetter = letter;
       }, { passive: true });
-      footerWord.addEventListener('pointerleave', () => {
-        footer.targetOpacity = 0;
-        queuePointers();
-      });
-      footerWord.addEventListener('focus', () => footerWord.classList.add('is-focused'));
-      footerWord.addEventListener('blur', () => footerWord.classList.remove('is-focused'));
+      footerWord.addEventListener('pointerleave', () => { lastFooterLetter = null; });
+      footerWord.addEventListener('focus', bounceFooter);
       footerWord.addEventListener('pointerdown', event => {
-        if (event.pointerType !== 'touch' && precisePointer.matches) return;
-        clearTimeout(touchTimer);
-        footerWord.classList.add('is-touch-active');
+        if (event.pointerType === 'touch' || !precisePointer.matches) bounceFooter();
       }, { passive: true });
-      const finishTouch = () => {
-        clearTimeout(touchTimer);
-        touchTimer = window.setTimeout(() => footerWord.classList.remove('is-touch-active'), 450);
-      };
-      footerWord.addEventListener('pointerup', finishTouch, { passive: true });
-      footerWord.addEventListener('pointercancel', finishTouch, { passive: true });
     }
 
     if (list && typeof MutationObserver === 'function') {
@@ -351,7 +280,6 @@
 
     window.addEventListener('scroll', queueScene, { passive: true });
     window.addEventListener('resize', () => {
-      measureFooter();
       queueScene();
     }, { passive: true });
     const listenToMedia = (query, listener) => {

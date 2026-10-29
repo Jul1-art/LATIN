@@ -120,7 +120,7 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 @keyframes arrow-pass { 0% { transform: translate(0, 0); } 40% { transform: translate(22px, -22px); } 41% { transform: translate(-22px, 22px); } 100% { transform: translate(0, 0); } }
 .empty-state { text-align: center; font-size: 16px; line-height: 1.8; color: var(--muted); padding: 70px 20px; border-bottom: 1px solid var(--line); }
 
-/* Monumental type. The two identical layers share the same letter motion. */
+/* Plain monumental type, with a staggered bounce on interaction. */
 .site-footer { background: var(--ink); color: var(--paper); overflow: clip; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-block: 30px; border-bottom: 1px solid #ffffff20; }
 .footer-top .text-button { color: #c9cbbf; font-size: 11px; }
@@ -128,17 +128,14 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 .back-top { display: flex; align-items: center; gap: 14px; font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top .icon { width: 17px; height: 17px; transform: rotate(-90deg); }
 .footer-word { position: relative; display: block; padding-block: 85px 0; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; outline-offset: -2px; }
-.footer-word-base, .footer-word-gold { display: flex; justify-content: space-between; align-items: flex-end; padding-right: .055em; }
-.footer-word-base { color: #e2dfd5; }
-.footer-word-gold { position: absolute; inset: 0; padding-top: 85px; pointer-events: none; color: var(--gold); opacity: var(--spot-opacity, 0); -webkit-mask-image: radial-gradient(ellipse 320px 260px at var(--spot-x, 50%) var(--spot-y, 50%), #000 5%, #000 32%, transparent 100%), radial-gradient(ellipse 210px 200px at var(--trail-x, 50%) var(--trail-y, 50%), #0008, transparent 100%); mask-image: radial-gradient(ellipse 320px 260px at var(--spot-x, 50%) var(--spot-y, 50%), #000 5%, #000 32%, transparent 100%), radial-gradient(ellipse 210px 200px at var(--trail-x, 50%) var(--trail-y, 50%), #0008, transparent 100%); }
-.footer-letter { display: block; transform: translate3d(var(--letter-x, 0px), var(--letter-y, 0px), 0) rotate(var(--letter-rotate, 0deg)) scale(var(--letter-scale-x, 1), var(--letter-scale-y, 1)); transform-origin: center bottom; }
-.footer-word-gold .footer-letter { color: transparent; background: linear-gradient(112deg, #7a6620 5%, #b59a45 23%, #f8f5f0 45%, #d4af37 56%, #b59a45 74%, #7a6620 95%); background-size: 200% 100%; background-position: var(--sheen-position, 50%) 50%; -webkit-background-clip: text; background-clip: text; }
+.footer-word-base { display: flex; justify-content: space-between; align-items: flex-end; padding-right: .055em; }
+.footer-word-base { color: var(--paper); }
+.footer-letter { display: block; transform-origin: center bottom; }
 @supports (text-box-trim: trim-both) {
   .footer-word { line-height: 1; }
   .footer-letter { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
-.footer-word.is-focused .footer-word-gold, .footer-word.is-touch-active .footer-word-gold { opacity: 1; -webkit-mask-image: none; mask-image: none; }
-.footer-word:focus-visible { outline-color: var(--gold); }
+.footer-word:focus-visible { outline-color: var(--paper); }
 
 /* Native dialog focus handling, with motion controlled in script.js. */
 .reader { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; padding: 0 6%; margin: 0; border: 0; color: var(--paper); background: var(--ink); color-scheme: dark; overscroll-behavior: contain; }
@@ -218,7 +215,6 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
   .footer-top { gap: 12px; }
   .footer-top .text-button, .back-top, .film-credits-link { font-size: 10px; }
   .footer-word { font-size: 24vw; padding-block: 55px 0; }
-  .footer-word-gold { padding-top: 55px; }
   .reader { padding-inline: 6%; }
   .reader-top { min-height: 75px; }
   .reader-close { font-size: 10px; gap: 9px; }
@@ -240,5 +236,4 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .portrait-parallax, .portrait-frame img, .featured-type, .footer-letter { transform: none !important; }
   .featured-fill { clip-path: none !important; }
-  .footer-word:hover .footer-word-gold { opacity: 1; -webkit-mask-image: none; mask-image: none; }
 }
