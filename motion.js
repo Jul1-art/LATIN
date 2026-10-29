@@ -236,7 +236,7 @@
     footerBaseLetters.forEach(letter => {
       let hovered = false;
       const onHover = event => {
-        if (!enabled || !precisePointer.matches || event.pointerType === 'touch') return;
+        if (!enabled || event.pointerType === 'touch') return;
         // Font ink can be hit-tested outside the trimmed letter box.
         const rect = letter.getBoundingClientRect();
         const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
