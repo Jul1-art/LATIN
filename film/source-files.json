@@ -202,5 +202,28 @@
     "changes": "Film adaptation: cropping, slow camera movement, colour grading and overlaid Latin quotation/translation. Credit NASA/Aubrey Gemignani, link CC BY2.0 and note adaptation in media credits.",
     "bytes": 1017523,
     "sha256": "7fb169dbe054b6d0baa521f008a7b81a835307264e505c8e0605665c629ddb2e"
+  },
+  {
+    "file": "nasa-perseids-2010.mp4",
+    "title": "Perseid Meteor Shower at Its Peak! — NASA/MSFC observations, 13 August 2010",
+    "author": "NASA / Marshall Space Flight Center / D. Moser / NASA's Meteoroid Environment Office",
+    "media_type": "archival observational video",
+    "width": 640,
+    "height": 480,
+    "fps": "6/1",
+    "duration_seconds": 53.359433,
+    "source_url": "https://archive.org/details/NASAMarshallTV-iKAAK5dUMA0",
+    "url": "https://archive.org/download/NASAMarshallTV-iKAAK5dUMA0/NASAMarshallTV-iKAAK5dUMA0.mp4",
+    "original_source_url": "https://www.youtube.com/watch?v=iKAAK5dUMA0",
+    "license": "NASA media usage guidelines — educational/informational reuse with NASA source acknowledgement",
+    "license_url": "https://web.archive.org/web/20241231095402/https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "license_evidence": "The specific Internet Archive NASA Marshall item identifies actual observations of the 13 August 2010 Perseid shower over Huntsville and credits NASA/MSFC/D. Moser, NASA's Meteoroid Environment Office. The Archive item has no separate file-specific licence field. NASA's own Images and Media Usage Guidelines were inspected through the 31 December 2024 Wayback capture: NASA content including video generally is not subject to copyright in the United States and may be used for educational or informational purposes, expressly including Internet and personal Web pages, with NASA acknowledged as source. Identified third-party copyrighted material is excluded; the selected observational camera frames carry only the stated NASA/MSFC credit, with no third-party credit identified. This basis is NASA's general reuse guidance, not the unrelated NASA-3D-Resources licence or a file-specific Commons PD determination.",
+    "policy_excerpt": "NASA content – images, audio, video ... generally are not subject to copyright in the United States. You may use this material for educational or informational purposes ... Internet Web pages ... NASA should be acknowledged as the source of the material.",
+    "policy_inspected_copy_sha256": "e0b8bc66ccd3f6030d5b1c48026231cad8066d77c275f8f89967486dc6fc5849",
+    "policy_inspected_original_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "changes": "Excerpt11.5–21.75s, crop removing all-sky lens margins and timestamp, enlargement from native640x480 at6fps, motion interpolation to24fps, contrast curve and overlaid quotation. No generated meteor trails or replacement trajectories.",
+    "bytes": 4640695,
+    "sha256": "d940f01d465dc56f9e09848b40add96216927d4cb0f13c49df298339e9f4ad10",
+    "verification": "Specific Archive metadata, original archival video contact sheet, and NASA media policy via cached official-page capture inspected. Selected frames show camera observations of passing meteors, not an educational animation. The separate2011 Flickr file labelled CC BY-NC2.0 is not used."
   }
 ]

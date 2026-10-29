@@ -206,28 +206,26 @@
       "title": "Audacibus — ouvrir l’horizon"
     },
     {
-      "path": "film/sources/pillars-webb.jpg",
+      "path": "film/sources/nasa-perseids-2010.mp4",
       "duration": 10.25,
-      "source_url": "https://commons.wikimedia.org/wiki/File:Pillars_of_Creation_(NIRCam_Image).jpg",
-      "license": "Public domain — NASA/STScI Webb; source credit required",
-      "license_url": "https://commons.wikimedia.org/w/index.php?title=File:Pillars_of_Creation_(NIRCam_Image).jpg&oldid=1277547910",
-      "title": "Pillars of Creation — JWST NIRCam",
-      "saturation": 0.98,
-      "type": "image",
-      "zoom": 0.18,
-      "motion": "orbital-depth",
+      "source_url": "https://archive.org/details/NASAMarshallTV-iKAAK5dUMA0",
+      "license": "NASA media usage guidelines — educational/informational reuse with NASA source acknowledgement",
+      "license_url": "https://web.archive.org/web/20241231095402/https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "title": "Perseid Meteor Shower at Its Peak! — NASA/MSFC observations, 13 August 2010",
+      "start": 11.5,
+      "speed": 1,
+      "motion": "native",
+      "saturation": 1,
+      "interpolate": true,
       "crop_source": [
-        0,
-        1700,
-        8422,
-        4738
+        105,
+        65,
+        430,
+        300
       ],
-      "portrait_crop_source": [
-        0,
-        0,
-        8422,
-        14588
-      ]
+      "framing": "fit",
+      "portrait_align_y": 0.18,
+      "luma_curve": "0/0 0.32/0.008 0.46/0.09 0.65/0.65 1/1"
     },
     {
       "path": "film/sources/earth-blue.jpg",
@@ -394,6 +392,6 @@
   ],
   "width": 1280,
   "height": 720,
-  "notes": "All thirteen Latin quotes, translations and authors remain exactly unchanged. The three rejected homemade scenes are replaced by existing sourced images: Camuccini painting for Tu quoque, JWST Southern Ring Nebula for Memento mori, and NASA/Aubrey Gemignani total eclipse for Omnes vulnerant. No new original 3D object or scene is created. The existing other shots, including the sole Apollo footprint, sole Carpe diem flower, Earth titles, Saturn, SDO and JWST Pillars, remain unchanged. Music uses the same continuous105-second interior-phrase extension.",
+  "notes": "All thirteen Latin quotations, translations and authors remain exactly unchanged. Only Ad astra is changed in this revision: genuine NASA/MSFC/D.Moser Perseid observations recorded13August2010, excerpt11.5–21.75s, with source-derived motion, reframing, contrast grading and cadence interpolation. No generated meteors or3D objects. All other scenes and the continuous105-second soundtrack remain unchanged.",
   "motion": "orbital-depth"
 }

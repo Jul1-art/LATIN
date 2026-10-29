@@ -1,6 +1,6 @@
 # Séquences originales LATIN
 
-Ces sept vidéos originales sont conservées dans le dépôt. **Seul le dé est encore utilisé par le montage actuel.** La dague, la bougie et le cadran solaire ont été remplacés par le tableau de Camuccini, la nébuleuse de l’Anneau austral et une photographie d’éclipse. Les monolithes, le bouclier et la traversée Tycho avaient déjà été remplacés par Saturne, le Soleil SDO et les Piliers de la Création JWST. Le montage principal n’a pas besoin de Blender pour lire ou assembler la séquence du dé.
+Ces sept vidéos originales sont conservées dans le dépôt. **Seul le dé est encore utilisé par le montage actuel.** La dague, la bougie et le cadran solaire ont été remplacés par le tableau de Camuccini, la nébuleuse de l’Anneau austral et une photographie d’éclipse. Les monolithes et le bouclier avaient déjà été remplacés par Saturne et le Soleil SDO. La traversée Tycho, puis l’image des Piliers de la Création, ont cédé la place aux observations réelles de météores NASA/MSFC pour « Ad astra per ardua. ». Le montage principal n’a pas besoin de Blender pour lire ou assembler la séquence du dé.
 
 **Pour tout nouveau visuel du film, utiliser une image, une vidéo ou une œuvre existante dont la source et la licence sont documentées. Ne créer aucun nouvel objet ou décor en 3D.** Les fichiers et scripts ci-dessous restent disponibles pour comprendre et reproduire les versions antérieures.
 

@@ -119,6 +119,11 @@ def main():
             source_crop = clip.get('portrait_crop_source', clip.get('crop_source')) if args.portrait else clip.get('crop_source')
             crop = f'crop={int(source_crop[2])}:{int(source_crop[3])}:{int(source_crop[0])}:{int(source_crop[1])},' if source_crop else ''
             framing = f'scale={width}:{height}:force_original_aspect_ratio=increase,crop={width}:{height}'
+            if not image and clip.get('framing') == 'fit':
+                pad_y = float(clip.get('portrait_align_y' if args.portrait else 'align_y', .5))
+                if not 0 <= pad_y <= 1:
+                    raise SystemExit('Frame alignment must be between zero and one.')
+                framing = f'scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)*{pad_y}:black'
             if image:
                 # Oversampling keeps slow camera movement smooth at subpixel distances.
                 zoom = float(clip.get('zoom', .08))
@@ -141,6 +146,8 @@ def main():
                     video_filter += f',minterpolate=fps={FPS}:mi_mode=mci:mc_mode=obmc:me_mode=bidir:vsbmc=1'
                 video_filter += ',' + framing
             video_filter += f",setsar=1,eq=saturation={float(clip.get('saturation', .90))}:contrast={float(clip.get('contrast', 1.035))}:brightness=-0.008:gamma={float(clip.get('gamma', 1))},fps={FPS}"
+            if clip.get('luma_curve'):
+                video_filter += f",curves=all='{clip['luma_curve']}'"
             if clip.get('motion', recipe.get('motion')) == 'orbital-depth':
                 video_filter += ',' + depth_filter(width, height, length, index, FPS, .8)
             # Bias the optical shade upward to protect lower-third captions.
