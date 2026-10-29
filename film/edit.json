@@ -39,14 +39,28 @@
       "title": "Un salut au monde — rouge-gorge"
     },
     {
-      "path": "film/generated/still-lifes/tu-quoque.mp4",
+      "path": "film/sources/caesar-camuccini.jpg",
       "duration": 7.65,
-      "source_url": "https://github.com/Jul1-art/LATIN/tree/main/film/generated/still-lifes",
-      "license": "Original animation created for the LATIN project",
-      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
+      "type": "image",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg",
+      "license": "Public domain — PD-old-100-expired; faithful reproduction of a public-domain2D artwork (PD-Art)",
+      "license_url": "https://commons.wikimedia.org/w/index.php?title=File:Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg&oldid=1042602578",
       "motion": "native",
-      "saturation": 0.96,
-      "title": "Tu quoque — l’ombre de la lame"
+      "zoom": 0.065,
+      "saturation": 0.97,
+      "title": "La morte di Cesare — Vincenzo Camuccini",
+      "crop_source": [
+        240,
+        270,
+        1570,
+        884
+      ],
+      "portrait_crop_source": [
+        620,
+        300,
+        484,
+        860
+      ]
     },
     {
       "path": "film/generated/dice/dice.mp4",
@@ -130,24 +144,41 @@
       "interpolate": true
     },
     {
-      "path": "film/generated/still-lifes/memento-mori.mp4",
+      "path": "film/sources/southern-ring-webb.jpg",
       "duration": 7.65,
-      "source_url": "https://github.com/Jul1-art/LATIN/tree/main/film/generated/still-lifes",
-      "license": "Original animation created for the LATIN project",
-      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
+      "type": "image",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Southern_Ring_Nebula_by_Webb_Telescope_(2022).jpg",
+      "license": "Public domain — NASA (PD-USGov-NASA)",
+      "license_url": "https://commons.wikimedia.org/w/index.php?title=File:Southern_Ring_Nebula_by_Webb_Telescope_(2022).jpg&oldid=911295671",
       "motion": "native",
-      "saturation": 0.96,
-      "title": "Memento mori — la flamme s’amenuise"
+      "zoom": 0.09,
+      "saturation": 0.97,
+      "title": "Southern Ring Nebula — JWST NIRCam (NGC 3132)",
+      "framing": "fit"
     },
     {
-      "path": "film/generated/sundial/sundial.mp4",
+      "path": "film/sources/eclipse-totality-2017.jpg",
       "duration": 8.65,
-      "source_url": "https://github.com/Jul1-art/LATIN/tree/main/film/generated/sundial",
-      "license": "Original animation created for the LATIN project",
-      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
+      "type": "image",
+      "source_url": "https://commons.wikimedia.org/wiki/File:2017_Total_Solar_Eclipse_(35909952653).jpg",
+      "license": "CC BY 2.0 Generic",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "motion": "native",
-      "saturation": 0.96,
-      "title": "Omnes vulnerant — l’ombre du cadran solaire"
+      "zoom": 0.08,
+      "saturation": 0.97,
+      "title": "Total solar eclipse above Madras, Oregon — 21 August 2017",
+      "crop_source": [
+        450,
+        300,
+        2300,
+        1700
+      ],
+      "portrait_crop_source": [
+        0,
+        0,
+        3186,
+        2526
+      ]
     },
     {
       "path": "film/sources/flower.mp4",
@@ -363,6 +394,6 @@
   ],
   "width": 1280,
   "height": 720,
-  "notes": "Each quotation has its own visual subject. Apollo bootprint is used only for Veni vidi vici; the MDN flower only for Carpe diem. NASA Earth remains only under the LATIN opening and ending. Dura lex uses Cassini Saturn; Si vis pacem uses genuine SDO solar footage; Ad astra uses the detailed JWST NIRCam Pillars of Creation image with an artistic perspective camera movement. All thirteen Latin quotes, translations and authors remain exactly unchanged. Music extends an interior phrase and resolves only at the film end.",
+  "notes": "All thirteen Latin quotes, translations and authors remain exactly unchanged. The three rejected homemade scenes are replaced by existing sourced images: Camuccini painting for Tu quoque, JWST Southern Ring Nebula for Memento mori, and NASA/Aubrey Gemignani total eclipse for Omnes vulnerant. No new original 3D object or scene is created. The existing other shots, including the sole Apollo footprint, sole Carpe diem flower, Earth titles, Saturn, SDO and JWST Pillars, remain unchanged. Music uses the same continuous105-second interior-phrase extension.",
   "motion": "orbital-depth"
 }

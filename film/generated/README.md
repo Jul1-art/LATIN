@@ -1,8 +1,10 @@
 # Séquences originales LATIN
 
-Ces sept vidéos originales sont conservées dans le dépôt. Le montage actuel utilise le dé, la dague, la bougie et le cadran solaire. Les monolithes, le bouclier et la traversée Tycho appartiennent à une version précédente : ils ont été remplacés respectivement par Saturne, le Soleil SDO et les Piliers de la Création JWST. Le montage principal n’a pas besoin de Blender pour lire ou assembler les quatre séquences actives.
+Ces sept vidéos originales sont conservées dans le dépôt. **Seul le dé est encore utilisé par le montage actuel.** La dague, la bougie et le cadran solaire ont été remplacés par le tableau de Camuccini, la nébuleuse de l’Anneau austral et une photographie d’éclipse. Les monolithes, le bouclier et la traversée Tycho avaient déjà été remplacés par Saturne, le Soleil SDO et les Piliers de la Création JWST. Le montage principal n’a pas besoin de Blender pour lire ou assembler la séquence du dé.
 
-| Séquence | Citation | Fabrication |
+**Pour tout nouveau visuel du film, utiliser une image, une vidéo ou une œuvre existante dont la source et la licence sont documentées. Ne créer aucun nouvel objet ou décor en 3D.** Les fichiers et scripts ci-dessous restent disponibles pour comprendre et reproduire les versions antérieures.
+
+| Séquence conservée | Citation de la version d’origine | Fabrication |
 |---|---|---|
 | `dice/dice.mp4` | Alea jacta est. | Dé en ivoire, points creusés, chute et stabilisation, éclairage de studio. |
 | `still-lifes/tu-quoque.mp4` | Tu quoque, mi fili ! | Dague et ombre sur une pierre claire. |
@@ -18,7 +20,7 @@ La traversée stellaire réutilise les directions et couleurs échantillonnées 
 
 ## Reproduire les scènes
 
-Les MP4 présents sont les sources vérifiées du montage livré. Pour expérimenter, copier un dossier dans `film/render/` avant de lancer ses scripts : les outils de création peuvent remplacer leurs propres images, vidéos et fichiers de provenance. La commande d’assemblage `build_film.py`, elle, refuse d’écraser un export existant.
+Les MP4 présents sont les sources vérifiées des séquences originales ; seul `dice/dice.mp4` figure encore dans le montage actuel. Les commandes suivantes documentent la reproduction des archives. Copier un dossier dans `film/render/` avant de lancer ses scripts : les outils de création peuvent remplacer leurs propres images, vidéos et fichiers de provenance. La commande d’assemblage `build_film.py`, elle, refuse d’écraser un export existant.
 
 Prérequis optionnels : Blender 4.3+, FFmpeg avec `minterpolate`, et la police DejaVu Serif pour le cadran solaire. Le chemin de police du cadran correspond à Debian/Ubuntu. Les scripts limitent leur usage du processeur à deux threads.
 

@@ -1,6 +1,6 @@
 # LATIN — le film
 
-Montage de **1 min 45 s**, en quinze plans, réunissant les **treize citations du site**, leurs traductions françaises et leurs auteurs. Chaque citation possède son propre sujet visuel : vidéos de nature, scènes d’objets originales en 3D, photographies spatiales et vidéo solaire NASA. La Terre accompagne les titres d’ouverture et de fin. Deux exports partagent le même montage et la même bande-son :
+Montage de **1 min 45 s**, en quinze plans, réunissant les **treize citations du site**, leurs traductions françaises et leurs auteurs. Chaque citation possède son propre sujet visuel : vidéos de nature, tableau historique, photographies spatiales, vidéo solaire NASA et animation du dé déjà présent. La Terre accompagne les titres d’ouverture et de fin. Deux exports partagent le même montage et la même bande-son :
 
 - `assets/latin-intro.mp4` : paysage, 1280 × 720, H.264/AAC, 24 images/s.
 - `assets/latin-intro-mobile.mp4` : vertical, 720 × 1280, mêmes durée et bande-son.
@@ -12,6 +12,7 @@ Montage de **1 min 45 s**, en quinze plans, réunissant les **treize citations d
 - Réserver **la vidéo de fleur à « Carpe diem. »**, avec une seule apparition dans le film.
 - Réserver **la Terre aux titres « LATIN. » d’ouverture et de fin**.
 - Maintenir un sujet distinct pour chaque citation et identifier les créations originales comme telles dans les crédits.
+- Pour tout nouveau plan, utiliser des **images, vidéos ou œuvres existantes**, avec une source et une licence documentées. **Ne créer aucun nouvel objet ou décor en 3D pour le film.**
 
 Ces règles s’appliquent aussi aux futurs changements d’images, de recadrage ou de format.
 
@@ -26,15 +27,15 @@ Les paramètres proposent les vitesses 0,75×, 1×, 1,25× et 1,5× ainsi qu’u
 | Citation | Sujet du plan |
 | --- | --- |
 | Ave ! | Rouge-gorge, vidéo de nature |
-| Tu quoque, mi fili ! | Dague et ombre sur pierre, création 3D |
+| Tu quoque, mi fili ! | La morte di Cesare, tableau de Vincenzo Camuccini |
 | Alea jacta est. | Dé qui tombe et s’immobilise, création 3D |
 | Veni, vidi, vici. | Empreinte Apollo, photographie NASA mise en mouvement |
 | Dura lex, sed lex. | Saturne et ses anneaux, photographie de Cassini |
 | Si vis pacem, para bellum. | Éruption solaire du 10 mai 2022, vidéo NASA SDO |
 | Mens sana in corpore sano. | Épis de blé dans le vent, vidéo de nature |
 | Errare humanum est, perseverare diabolicum. | Ruisseau qui contourne les obstacles, vidéo de nature |
-| Memento mori. | Bougie dont la flamme s’amenuise, création 3D |
-| Omnes vulnerant, ultima necat. | Cadran solaire et ombre mobile, création 3D |
+| Memento mori. | Nébuleuse de l’Anneau austral, photographie JWST NIRCam |
+| Omnes vulnerant, ultima necat. | Éclipse solaire totale du 21 août 2017, photographie NASA / Aubrey Gemignani |
 | Carpe diem. | Fleur, vidéo de nature |
 | Audacibus fortuna juvat. | Vagues et horizon, vidéo de nature |
 | Ad astra per ardua. | Piliers de la création, image infrarouge JWST NIRCam mise en mouvement |
@@ -43,17 +44,23 @@ Les paramètres proposent les vitesses 0,75×, 1×, 1,25× et 1,5× ainsi qu’u
 
 Les photographies **Earth (B)** et **Moon — Apollo Astronaut Bootprint** proviennent de la collection officielle `nasa/NASA-3D-Resources`, fixée au commit `11ebb4ee043715aefbba6aeec8a61746fad67fa7`. Son README déclare explicitement : **“These assets are free and without copyright.”** Cette déclaration concerne les ressources de la collection. Le README et les images utilisés ont été inspectés. Les directives NASA figurent dans les crédits comme référence ; leur page externe n’a pas été directement consultée depuis cet environnement.
 
-Trois ressources spatiales supplémentaires sont distribuées par Wikimedia Commons. Leurs fichiers et notices ont été inspectés ; `source-files.json` conserve les URL, empreintes SHA-256 et révisions précises des notices :
+Six ressources supplémentaires sont distribuées par Wikimedia Commons. Leurs fichiers et notices ont été inspectés ; `source-files.json` conserve les URL, empreintes SHA-256 et révisions précises des notices :
 
 - **Saturn during Equinox — Cassini PIA11141** : NASA / JPL / Space Science Institute. La [notice Commons](https://commons.wikimedia.org/w/index.php?title=File:Saturn_during_Equinox.jpg&oldid=1281661591) classe cette image dans le domaine public NASA (`PD-USGov-NASA`).
 - **Solar X1.5 flare — May 10, 2022, SDO AIA 304 PSF (SVS5005)** : NASA Scientific Visualization Studio ; Tom Bridgman (Global Science and Technology, Inc.), Scott Wiessinger (KBR Wyle Services, LLC), Laurence Schuler et Ian Jones (ADNET Systems, Inc.). La [notice Commons](https://commons.wikimedia.org/w/index.php?title=File:Solar_X1_5_flare_-_May_10,_2022_(SVS5005_-_20220510_FlareX15_AIA304_PSF_2048p30).webm&oldid=1065571301) indique le domaine public NASA. Le film emploie un extrait du transcodage Commons 1080 × 1080 de cette vidéo, sans son source.
 - **Pillars of Creation — JWST NIRCam** : SCIENCE : NASA, ESA, CSA, STScI ; IMAGE PROCESSING : Joseph DePasquale (STScI), Anton M. Koekemoer (STScI), Alyssa Pagan (STScI). La [notice Commons](https://commons.wikimedia.org/w/index.php?title=File:Pillars_of_Creation_(NIRCam_Image).jpg&oldid=1277547910) indique le domaine public NASA/STScI, avec conservation du crédit de source. Le crédit complet est reproduit ici et sur la page des crédits. L’image infrarouge détaillée reçoit un mouvement de caméra au montage ; ce mouvement ne reconstitue pas la géométrie physique de la nébuleuse.
 
+- **La morte di Cesare** : Vincenzo Camuccini (1771–1844). La [notice Commons](https://commons.wikimedia.org/w/index.php?title=File:Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg&oldid=1042602578) identifie une reproduction fidèle d’un tableau dans le domaine public (`PD-Art`, `PD-old-100-expired`). Cette œuvre historique accompagne « Tu quoque, mi fili ! » ; elle n’est pas un enregistrement de l’événement.
+- **Southern Ring Nebula — JWST NIRCam (NGC 3132)** : NASA / ESA / CSA / STScI. La [notice Commons](https://commons.wikimedia.org/w/index.php?title=File:Southern_Ring_Nebula_by_Webb_Telescope_(2022).jpg&oldid=911295671) classe cette photographie télescopique dans le domaine public NASA. Elle accompagne « Memento mori. ».
+- **Total solar eclipse above Madras, Oregon — 21 August 2017** : NASA / Aubrey Gemignani, diffusion NASA Goddard Space Flight Center. Cette photographie accompagne « Omnes vulnerant, ultima necat. ». Sa [notice Commons vérifiée](https://commons.wikimedia.org/w/index.php?title=File:2017_Total_Solar_Eclipse_(35909952653).jpg&oldid=1085795581) indique précisément la licence **[CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)**. Adaptations pour le film : recadrage, léger mouvement de caméra, colorimétrie et superposition de la citation et de sa traduction. La source, le crédit et la licence sont conservés dans les crédits du site.
+
+Les trois nouveaux plans utilisent ces images existantes avec de légers mouvements et recadrages en deux dimensions. Aucun objet, décor ou phénomène n’a été reconstruit pour ces plans.
+
 Les pages NASA/JPL, SVS et Webb indiquées comme sources originales par Commons n’ont pas été directement consultées depuis cet environnement. Les affirmations de licence ci-dessus reposent sur les notices Commons inspectées.
 
 Les vidéos **Robin Bird**, **Wheat Field** et **Waves** proviennent du dépôt miroir `tanersener/ffmpeg-video-slideshow-scripts`, fixé au commit `91d766eb231566215f66204a34bcc2b7221c2648`. Son README nomme ces trois vidéos et les déclare dans le domaine public, séparément de la licence du logiciel. Les pages primaires Pixabay n’ont pas été directement consultées ; les notices conservent cette distinction. Les vidéos **flower** et **stream-of-water** sont distribuées par MDN, au commit `13024db581b08fae11a0ca229497198b9b0534e7`, sous **CC0-1.0**.
 
-Les **quatre scènes d’objets en 3D utilisées dans ce montage** — dague, dé, bougie et cadran solaire — sont des animations originales créées pour LATIN avec Blender. Leurs formes, matériaux, lumières et mouvements sont générés par les scripts du projet. Elles sont créditées comme créations originales, et non comme images d’archives ou reproductions d’objets historiques identifiés. Les anciens plans de monolithes, de bouclier et de traversée Tycho ne sont plus utilisés dans le montage.
+Le **dé déjà présent**, qui accompagne « Alea jacta est. », est la seule animation d’objet originale encore utilisée dans ce montage. Il reste crédité comme une création Blender du projet. Les anciens plans de dague, bougie, cadran solaire, monolithes, bouclier et traversée Tycho sont conservés dans le dépôt pour les versions antérieures et ne sont plus utilisés dans le film actuel.
 
 Les vidéos générées, leurs scripts et leurs notices de provenance sont versionnés dans [`generated/`](generated/README.md). Les auteurs, liens et licences de l’ensemble des médias figurent dans [la page des crédits](../media-credits.html) et dans `source-files.json`.
 
@@ -75,8 +82,8 @@ python3 film/build_film.py film/edit.json film/render/portrait --portrait
 
 `source-files.json` fixe les URL, les empreintes et les notices de licence des ressources externes. `edit.json` documente les quinze plans, leurs extraits, les ralentis, les mouvements, les titres et la musique. `chapters.json` contient les treize citations et les repères de navigation du lecteur. Les sources téléchargées et exports de travail sont ignorés par Git ; les vidéos originales générées et leurs scripts sont versionnés. `build_film.py` refuse d’écraser une sortie finale existante.
 
-La régénération des scènes d’objets est facultative et nécessite **Blender**. Les commandes et dépendances propres aux créations conservées dans le dépôt sont décrites dans [`generated/README.md`](generated/README.md).
+L’animation du dé est déjà incluse. Les scripts des créations antérieures sont conservés à titre d’archive dans [`generated/README.md`](generated/README.md) ; ils ne doivent pas servir à ajouter de nouveaux objets ou décors en 3D au film.
 
-Les vidéos conservent leur mouvement natif, avec les ralentis et interpolations indiqués dans `edit.json`. `depth_motion.py` applique aux photographies NASA des rotations autour des axes X/Y et une projection perspective, avec déplacement en profondeur et dérive lente. Cet effet anime des plans photographiques et ne reconstruit pas leur géométrie physique. Les quinze plans se raccordent par des fondus de **0,65 seconde** ; les citations sont composées au-dessus pour rester lisibles.
+Les vidéos conservent leur mouvement natif, avec les ralentis et interpolations indiqués dans `edit.json`. `depth_motion.py` applique à certains plans photographiques NASA des rotations autour des axes X/Y et une projection perspective, avec déplacement en profondeur et dérive lente. Cet effet anime des plans photographiques et ne reconstruit pas leur géométrie physique. Les quinze plans se raccordent par des fondus de **0,65 seconde** ; les citations sont composées au-dessus pour rester lisibles.
 
 Les exports comprennent des recadrages adaptés au format, une colorimétrie modérée, les citations et leurs traductions, et le mixage musical. La durée complète des pistes vidéo et audio est contrôlée à l’export. Les deux fichiers finaux sont livrés directement dans `assets/` ; les scripts ne sont pas nécessaires pour regarder le film.
