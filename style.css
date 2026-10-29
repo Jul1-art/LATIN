@@ -127,7 +127,7 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 .film-credits-link { font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top { display: flex; align-items: center; gap: 14px; font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top .icon { width: 17px; height: 17px; transform: rotate(-90deg); }
-.footer-word { position: relative; display: block; padding-block: 85px 0; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; outline-offset: -2px; }
+.footer-word { position: relative; display: block; width: 100%; padding: 85px 0 0; background: transparent; text-align: left; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; outline-offset: -2px; }
 .footer-word-base { display: flex; justify-content: space-between; align-items: flex-end; padding-right: .055em; }
 .footer-word-base { color: var(--paper); }
 .footer-letter { display: block; transform-origin: center bottom; }

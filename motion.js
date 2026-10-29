@@ -121,8 +121,15 @@
       if (enabled && !sceneFrame) sceneFrame = requestAnimationFrame(updateScene);
     }
 
-    function bounceFooterLetter(letter, delay = 0) {
-      if (!enabled || !letter || footerBounces.has(letter)) return;
+    function bounceFooterLetter(letter, delay = 0, restart = false) {
+      if (!enabled || !letter) return;
+      const previous = footerBounces.get(letter);
+      if (previous) {
+        if (!restart) return;
+        previous.cancel();
+        animations.delete(previous);
+        footerBounces.delete(letter);
+      }
       const lift = Math.min(42, Math.max(18, letter.offsetHeight * 0.16));
       const direction = Number(letter.dataset.position) % 2 ? 1 : -1;
       const animation = animate(letter, [
@@ -134,12 +141,14 @@
         { offset: 0.87, transform: 'translate3d(0,0,0) scale(1.02,.98)' },
         { offset: 0.94, transform: `translate3d(0,${-lift * 0.10}px,0)` },
         { offset: 1, transform: 'translate3d(0,0,0) scale(1,1)' }
-      ], { duration: 900, delay, easing: 'linear' }, () => footerBounces.delete(letter));
+      ], { duration: 900, delay, easing: 'linear' }, () => {
+        if (footerBounces.get(letter) === animation) footerBounces.delete(letter);
+      });
       if (animation) footerBounces.set(letter, animation);
     }
 
-    function bounceFooter() {
-      footerBaseLetters.forEach((letter, index) => bounceFooterLetter(letter, index * 55));
+    function bounceFooter(restart = false) {
+      footerBaseLetters.forEach((letter, index) => bounceFooterLetter(letter, index * 55, restart));
     }
 
     function updatePointers() {
@@ -250,10 +259,8 @@
         lastFooterLetter = letter;
       }, { passive: true });
       footerWord.addEventListener('pointerleave', () => { lastFooterLetter = null; });
-      footerWord.addEventListener('focus', bounceFooter);
-      footerWord.addEventListener('pointerdown', event => {
-        if (event.pointerType === 'touch' || !precisePointer.matches) bounceFooter();
-      }, { passive: true });
+      footerWord.addEventListener('focus', () => bounceFooter());
+      footerWord.addEventListener('click', () => bounceFooter(true));
     }
 
     if (list && typeof MutationObserver === 'function') {
