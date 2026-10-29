@@ -1,0 +1,93 @@
+{
+  "creator": "Original CGI authored for LATIN with Blender 4.3.2",
+  "nature": "Procedural studio still-lifes, not photographs, archive footage or reconstructed historical objects",
+  "external_assets": [],
+  "license": "Original project artwork; no third-party source material",
+  "render": {
+    "resolution": [
+      960,
+      540
+    ],
+    "engine": "Blender EEVEE",
+    "samples": 4,
+    "pose_fps": 1,
+    "delivery_fps": 24,
+    "motion": "Original slow camera and lighting changes; FFmpeg motion interpolation"
+  },
+  "shots": [
+    {
+      "file": "tu-quoque.mp4",
+      "duration_requested_seconds": 7.65,
+      "subject": "Ceremonial dagger and its shadow on stone"
+    },
+    {
+      "file": "dura-lex.mp4",
+      "duration_requested_seconds": 7.65,
+      "subject": "Three unbroken dark stone monoliths"
+    },
+    {
+      "file": "si-vis-pacem.mp4",
+      "duration_requested_seconds": 8.65,
+      "subject": "Round bronze defensive shield"
+    },
+    {
+      "file": "memento-mori.mp4",
+      "duration_requested_seconds": 7.65,
+      "subject": "Dimming beeswax candle"
+    }
+  ],
+  "verified_deliverables": [
+    {
+      "file": "tu-quoque.mp4",
+      "sha256": "8e4cd4068ed92dca6be1c8b26584d07ebff81b09bf15a34e16c4e3eb4c9b8aee",
+      "bytes": 528199,
+      "duration_seconds": 7.666667,
+      "frames": 184,
+      "resolution": [
+        960,
+        540
+      ],
+      "fps": 24,
+      "audio_streams": 0
+    },
+    {
+      "file": "dura-lex.mp4",
+      "sha256": "5927d3f45f8bec1e1e0909182d45a4d947ba9563c5cebd1b749a77309ee29644",
+      "bytes": 381668,
+      "duration_seconds": 7.666667,
+      "frames": 184,
+      "resolution": [
+        960,
+        540
+      ],
+      "fps": 24,
+      "audio_streams": 0
+    },
+    {
+      "file": "si-vis-pacem.mp4",
+      "sha256": "7b74a4870b9aad7cdc715fc840a0a6a670ca42b2f2cbc1f052ad17431699d1a4",
+      "bytes": 574547,
+      "duration_seconds": 8.666667,
+      "frames": 208,
+      "resolution": [
+        960,
+        540
+      ],
+      "fps": 24,
+      "audio_streams": 0
+    },
+    {
+      "file": "memento-mori.mp4",
+      "sha256": "5b5465916f824c0954cfed03ac91485627f2558e24a4f10e792f09c49e43aa83",
+      "bytes": 226471,
+      "duration_seconds": 7.666667,
+      "frames": 184,
+      "resolution": [
+        960,
+        540
+      ],
+      "fps": 24,
+      "audio_streams": 0
+    }
+  ]
+}

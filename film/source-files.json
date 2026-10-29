@@ -1,49 +1,5 @@
 [
   {
-    "file": "city-film.mp4",
-    "url": "https://raw.githubusercontent.com/195440/lax-kreativ-city-waking-up/4b21e000299edd0eba0754973b2fb6e9e0b1983b/film.mp4",
-    "sha256": "eace7992d1fc96f8e2d71baae959a47fbca638481bd5a131b7f2e5261c1ccef4",
-    "license_evidence": "https://github.com/195440/lax-kreativ-city-waking-up/blob/4b21e000299edd0eba0754973b2fb6e9e0b1983b/SOURCES.txt"
-  },
-  {
-    "file": "moon-disc.jpg",
-    "title": "La Lune — disque complet sur fond noir",
-    "author": "NASA / NASA-3D-Resources collection",
-    "media_type": "still image",
-    "description": "Photographie ou mosaïque photographique du disque lunaire distribuée par NASA ; fichier carré, ce n’est pas une carte de texture équirectangulaire.",
-    "width": 1913,
-    "height": 1911,
-    "bytes": 2957499,
-    "sha256": "1318334a5089fb186d39996f60677b5f5b42cde74158ceff97b3e2283bfd41d4",
-    "source_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon/Moon.jpg",
-    "download_url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon/Moon.jpg",
-    "license": "Free and without copyright, as explicitly stated for the NASA collection assets",
-    "license_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/README.md",
-    "license_evidence": "Official NASA repository README: \"This is a growing collection of 3D models, textures, and images from inside NASA. [...] These assets are free and without copyright.\" The statement refers to the collection assets, not merely repository code.",
-    "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media",
-    "verification": "Official pinned GitHub README and actual image inspected. External NASA usage-guideline page not consulted in this environment.",
-    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon/Moon.jpg"
-  },
-  {
-    "file": "apollo-crater.jpg",
-    "title": "Surface lunaire — cratère Apollo",
-    "author": "NASA / NASA-3D-Resources collection",
-    "media_type": "still image",
-    "description": "Image NASA de cratère lunaire, présentée dans le dossier officiel Moon - Apollo Crater. Aucun identifiant de mission plus précis n’est fourni par la notice du dossier.",
-    "width": 3000,
-    "height": 3000,
-    "bytes": 2826739,
-    "sha256": "b0b2adf860b960450b4c9fc89a117ee69d1a0d48b599ae7582493986397d3e1f",
-    "source_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon%20-%20Apollo%20Crater/Moon%20-%20Apollo%20Crater.jpg",
-    "download_url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon%20-%20Apollo%20Crater/Moon%20-%20Apollo%20Crater.jpg",
-    "license": "Free and without copyright, as explicitly stated for the NASA collection assets",
-    "license_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/README.md",
-    "license_evidence": "Official NASA repository README: \"This is a growing collection of 3D models, textures, and images from inside NASA. [...] These assets are free and without copyright.\" The statement refers to the collection assets, not merely repository code.",
-    "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media",
-    "verification": "Official pinned GitHub README and actual image inspected. External NASA usage-guideline page not consulted in this environment.",
-    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon%20-%20Apollo%20Crater/Moon%20-%20Apollo%20Crater.jpg"
-  },
-  {
     "file": "apollo-bootprint.jpg",
     "title": "Apollo — empreinte de botte sur la Lune",
     "author": "NASA / NASA-3D-Resources collection",
@@ -61,25 +17,6 @@
     "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media",
     "verification": "Official pinned GitHub README and actual image inspected. External NASA usage-guideline page not consulted in this environment.",
     "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Moon%20-%20Apollo%20Astronaut%20Bootprint/Moon%20-%20Apollo%20Astronaut%20Bootprint.jpg"
-  },
-  {
-    "file": "stars-map.jpg",
-    "title": "Carte stellaire Hipparcos",
-    "author": "NASA / NASA-3D-Resources collection",
-    "media_type": "still image",
-    "description": "Carte scientifique du ciel produite à partir du catalogue Hipparcos ; représentation de données astronomiques, pas une photographie de nébuleuse.",
-    "width": 2880,
-    "height": 1440,
-    "bytes": 2782926,
-    "sha256": "69df300963b0996fd9678c204bb913fea17e26d1dc74bf5b4593a7ddb3714522",
-    "source_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Hipparcos%20Star%20Map/Hipparcos%20Star%20Map.jpg",
-    "download_url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Hipparcos%20Star%20Map/Hipparcos%20Star%20Map.jpg",
-    "license": "Free and without copyright, as explicitly stated for the NASA collection assets",
-    "license_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/README.md",
-    "license_evidence": "Official NASA repository README: \"This is a growing collection of 3D models, textures, and images from inside NASA. [...] These assets are free and without copyright.\" The statement refers to the collection assets, not merely repository code.",
-    "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media",
-    "verification": "Official pinned GitHub README and actual image inspected. External NASA usage-guideline page not consulted in this environment.",
-    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Hipparcos%20Star%20Map/Hipparcos%20Star%20Map.jpg"
   },
   {
     "file": "tycho-stars.jpg",
@@ -112,5 +49,56 @@
     "sha256": "12f6c594f6acc769598ae3cb908e9020f7973f2a0b73f7fb75bf3df737fb7b31",
     "license_evidence": "Official NASA collection README explicitly states: These assets are free and without copyright. The image itself was downloaded and inspected.",
     "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Earth%20%28B%29/Earth%20%28B%29.jpg"
+  },
+  {
+    "file": "robin.mp4",
+    "title": "Robin Bird",
+    "url": "https://raw.githubusercontent.com/tanersener/ffmpeg-video-slideshow-scripts/91d766eb231566215f66204a34bcc2b7221c2648/media/1.mp4",
+    "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/1.mp4",
+    "sha256": "7d601c65b12adda839cb8e33793c583c75f2c1a5089af39fff1e29b53189469d",
+    "license": "Public domain as explicitly declared for the specific video in the pinned media README",
+    "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+    "original_url": "https://pixabay.com/videos/robin-bird-forest-nature-spring-21723/",
+    "license_evidence": "The README names these media files and declares them public domain separately from the software license. The primary Pixabay pages were not directly consulted."
+  },
+  {
+    "file": "waves.mp4",
+    "title": "Waves",
+    "url": "https://raw.githubusercontent.com/tanersener/ffmpeg-video-slideshow-scripts/91d766eb231566215f66204a34bcc2b7221c2648/media/2.mp4",
+    "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/2.mp4",
+    "sha256": "5483eceffe27b6ef5c6eac50f58734d58e24013b09dd7e117f334e5616221d01",
+    "license": "Public domain as explicitly declared for the specific video in the pinned media README",
+    "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+    "original_url": "https://pixabay.com/videos/waves-vacation-summer-sun-ocean-3917/",
+    "license_evidence": "The README names these media files and declares them public domain separately from the software license. The primary Pixabay pages were not directly consulted."
+  },
+  {
+    "file": "wheat.mp4",
+    "title": "Wheat Field",
+    "url": "https://raw.githubusercontent.com/tanersener/ffmpeg-video-slideshow-scripts/91d766eb231566215f66204a34bcc2b7221c2648/media/3.mp4",
+    "source_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/media/3.mp4",
+    "sha256": "ecba7f969d7f0b21cabe803d711f4cdbe1767b274dfcb546c69044edd6f6e5ec",
+    "license": "Public domain as explicitly declared for the specific video in the pinned media README",
+    "license_url": "https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/91d766eb231566215f66204a34bcc2b7221c2648/README.md#license",
+    "original_url": "https://pixabay.com/videos/wheat-wheat-field-nature-17285/",
+    "license_evidence": "The README names these media files and declares them public domain separately from the software license. The primary Pixabay pages were not directly consulted."
+  },
+  {
+    "file": "flower.mp4",
+    "title": "flower",
+    "url": "https://raw.githubusercontent.com/mdn/interactive-examples/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4",
+    "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/cc0-videos/flower.mp4",
+    "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451",
+    "license": "CC0-1.0",
+    "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE"
+  },
+  {
+    "file": "stream.mp4",
+    "title": "stream",
+    "url": "https://raw.githubusercontent.com/mdn/interactive-examples/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/examples/stream-of-water.mp4",
+    "source_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/live-examples/media/examples/stream-of-water.mp4",
+    "sha256": "d492f9092c4cde2e74d1cde3ec10662141412a466769d1b53070e63611238652",
+    "license": "CC0-1.0",
+    "license_url": "https://github.com/mdn/interactive-examples/blob/13024db581b08fae11a0ca229497198b9b0534e7/LICENSE"
   }
 ]

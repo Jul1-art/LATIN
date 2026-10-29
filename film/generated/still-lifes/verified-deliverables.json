@@ -1,0 +1,54 @@
+[
+  {
+    "file": "tu-quoque.mp4",
+    "sha256": "8e4cd4068ed92dca6be1c8b26584d07ebff81b09bf15a34e16c4e3eb4c9b8aee",
+    "bytes": 528199,
+    "duration_seconds": 7.666667,
+    "frames": 184,
+    "resolution": [
+      960,
+      540
+    ],
+    "fps": 24,
+    "audio_streams": 0
+  },
+  {
+    "file": "dura-lex.mp4",
+    "sha256": "5927d3f45f8bec1e1e0909182d45a4d947ba9563c5cebd1b749a77309ee29644",
+    "bytes": 381668,
+    "duration_seconds": 7.666667,
+    "frames": 184,
+    "resolution": [
+      960,
+      540
+    ],
+    "fps": 24,
+    "audio_streams": 0
+  },
+  {
+    "file": "si-vis-pacem.mp4",
+    "sha256": "7b74a4870b9aad7cdc715fc840a0a6a670ca42b2f2cbc1f052ad17431699d1a4",
+    "bytes": 574547,
+    "duration_seconds": 8.666667,
+    "frames": 208,
+    "resolution": [
+      960,
+      540
+    ],
+    "fps": 24,
+    "audio_streams": 0
+  },
+  {
+    "file": "memento-mori.mp4",
+    "sha256": "5b5465916f824c0954cfed03ac91485627f2558e24a4f10e792f09c49e43aa83",
+    "bytes": 226471,
+    "duration_seconds": 7.666667,
+    "frames": 184,
+    "resolution": [
+      960,
+      540
+    ],
+    "fps": 24,
+    "audio_streams": 0
+  }
+]

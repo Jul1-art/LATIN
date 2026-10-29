@@ -1,0 +1,40 @@
+{
+  "title": "Sundial \u2014 Omnes vulnerant ultima necat",
+  "source_type": "original_procedural_3d_art",
+  "created_for": "LATIN cinematic phrase film",
+  "created_utc": "2026-10-28",
+  "description": "An original modeled limestone sundial, satin brass bezel and solid triangular gnomon in a charcoal studio. Engraved Roman hour numerals, fine radial marks, procedural stone microtexture, real directional-light shadows, and a slow camera arc.",
+  "authorship": "Scene geometry, procedural materials, lighting and camera animation authored specifically for this project in create_sundial.py.",
+  "external_visual_assets": [],
+  "local_font": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+  "render_engine": "Blender 4.3.2 Eevee Next, CPU software EGL",
+  "render_settings": {
+    "width": 960,
+    "height": 540,
+    "aa_samples": 4,
+    "threads": 2,
+    "source_poses_per_second": 4,
+    "final_frames_per_second": 24,
+    "duration_seconds": 8.666667,
+    "audio": false,
+    "rendered_pose_count": 35
+  },
+  "motion": "Sun-light rotation physically moves the gnomon's cast shadow. Camera moves on a short arc. Four scene poses per second are rendered and motion-interpolated with FFmpeg to 24 fps.",
+  "framing": "Dial above center with lower-third negative space for later caption compositing. No quote or brand baked into source footage.",
+  "files": {
+    "video": "sundial.mp4",
+    "preview": "preview.png",
+    "scene": "sundial.blend",
+    "scene_script": "create_sundial.py",
+    "reproduction": "render.sh"
+  },
+  "attribution": "Original project artwork; no NASA imagery, archive footage, stock footage, or third-party model is used.",
+  "instrument_note": "Hour marks are an artistic arrangement for the film, not a latitude-calibrated measuring instrument.",
+  "verification": {
+    "frame_count": 208,
+    "duration_seconds": 8.666667,
+    "audio_streams": 0,
+    "decode_check": "FFmpeg full-file decode completed with no errors",
+    "sha256": "e36d5fa884513509ab7ac32b20da3ab5539bf96d1ecb4760e0be48383676ac39"
+  }
+}

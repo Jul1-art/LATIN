@@ -1,0 +1,28 @@
+{
+  "type": "original procedural 3D art",
+  "title": "Alea \u2014 ivory die on charcoal slate",
+  "creator": "Original scene created for Latinquote",
+  "source_assets": "All geometry, materials, lighting and animation are original procedural work created in Blender. No stock, archive, NASA, external imagery, words or logos.",
+  "software": [
+    "Blender 4.3.2 EEVEE Next",
+    "FFmpeg"
+  ],
+  "delivered_file": "dice.mp4",
+  "delivery_resolution": [
+    1280,
+    720
+  ],
+  "native_render_resolution": [
+    960,
+    540
+  ],
+  "delivery_fps": 24,
+  "source_fps": "12 fps during fall, 6 fps during settled camera push",
+  "frames": 160,
+  "duration_seconds": 6.666666666666667,
+  "processing": "51 original rendered frames with adaptive timing; motion interpolation to 24 fps and Lanczos upscaling.",
+  "has_audio": false,
+  "reproducible_scene_script": "create_scene.py",
+  "reproducible_encode_script": "encode_clip.py",
+  "scene_file": "scene.blend"
+}

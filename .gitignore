@@ -1,3 +1,8 @@
 film/sources/
 film/render/
 __pycache__/
+
+film/generated/**/frames/
+film/generated/**/*.blend*
+film/generated/**/preview*.png
+film/generated/**/*.ffconcat

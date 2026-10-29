@@ -1,0 +1,13 @@
+{
+  "title": "Vers les étoiles — trajet de caméra en profondeur",
+  "kind": "Original interpretive data visualization",
+  "source_file": "tycho-stars.jpg",
+  "source_sha256": "d49f636ce99ee4d70f12699dd4bc0ec937baa8e969f2c358beed7a3555561508",
+  "source": "NASA-3D-Resources, Tycho Star Map",
+  "source_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/Images%20and%20Textures/Tycho%20Star%20Map/Tycho%20Star%20Map.jpg",
+  "license_url": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/README.md",
+  "transforms": "Local bright stellar pixels supply directions and colors; artistic depths, optical bloom and camera travel. Not a spacecraft recording or a measurement of stellar distances.",
+  "stars": 44716,
+  "duration": 10.25,
+  "output_sha256": "40902e1b5a6790ab4db0308c433877522b474db458571b82f211fa69b3af745b"
+}

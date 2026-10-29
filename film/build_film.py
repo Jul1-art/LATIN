@@ -109,7 +109,7 @@ def main():
             if speed <= 0:
                 raise SystemExit('Playback speed must be positive.')
             inputs = ['-loop', '1', '-framerate', str(FPS), '-i', clip['path']] if image else ['-ss', str(clip.get('start', 0)), '-t', str(length * speed), '-i', clip['path']]
-            source_crop = clip.get('crop_source')
+            source_crop = clip.get('portrait_crop_source', clip.get('crop_source')) if args.portrait else clip.get('crop_source')
             crop = f'crop={int(source_crop[2])}:{int(source_crop[3])}:{int(source_crop[0])}:{int(source_crop[1])},' if source_crop else ''
             framing = f'scale={width}:{height}:force_original_aspect_ratio=increase,crop={width}:{height}'
             if image:
@@ -124,12 +124,15 @@ def main():
                     canvas = f'scale={width*2}:{height*2}:force_original_aspect_ratio=increase,crop={width*2}:{height*2}'
                 video_filter = f'{crop}{canvas},zoompan=z=\'{z}\':x=\'iw/2-iw/zoom/2\':y=\'ih/2-ih/zoom/2\':d=1:s={width}x{height}:fps={FPS}'
             else:
-                video_filter = f'{crop}setpts=(PTS-STARTPTS)/{speed},{framing}'
+                video_filter = f'{crop}setpts=(PTS-STARTPTS)/{speed}'
+                if clip.get('interpolate'):
+                    video_filter += f',minterpolate=fps={FPS}:mi_mode=mci:mc_mode=obmc:me_mode=bidir:vsbmc=1'
+                video_filter += ',' + framing
             video_filter += f",setsar=1,eq=saturation={float(clip.get('saturation', .90))}:contrast={float(clip.get('contrast', 1.035))}:brightness=-0.008:gamma={float(clip.get('gamma', 1))},fps={FPS}"
-            if recipe.get('motion') == 'orbital-depth':
+            if clip.get('motion', recipe.get('motion')) == 'orbital-depth':
                 video_filter += ',' + depth_filter(width, height, length, index, FPS, .8)
             # Bias the optical shade upward to protect lower-third captions.
-            video_filter += ',vignette=angle=PI/3:x0=w/2:y0=h*.15,format=yuv420p'
+            video_filter += f',vignette=angle=PI/3:x0=w/2:y0=h*.15,tpad=stop_mode=clone:stop_duration=1,trim=duration={length},format=yuv420p'
             run(['ffmpeg', '-hide_banner', '-v', 'error', '-threads', '2', *inputs, '-vf', video_filter, '-filter_threads', '2', '-an', '-t', str(length), '-c:v', 'libx264', '-threads', '2', '-preset', 'fast', '-crf', '19', '-pix_fmt', 'yuv420p', str(path)])
             normalized.append(path)
             print(f'Shot {index+1}/{len(clips)} ready', flush=True)
