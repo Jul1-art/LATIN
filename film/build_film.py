@@ -2,6 +2,7 @@
 """Render the LATIN film locally from licensed, pinned images and moving footage."""
 import argparse
 import json
+import re
 from pathlib import Path
 import subprocess
 import tempfile
@@ -78,10 +79,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('manifest', type=Path)
     parser.add_argument('output_directory', type=Path)
-    parser.add_argument('--portrait', action='store_true', help='Export the mobile 720x1280 version')
+    parser.add_argument('--portrait', action='store_true', help='Export the vertical version')
     args = parser.parse_args()
+    global FPS
     recipe = json.loads(args.manifest.read_text())
-    width, height = (720, 1280) if args.portrait else (int(recipe.get('width', 1280)), int(recipe.get('height', 720)))
+    FPS = int(recipe.get("fps", 24))
+    if FPS not in (24, 25, 30, 60):
+        raise SystemExit("Unsupported frame rate")
+    width, height = (int(recipe.get('portrait_width', 720)), int(recipe.get('portrait_height', 1280))) if args.portrait else (int(recipe.get('width', 1280)), int(recipe.get('height', 720)))
     if min(width, height) < 240 or width % 2 or height % 2:
         raise SystemExit('Output dimensions must be even and at least 240 pixels.')
     clips = recipe.get('clips', [])
@@ -108,8 +113,11 @@ def main():
     with tempfile.TemporaryDirectory(prefix='latin-film-') as directory:
         work = Path(directory)
         # Normalize one shot at a time so a longer film does not decode all sources at once.
+        output_width, output_height, output_fps = width, height, FPS
         normalized = []
         for index, (clip, length) in enumerate(zip(clips, lengths)):
+            # Retain the established rendering of all unchanged scenes.
+            width, height, FPS = (output_width, output_height, output_fps) if clip.get('render_at_output_size') else ((720, 1280, 24) if args.portrait else (1280, 720, 24))
             path = work / f'shot-{index:02}.mp4'
             image = clip.get('type') == 'image'
             speed = float(clip.get('speed', 1))
@@ -143,7 +151,7 @@ def main():
             else:
                 video_filter = f'{crop}setpts=(PTS-STARTPTS)/{speed}'
                 if clip.get('interpolate'):
-                    video_filter += f',minterpolate=fps={FPS}:mi_mode=mci:mc_mode=obmc:me_mode=bidir:vsbmc=1'
+                    video_filter += f',minterpolate=fps=24:mi_mode=mci:mc_mode=obmc:me_mode=bidir:vsbmc=1'
                 video_filter += ',' + framing
             video_filter += f",setsar=1,eq=saturation={float(clip.get('saturation', .90))}:contrast={float(clip.get('contrast', 1.035))}:brightness=-0.008:gamma={float(clip.get('gamma', 1))},fps={FPS}"
             if clip.get('luma_curve'):
@@ -155,17 +163,19 @@ def main():
             run(['ffmpeg', '-hide_banner', '-v', 'error', '-threads', '2', *inputs, '-vf', video_filter, '-filter_threads', '2', '-an', '-t', str(length), '-c:v', 'libx264', '-threads', '2', '-preset', 'fast', '-crf', '19', '-pix_fmt', 'yuv420p', str(path)])
             normalized.append(path)
             print(f'Shot {index+1}/{len(clips)} ready', flush=True)
+        width, height, FPS = output_width, output_height, output_fps
         inputs = []
         filters = []
         for index, path in enumerate(normalized):
             inputs += ['-threads', '1', '-i', str(path)]
-            filters.append(f'[{index}:v]settb=AVTB,setpts=PTS-STARTPTS,fps={FPS}[v{index}]')
+            filters.append(f'[{index}:v]settb=AVTB,setpts=PTS-STARTPTS,scale={width}:{height}:flags=lanczos,fps={FPS}[v{index}]')
         last, running = 'v0', lengths[0]
         for index in range(1, len(clips)):
             label = f'mix{index}'
             filters.append(f'[{last}][v{index}]xfade=transition=fade:duration={dissolve}:offset={running-dissolve},fps={FPS}[{label}]')
             last, running = label, running + lengths[index] - dissolve
         # The quote, French translation and author share a single readable composition.
+        text_scale = width / (720 if args.portrait else 1280)
         typography = f'[{last}]drawbox=x=0:y=0:w=iw:h=ih:color=black@0.10:t=fill'
         for index, title in enumerate(recipe.get('titles', [])):
             start, end = float(title['start']), float(title['end'])
@@ -189,10 +199,14 @@ def main():
             for row_index, (text, size, family, y, color, spacing) in enumerate(rows):
                 textfile = work / f'title-{index}-{row_index}.txt'
                 textfile.write_text(text)
+                size *= text_scale
+                spacing *= text_scale
+                y = re.sub(r'\b(h|text_h)\b', lambda m: f'({m[0]}/{text_scale})', y)
+                y = f'({y})*{text_scale}'
                 delay = .12 * row_index
                 a, b = start + delay, end
                 alpha = f"if(lt(t,{a}),0,if(lt(t,{a+.65}),(t-{a})/.65,if(lt(t,{b-.5}),1,if(lt(t,{b}),({b}-t)/.5,0))))"
-                typography += f",drawtext=fontfile='{family}':textfile='{textfile}':expansion=none:fontsize={size}:fontcolor={color}:line_spacing={spacing}:text_align=C:shadowcolor=black@0.6:shadowx=1:shadowy=2:x=(w-text_w)/2:y='({y})+18*(1-clip((t-{a})/.85,0,1))':alpha='{alpha}'"
+                typography += f",drawtext=fontfile='{family}':textfile='{textfile}':expansion=none:fontsize={size}:fontcolor={color}:line_spacing={spacing}:text_align=C:shadowcolor=black@0.6:shadowx=1:shadowy=2:x=(w-text_w)/2:y='({y})+{18*text_scale}*(1-clip((t-{a})/.85,0,1))':alpha='{alpha}'"
         typography += f',fade=t=in:st=0:d=0.8,fade=t=out:st={duration-1.2}:d=1.2[film]'
         filters.append(typography)
         music_inputs, music_filters = music_mix(music, len(clips), duration)

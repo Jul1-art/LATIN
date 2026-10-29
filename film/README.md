@@ -1,9 +1,9 @@
 # LATIN — le film
 
-Montage de **1 min 45 s**, en quinze plans, réunissant les **treize citations du site**, leurs traductions françaises et leurs auteurs. Chaque citation possède son propre sujet visuel : vidéos de nature, tableau historique, photographies spatiales, vidéo solaire, observations de météores NASA et animation du dé déjà présent. La Terre accompagne les titres d’ouverture et de fin. Deux exports partagent le même montage et la même bande-son :
+Montage de **1 min 45 s**, en quinze plans, réunissant les **treize citations du site**, leurs traductions françaises et leurs auteurs. Chaque citation possède son propre sujet visuel : vidéos de nature, tableau historique, photographies spatiales, vidéo solaire, time-lapse réel de la Voie lactée ESO et animation du dé déjà présent. La Terre accompagne les titres d’ouverture et de fin. Deux exports partagent le même montage et la même bande-son :
 
-- `assets/latin-intro.mp4` : paysage, 1280 × 720, H.264/AAC, 24 images/s.
-- `assets/latin-intro-mobile.mp4` : vertical, 720 × 1280, mêmes durée et bande-son.
+- `assets/latin-intro.mp4` : paysage, 3840 × 2160, H.264/AAC, 60 images/s.
+- `assets/latin-intro-mobile.mp4` : vertical, 2160 × 3840 à 60 images/s, mêmes durée et bande-son.
 
 ## Règles éditoriales à conserver
 
@@ -38,11 +38,11 @@ Les paramètres proposent les vitesses 0,75×, 1×, 1,25× et 1,5× ainsi qu’u
 | Omnes vulnerant, ultima necat. | Éclipse solaire totale du 21 août 2017, photographie NASA / Aubrey Gemignani |
 | Carpe diem. | Fleur, vidéo de nature |
 | Audacibus fortuna juvat. | Vagues et horizon, vidéo de nature |
-| Ad astra per ardua. | Plusieurs météores des Perséides, vidéo d’observation NASA/MSFC du 13 août 2010 |
+| Ad astra per ardua. | Voie lactée au VLT, time-lapse réel 4K ESO/C. Malin |
 
 ## Sources et créations originales
 
-Les photographies **Earth (B)** et **Moon — Apollo Astronaut Bootprint** proviennent de la collection officielle `nasa/NASA-3D-Resources`, fixée au commit `11ebb4ee043715aefbba6aeec8a61746fad67fa7`. Son README déclare explicitement : **“These assets are free and without copyright.”** Cette déclaration concerne les ressources de la collection. Le README et les images utilisés ont été inspectés. Les directives générales NASA ont été inspectées dans une capture officielle archivée ; leur application à la vidéo des Perséides est détaillée ci-dessous.
+Les photographies **Earth (B)** et **Moon — Apollo Astronaut Bootprint** proviennent de la collection officielle `nasa/NASA-3D-Resources`, fixée au commit `11ebb4ee043715aefbba6aeec8a61746fad67fa7`. Son README déclare explicitement : **“These assets are free and without copyright.”** Cette déclaration concerne les ressources de la collection. Le README et les images utilisés ont été inspectés. Les directives générales NASA ont été inspectées dans une capture officielle archivée ; la provenance de l’ancienne vidéo des Perséides reste conservée dans `source-files.json` pour l’historique.
 
 Cinq ressources supplémentaires utilisées dans ce montage sont distribuées par Wikimedia Commons. Leurs fichiers et notices ont été inspectés ; `source-files.json` conserve les URL, empreintes SHA-256 et révisions précises des notices :
 
@@ -56,9 +56,9 @@ Les plans de Camuccini, de l’Anneau austral et de l’éclipse utilisent ces i
 
 Les pages NASA/JPL, SVS et Webb indiquées comme sources originales par Commons n’ont pas été directement consultées depuis cet environnement. Les affirmations de licence ci-dessus reposent sur les notices Commons inspectées.
 
-La vidéo **Perseid Meteor Shower at Its Peak!** accompagne « Ad astra per ardua. ». Cette archive montre plusieurs détections réelles des Perséides enregistrées le **13 août 2010 au-dessus de Huntsville, Alabama**. Crédit : **NASA / Marshall Space Flight Center / D. Moser / NASA’s Meteoroid Environment Office**. La [notice Internet Archive](https://archive.org/details/NASAMarshallTV-iKAAK5dUMA0) identifie ces observations et leur attribution NASA. L’extrait de **11,5 à 21,75 secondes** est issu du fichier natif **640 × 480, 6 images/s** : recadrage des marges de l’objectif et de l’horodatage, agrandissement, contraste adapté et interpolation de cadence à 24 images/s. Le cadrage mobile conserve les passages visibles dans le champ. Aucun météore ni trajectoire n’est généré.
+La vidéo **Yepun to the Universe** accompagne « Ad astra per ardua. ». Ce véritable time-lapse panoramique de la Voie lactée a été filmé au VLT, à Paranal. Crédit intégral : **ESO/C. Malin (christophmalin.com)**. La [notice officielle](https://www.eso.org/public/videos/uhd-cm-vlt2014-3/) décrit les prises de vues réelles et propose le fichier H.264 natif **3840 × 2160 à 25 images/s**. L’empreinte SHA-256 publiée par ESO a été vérifiée après téléchargement. La [politique officielle ESO](https://www.eso.org/public/copyright/), inspectée, place ces vidéos sous **CC BY 4.0** et autorise leur adaptation avec attribution visible.
 
-La réutilisation éducative de cette vidéo repose sur les **directives générales officielles NASA**, inspectées dans leur [capture du 31 décembre 2024](https://web.archive.org/web/20241231095402/https://www.nasa.gov/nasa-brand-center/images-and-media/). Elles indiquent que les contenus NASA, dont les vidéos, ne sont généralement pas protégés par le droit d’auteur aux États-Unis et peuvent être utilisés à des fins éducatives ou informatives, notamment sur des pages Web, en créditant NASA. Les contenus tiers identifiés restent exclus. La notice Archive ne comporte pas de licence individuelle ; les observations sélectionnées portent l’attribution NASA/MSFC indiquée, sans crédit tiers identifié. Cette base est distincte de la notice NASA-3D-Resources et des évaluations de licence Commons. Les liens, la citation de la politique et les empreintes des fichiers sont conservés dans `source-files.json`.
+L’extrait de **2 à 12,25 secondes** reçoit un recadrage, une colorimétrie et les textes existants. Les exports sont à **60 images/s par conversion de cadence**, sans prétendre à une captation native à 60 images/s. Aucun objet ou ciel 3D n’est ajouté. Les autres plans gardent leur rendu original à 24 images/s, agrandi pour l’export 4K ; leur détail natif n’augmente pas. Le portrait est un recadrage de la source paysage. Les treize citations, traductions, auteurs, durées et la musique continue sont identiques.
 
 Les vidéos **Robin Bird**, **Wheat Field** et **Waves** proviennent du dépôt miroir `tanersener/ffmpeg-video-slideshow-scripts`, fixé au commit `91d766eb231566215f66204a34bcc2b7221c2648`. Son README nomme ces trois vidéos et les déclare dans le domaine public, séparément de la licence du logiciel. Les pages primaires Pixabay n’ont pas été directement consultées ; les notices conservent cette distinction. Les vidéos **flower** et **stream-of-water** sont distribuées par MDN, au commit `13024db581b08fae11a0ca229497198b9b0534e7`, sous **CC0-1.0**.
 
@@ -72,7 +72,7 @@ Les vidéos générées, leurs scripts et leurs notices de provenance sont versi
 
 ## Reproduire le montage
 
-L’assemblage principal nécessite **Python 3.11+ et sa bibliothèque standard**, FFmpeg/FFprobe avec libx264, AAC, libwebp et les filtres drawtext, zoompan, perspective, xfade, acrossfade, atempo, minterpolate, curves et vignette, ainsi que Fontconfig avec Liberation Sans/Serif. Les vidéos générées sont déjà incluses dans `generated/` : **Blender, NumPy et Pillow ne sont pas nécessaires pour assembler le film**. Les sources externes proviennent de commits GitHub précis, de fichiers Commons documentés ou de l’archive NASA Marshall identifiée ; leurs empreintes SHA-256 sont vérifiées avant utilisation.
+L’assemblage principal nécessite **Python 3.11+ et sa bibliothèque standard**, FFmpeg/FFprobe avec libx264, AAC, libwebp et les filtres drawtext, zoompan, perspective, xfade, acrossfade, atempo, minterpolate, curves et vignette, ainsi que Fontconfig avec Liberation Sans/Serif. Les vidéos générées sont déjà incluses dans `generated/` : **Blender, NumPy et Pillow ne sont pas nécessaires pour assembler le film**. Les sources externes proviennent de commits GitHub précis, de fichiers Commons documentés ou du catalogue vidéo officiel ESO (les sources des versions antérieures restent documentées) ; leurs empreintes SHA-256 sont vérifiées avant utilisation.
 
 Depuis la racine du dépôt :
 

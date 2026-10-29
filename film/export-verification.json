@@ -1,0 +1,78 @@
+{
+  "base_commit": "b69621ca8473191b981a50f66e56de24cc8a1ca7",
+  "unchanged": {
+    "quote_translation_author_entries": 13,
+    "other_scene_entries": 14,
+    "chapter_file": true,
+    "music_recipe": true,
+    "duration_seconds": 105
+  },
+  "audio_packet_sha256": "6384817a9968d4801cdb5197cc77c3c0d6565eacb32ef50301a55e2ff5953843",
+  "original_audio_packet_hash_matches_both_exports": true,
+  "exports": [
+    {
+      "path": "assets/latin-intro.mp4",
+      "bytes": 97382882,
+      "sha256": "772fd209b48467a5d4c1563eeef92d25e160c3bd2ff478631ae6660d26bbe376",
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 3840,
+          "height": 2160,
+          "r_frame_rate": "60/1",
+          "duration": "105.000000",
+          "nb_frames": "6300"
+        },
+        {
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "duration": "105.000000",
+          "nb_frames": "4923"
+        }
+      ]
+    },
+    {
+      "path": "assets/latin-intro-mobile.mp4",
+      "bytes": 73211644,
+      "sha256": "66a28b60c4dae5dfeaa1b1abfacada66bf5ae13e43e505cc3e7098e7cc3bc3bd",
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 2160,
+          "height": 3840,
+          "r_frame_rate": "60/1",
+          "duration": "105.000000",
+          "nb_frames": "6300"
+        },
+        {
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "duration": "105.000000",
+          "nb_frames": "4923"
+        }
+      ]
+    }
+  ],
+  "browser": [
+    {
+      "mobile": false,
+      "width": 3840,
+      "height": 2160,
+      "duration": 105,
+      "muted": false,
+      "volume": 1,
+      "time": 94,
+      "errors": []
+    },
+    {
+      "mobile": true,
+      "width": 2160,
+      "height": 3840,
+      "duration": 105,
+      "muted": false,
+      "volume": 1,
+      "time": 94,
+      "errors": []
+    }
+  ]
+}

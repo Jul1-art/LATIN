@@ -225,5 +225,20 @@
     "bytes": 4640695,
     "sha256": "d940f01d465dc56f9e09848b40add96216927d4cb0f13c49df298339e9f4ad10",
     "verification": "Specific Archive metadata, original archival video contact sheet, and NASA media policy via cached official-page capture inspected. Selected frames show camera observations of passing meteors, not an educational animation. The separate2011 Flickr file labelled CC BY-NC2.0 is not used."
+  },
+  {
+    "file": "eso-yepun-4k.mp4",
+    "title": "Yepun to the Universe",
+    "author": "ESO/C. Malin (christophmalin.com)",
+    "media_type": "real astronomical time-lapse video",
+    "width": 3840,
+    "height": 2160,
+    "fps": 25,
+    "sha256": "3890c577b32b6175fac1d47eff65ea91da56674e9593f8740edeb7186fc6015e",
+    "url": "https://cdn.eso.org/videos/ultra_hd/uhd-cm-vlt2014-3.mp4",
+    "source_url": "https://www.eso.org/public/videos/uhd-cm-vlt2014-3/",
+    "license": "CC BY 4.0",
+    "license_url": "https://www.eso.org/public/copyright/",
+    "license_evidence": "Official page describes real timelapse panorama footage at VLT; official copyright body licenses videos CC BY 4.0. Published SHA-256 matches downloaded file. Excerpt 2–12.25 seconds, crop, grading, captions and 60 fps cadence conversion; no AI or generated objects."
   }
 ]
