@@ -131,7 +131,7 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 .footer-word-base, .footer-word-gold { display: flex; justify-content: space-between; align-items: flex-end; padding-right: .055em; }
 .footer-word-base { color: #e2dfd5; }
 .footer-word-gold { position: absolute; inset: 0; padding-top: 85px; pointer-events: none; color: var(--gold); opacity: var(--spot-opacity, 0); -webkit-mask-image: radial-gradient(ellipse 320px 260px at var(--spot-x, 50%) var(--spot-y, 50%), #000 5%, #000 32%, transparent 100%), radial-gradient(ellipse 210px 200px at var(--trail-x, 50%) var(--trail-y, 50%), #0008, transparent 100%); mask-image: radial-gradient(ellipse 320px 260px at var(--spot-x, 50%) var(--spot-y, 50%), #000 5%, #000 32%, transparent 100%), radial-gradient(ellipse 210px 200px at var(--trail-x, 50%) var(--trail-y, 50%), #0008, transparent 100%); }
-.footer-letter { display: block; transform: translate3d(var(--letter-x, 0px), 0, 0) scale(var(--letter-scale, 1)); transform-origin: center bottom; }
+.footer-letter { display: block; transform: translate3d(var(--letter-x, 0px), var(--letter-y, 0px), 0) rotate(var(--letter-rotate, 0deg)) scale(var(--letter-scale-x, 1), var(--letter-scale-y, 1)); transform-origin: center bottom; }
 .footer-word-gold .footer-letter { color: transparent; background: linear-gradient(112deg, #7a6620 5%, #b59a45 23%, #f8f5f0 45%, #d4af37 56%, #b59a45 74%, #7a6620 95%); background-size: 200% 100%; background-position: var(--sheen-position, 50%) 50%; -webkit-background-clip: text; background-clip: text; }
 @supports (text-box-trim: trim-both) {
   .footer-word { line-height: 1; }

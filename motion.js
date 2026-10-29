@@ -16,6 +16,7 @@
     const footerLetters = footerWord ? [...footerWord.querySelectorAll('.footer-letter')] : [];
     const footerBaseLetters = footerWord ? [...footerWord.querySelectorAll('.footer-word-base .footer-letter')] : [];
     const footerCenters = new Map();
+    const footerSprings = new Map(footerBaseLetters.map(letter => [letter.dataset.position, { value: 0, velocity: 0 }]));
     const ease = 'cubic-bezier(.16,1,.3,1)';
     const supported = typeof Element.prototype.animate === 'function' && typeof IntersectionObserver === 'function' && typeof requestAnimationFrame === 'function';
     const footer = { x: 0, y: 0, vx: 0, vy: 0, trailX: 0, trailY: 0, opacity: 0, targetX: 0, targetY: 0, targetOpacity: 0 };
@@ -131,10 +132,9 @@
       footerWidth = Math.max(bounds.width, 1);
       footerCenters.clear();
       footerBaseLetters.forEach(letter => {
-        const rect = letter.getBoundingClientRect();
         footerCenters.set(letter.dataset.position, {
-          center: rect.left - bounds.left + rect.width / 2,
-          width: Math.max(rect.width, 35)
+          center: letter.offsetLeft + letter.offsetWidth / 2,
+          width: Math.max(letter.offsetWidth, 35)
         });
       });
     }
@@ -151,9 +151,12 @@
         const geometry = footerCenters.get(letter.dataset.position);
         if (!geometry) return;
         const distance = (footer.x - geometry.center) / Math.max(geometry.width * 1.15, 60);
-        const influence = Math.exp(-distance * distance * 1.5) * footer.opacity;
-        letter.style.setProperty('--letter-x', `${(clamp(distance, -1, 1) * 6 * influence).toFixed(2)}px`);
-        letter.style.setProperty('--letter-scale', (1 + influence * 0.32).toFixed(4));
+        const bounce = clamp(footerSprings.get(letter.dataset.position).value, -0.35, 1.35);
+        letter.style.setProperty('--letter-x', `${(clamp(distance, -1, 1) * 6 * bounce).toFixed(2)}px`);
+        letter.style.setProperty('--letter-y', `${(-Math.min(10, geometry.width * 0.08) * Math.max(0, bounce)).toFixed(2)}px`);
+        letter.style.setProperty('--letter-scale-x', (1 + bounce * 0.18).toFixed(4));
+        letter.style.setProperty('--letter-scale-y', (1 + bounce * 0.20).toFixed(4));
+        letter.style.setProperty('--letter-rotate', `${(-clamp(distance, -1, 1) * 2.3 * bounce).toFixed(2)}deg`);
       });
     }
 
@@ -171,6 +174,18 @@
       footer.trailX += (footer.x - footer.trailX) * trailEase;
       footer.trailY += (footer.y - footer.trailY) * trailEase;
       footer.opacity += (footer.targetOpacity - footer.opacity) * (1 - Math.exp(-10 * dt));
+      let lettersUnsettled = false;
+      // One spring per position keeps the two colour layers perfectly aligned.
+      footerSprings.forEach((spring, position) => {
+        const geometry = footerCenters.get(position);
+        if (!geometry) return;
+        const distance = (footer.x - geometry.center) / Math.max(geometry.width * 1.15, 60);
+        const target = Math.exp(-distance * distance * 1.5) * footer.targetOpacity;
+        spring.velocity = (spring.velocity + (target - spring.value) * 220 * dt) * Math.exp(-10 * dt);
+        spring.value += spring.velocity * dt;
+        if (Math.abs(target - spring.value) > 0.001 || Math.abs(spring.velocity) > 0.01) lettersUnsettled = true;
+        else { spring.value = target; spring.velocity = 0; }
+      });
       tilt.x += (tilt.targetX - tilt.x) * 0.1;
       tilt.y += (tilt.targetY - tilt.y) * 0.1;
       renderFooter();
@@ -179,7 +194,7 @@
         portrait.style.setProperty('--portrait-ry', `${tilt.y.toFixed(3)}deg`);
       }
       const unsettled = Math.abs(footer.targetX - footer.x) > 0.05 || Math.abs(footer.targetY - footer.y) > 0.05 || Math.abs(footer.targetOpacity - footer.opacity) > 0.004 || Math.abs(tilt.targetX - tilt.x) > 0.008 || Math.abs(tilt.targetY - tilt.y) > 0.008 || Math.abs(footer.vx) > 0.15 || Math.abs(footer.vy) > 0.15 || Math.abs(footer.x - footer.trailX) > 0.1 || Math.abs(footer.y - footer.trailY) > 0.1;
-      if (unsettled) pointerFrame = requestAnimationFrame(updatePointers);
+      if (unsettled || lettersUnsettled) pointerFrame = requestAnimationFrame(updatePointers);
       else {
         footer.x = footer.targetX;
         footer.y = footer.targetY;
@@ -208,6 +223,7 @@
       lastPointerTime = 0;
       footer.vx = footer.vy = 0;
       footer.opacity = footer.targetOpacity = 0;
+      footerSprings.forEach(spring => { spring.value = spring.velocity = 0; });
       tilt.x = tilt.y = tilt.targetX = tilt.targetY = 0;
       renderFooter();
       if (portrait) {
