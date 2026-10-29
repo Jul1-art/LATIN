@@ -70,7 +70,8 @@
       "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
       "motion": "native",
       "saturation": 0.96,
-      "title": "Alea — le dé tombe et s’immobilise"
+      "title": "Alea — lancer du dé, impacts et stabilisation",
+      "render_at_output_size": true
     },
     {
       "path": "film/sources/apollo-bootprint.jpg",
@@ -383,7 +384,7 @@
   ],
   "width": 3840,
   "height": 2160,
-  "notes": "Only the Ad astra background is replaced with genuine 3840x2160 ESO/C. Malin time-lapse footage, source 25 fps, output 60 fps (cadence conversion, not native 60 fps). All titles, other scene subjects, timing and continuous soundtrack unchanged. No new 3D objects. Other footage retains its original source resolution.",
+  "notes": "Alea jacta est. uses an improved animation of the existing die only: native 1080p rendered action, genuine poses without optical flow, sharper impacts and damped settling. The localized export preserves all original quotes, timing, other scenes and original AAC packets. Exports remain 4K/60; Ad astra retains its genuine 4K ESO source.",
   "motion": "orbital-depth",
   "fps": 60,
   "portrait_width": 2160,

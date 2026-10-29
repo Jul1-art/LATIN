@@ -1,23 +1,36 @@
-"""Original procedural die film. Blender 4.3.2 EEVEE Next; deterministic geometry and motion.
-Run: blender -b -t 5 --python create_scene.py -- --preview
-Run full: blender -b -t 2 --python create_scene.py -- --render
+"""Animate the existing LATIN die, with full-rate pose sampling and no new objects.
+Render: blender -b -t 4 --python create_scene.py -- --output WORKDIR --render
+Encode: python3 encode_clip.py --output WORKDIR
 """
+import argparse
 import bpy, math, os, sys, json
+from pathlib import Path
 from mathutils import Vector, Euler
-OUT=os.path.dirname(os.path.abspath(__file__))
-os.makedirs(os.path.join(OUT,'frames'),exist_ok=True)
+parser = argparse.ArgumentParser()
+parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
+parser.add_argument('--width', type=int, default=1920)
+parser.add_argument('--height', type=int, default=1080)
+parser.add_argument('--samples', type=int, default=4)
+parser.add_argument('--render-step', type=int, default=2)
+parser.add_argument('--threads', type=int, default=4)
+parser.add_argument('--frames', type=int, nargs='+')
+parser.add_argument('--render', action='store_true')
+parser.add_argument('--preview', action='store_true')
+args = parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+OUT = str(args.output.resolve())
+os.makedirs(os.path.join(OUT, 'frames'), exist_ok=True)
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 for d in bpy.data.materials: bpy.data.materials.remove(d)
 s=bpy.context.scene
-s.render.engine='BLENDER_EEVEE_NEXT';s.eevee.taa_render_samples=4;s.cycles.use_denoising=False
+s.render.engine='BLENDER_EEVEE_NEXT';s.eevee.taa_render_samples=args.samples;s.cycles.use_denoising=False
 s.cycles.max_bounces=5;s.cycles.diffuse_bounces=2;s.cycles.glossy_bounces=3;s.cycles.transmission_bounces=2
-s.render.threads_mode='FIXED';s.render.threads=2
-s.render.resolution_x=1280;s.render.resolution_y=720;s.render.resolution_percentage=75
-s.render.fps=24;s.frame_start=1;s.frame_end=160;s.frame_step=2
+s.render.threads_mode='FIXED';s.render.threads=args.threads
+s.render.resolution_x=args.width;s.render.resolution_y=args.height;s.render.resolution_percentage=100
+s.render.fps=60;s.frame_start=1;s.frame_end=399;s.frame_step=1
 s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGB';s.render.image_settings.color_depth='8'
 s.render.filepath=OUT+'/frames/dice_'
 s.render.film_transparent=False
-s.render.use_motion_blur=True;s.render.motion_blur_shutter=.32
+s.render.use_motion_blur=False;s.render.motion_blur_shutter=.25
 s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.view_settings.exposure=.15
 # Very dim cool studio environment, photographed with local softboxes.
 w=bpy.data.worlds.new('Charcoal studio') if not bpy.data.worlds else bpy.data.worlds[0];s.world=w;w.use_nodes=True
@@ -73,32 +86,104 @@ area('Back slate grazing light',(-3,4,2.4),230,(.75,.8,1),3,target=(0,0,0))
 # Slightly elevated product camera. Focus and framing reserve the lower third.
 bpy.ops.object.empty_add(type='PLAIN_AXES',location=(0,0,1.05));focus=bpy.context.object;focus.name='Die focus target'
 bpy.ops.object.camera_add(location=(6.6,-10.2,6.3));cam=bpy.context.object;cam.name='Slow push product camera';s.camera=cam;cam.data.lens=58;cam.data.sensor_width=36
-cam.data.dof.use_dof=True;cam.data.dof.focus_object=focus;cam.data.dof.aperture_fstop=5.6;cam.data.dof.aperture_blades=7
-# Controlled fall -> two diminishing bounces -> damped edge rocking. Contact
-# height follows the rotated rounded cube's support, so the die never penetrates.
-poses=[(1,(-.60,.24),(-1.25,-.9,-.52),.35),(11,(-.25,.1),(-.50,.42,-.05),.20),(16,(.02,0),(.32,.24,.05),0),(23,(.20,-.04),(.19,-.26,.13),.25),(30,(.32,-.08),(-.13,-.13,.20),0),(37,(.38,-.10),(-.07,.10,.24),.075),(44,(.41,-.11),(.055,.05,.27),0),(52,(.43,-.12),(.028,-.03,.285),.018),(62,(.44,-.12),(-.018,-.008,.296),0),(74,(.445,-.12),(.005,.009,.299),0),(88,(.445,-.12),(0,0,.30),0),(160,(.445,-.12),(0,0,.30),0)]
-for fr,xy,ang,hop in poses:
- rot=Euler(ang,'XYZ');R=rot.to_matrix();support=.86*sum(abs(R[2][j]) for j in range(3))+.14
- die.location=(xy[0],xy[1],support+hop+.006);die.rotation_euler=rot
- die.keyframe_insert('location',frame=fr);die.keyframe_insert('rotation_euler',frame=fr)
-# Smooth cinematic easing, with deliberate contact points.
-for fcu in die.animation_data.action.fcurves:
- for kp in fcu.keyframe_points:kp.interpolation='BEZIER';kp.handle_left_type='AUTO_CLAMPED';kp.handle_right_type='AUTO_CLAMPED'
-for fr,loc,target in [(1,(6.9,-10.65,6.4),(.25,0,1.10)),(44,(6.76,-10.42,6.28),(.29,0,.32)),(160,(6.38,-9.78,5.96),(.32,0,.32))]:
- cam.location=loc;cam.rotation_euler=(Vector(target)-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert('location',frame=fr);cam.keyframe_insert('rotation_euler',frame=fr)
-for fcu in cam.animation_data.action.fcurves:
- for kp in fcu.keyframe_points:kp.interpolation='LINEAR'
-# Gentle focal follow to keep the falling die crisp while slate falls out of focus.
-for fr,z in [(1,2.65),(16,1.3),(40,1.1),(160,1.1)]:focus.location=(.3,0,z);focus.keyframe_insert('location',frame=fr)
-s.frame_set(96)
-bpy.ops.wm.save_as_mainfile(filepath=OUT+'/scene.blend')
-with open(OUT+'/provenance.json','w') as f:json.dump({'type':'original procedural 3D art','title':'Alea — ivory die on charcoal slate','creator':'Original scene created for Latinquote using Blender 4.3.2','source_assets':'All geometry, materials, lighting and animation are original procedural work; no stock or archive imagery.','software':['Blender 4.3.2 EEVEE Next','FFmpeg'],'resolution':[1280,720],'fps':24,'frames':160,'duration_seconds':160/24,'has_audio':False,'reproducible_script':'create_scene.py'},f,indent=2)
-if '--preview' in sys.argv:
- s.render.filepath=OUT+'/preview.png';bpy.ops.render.render(write_still=True)
-elif '--motion-test' in sys.argv:
- s.render.resolution_percentage=55;s.eevee.taa_render_samples=4
- for fr in [1,16]:s.frame_set(fr);s.render.filepath=OUT+'/test_%03d.png'%fr;bpy.ops.render.render(write_still=True)
-elif '--render' in sys.argv:
+cam.data.dof.use_dof=True;cam.data.dof.focus_object=focus;cam.data.dof.aperture_fstop=8;cam.data.dof.aperture_blades=7
+# Improve the existing die, floor and lights only: no additional scene objects.
+# Full-rate authored rigid motion: ballistic arcs, sharp contacts and decaying
+# edge rocking. Support is evaluated from the actual bevelled mesh every frame.
+FPS = 60
+MOVING_END = 202
+VERTICES = [tuple(vertex.co) for vertex in die.data.vertices]
+REST = (-math.pi, 0.0, 0.55)
+IMPACTS = [(1.0, (0.25, -0.35, 0.20)),
+           (1.72, (-math.pi + 0.10, 0.12, 0.47)),
+           (2.15, (-math.pi - 0.12, -0.07, 0.55))]
 
- for fr in list(range(1,45,2))+list(range(45,158,4)):
-  s.frame_set(fr);s.render.filepath=OUT+'/frames/dice_%04d.png'%fr;bpy.ops.render.render(write_still=True)
+def lerp(a, b, u):
+    return tuple(x + (y-x)*u for x, y in zip(a, b))
+
+def smooth(u):
+    u = max(0.0, min(1.0, u))
+    return u*u*(3-2*u)
+
+def support(rotation):
+    row = Euler(rotation, 'XYZ').to_matrix()[2]
+    return max(-(row[0]*x + row[1]*y + row[2]*z) for x,y,z in VERTICES)
+
+def pose(t):
+    if t <= 1.0:
+        rotation = lerp((2*math.pi + 0.7, math.pi + 0.5, -1.0), IMPACTS[0][1], t)
+        xy = lerp((-0.65, 0.18), (0.05, 0.0), t)
+        end_z = support(IMPACTS[0][1]) + 0.008
+        # One second flight, with an upward release and a decisive downward hit.
+        z = 2.6 + (end_z-2.6+6)*t - 6*t*t
+    elif t <= 1.72:
+        u = (t-1.0)/0.72
+        rotation = lerp(IMPACTS[0][1], IMPACTS[1][1], u)
+        xy = lerp((0.05, 0.0), (0.50, -0.10), u)
+        z = (1-u)*support(IMPACTS[0][1]) + u*support(IMPACTS[1][1]) + 0.008 + 4*0.80*u*(1-u)
+    elif t <= 2.15:
+        u = (t-1.72)/0.43
+        rotation = lerp(IMPACTS[1][1], IMPACTS[2][1], u)
+        xy = lerp((0.50, -0.10), (0.61, -0.13), u)
+        z = (1-u)*support(IMPACTS[1][1]) + u*support(IMPACTS[2][1]) + 0.008 + 4*0.20*u*(1-u)
+    elif t < 3.35:
+        u = t-2.15
+        decay = math.exp(-3.5*u)*(1-smooth(u/1.2))
+        rock = decay*math.cos(11*u)
+        rotation = (REST[0]-0.12*rock, -0.07*rock, REST[2])
+        xy = lerp((0.61, -0.13), (0.65, -0.14), smooth(u/1.2))
+        z = support(rotation) + 0.008
+    else:
+        rotation, xy = REST, (0.65, -0.14)
+        z = support(rotation) + 0.008
+    # A rotating convex volume cannot cross the slate between authored impacts.
+    return (xy[0], xy[1], max(z, support(rotation)+0.008)), rotation
+
+report = []
+for frame in list(range(1, MOVING_END+1)) + [399]:
+    t = (frame-1)/FPS
+    location, rotation = pose(t)
+    die.location = location
+    die.rotation_euler = rotation
+    die.keyframe_insert('location', frame=frame)
+    die.keyframe_insert('rotation_euler', frame=frame)
+    # Track lateral travel while preserving the visible height of each bounce.
+    progress = smooth(min(t/3.35, 1))
+    cam.location = lerp((6.9, -10.65, 7.0), (6.5, -10.05, 6.5), progress)
+    target = Vector((location[0], location[1], -0.24 + 0.75*(location[2]-1.008)))
+    cam.rotation_euler = (target-cam.location).to_track_quat('-Z','Y').to_euler()
+    cam.data.lens = 36 + 14*progress
+    cam.keyframe_insert('location', frame=frame)
+    cam.keyframe_insert('rotation_euler', frame=frame)
+    cam.data.keyframe_insert('lens', frame=frame)
+    focus.location = location
+    focus.keyframe_insert('location', frame=frame)
+    report.append({'frame':frame, 'center':list(location), 'rotation':list(rotation),
+                   'floor_clearance':location[2]-support(rotation)})
+for obj in (die, cam, cam.data, focus):
+    for curve in obj.animation_data.action.fcurves:
+        for key in curve.keyframe_points:
+            key.interpolation='LINEAR'
+s.frame_set(MOVING_END)
+bpy.ops.wm.save_as_mainfile(filepath=OUT+'/scene.blend')
+with open(OUT+'/motion-verification.json','w') as handle:
+    json.dump({'fps':FPS, 'moving_end_frame':MOVING_END, 'total_frames':399,
+               'render':{'resolution':[args.width,args.height], 'samples':args.samples, 'render_step':args.render_step, 'motion_blur':False},
+               'contact_seconds':[1.0,1.72,2.15], 'minimum_floor_clearance':min(r['floor_clearance'] for r in report),
+               'notes':'Existing mesh, floor and lights. Authored cinematic motion, not a Bullet simulation. No optical-flow interpolation.',
+               'samples':report}, handle, indent=2)
+if args.frames:
+    frames = args.frames
+elif args.preview:
+    frames = [83]
+elif args.render:
+    # After frame202 the die, camera and lighting are completely stationary.
+    frames = list(range(1, MOVING_END+1, args.render_step))
+    if frames[-1] != MOVING_END: frames.append(MOVING_END)
+else:
+    frames = []
+for frame in frames:
+    s.eevee.taa_render_samples = max(16, args.samples) if frame == MOVING_END else args.samples
+    s.frame_set(frame)
+    s.render.filepath=OUT+'/frames/dice_%04d.png'%frame
+    bpy.ops.render.render(write_still=True)

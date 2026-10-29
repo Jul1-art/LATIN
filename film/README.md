@@ -28,7 +28,7 @@ Les paramètres proposent les vitesses 0,75×, 1×, 1,25× et 1,5× ainsi qu’u
 | --- | --- |
 | Ave ! | Rouge-gorge, vidéo de nature |
 | Tu quoque, mi fili ! | La morte di Cesare, tableau de Vincenzo Camuccini |
-| Alea jacta est. | Dé qui tombe et s’immobilise, création 3D |
+| Alea jacta est. | Dé existant en ivoire : lancer, rotations, rebonds et immobilisation |
 | Veni, vidi, vici. | Empreinte Apollo, photographie NASA mise en mouvement |
 | Dura lex, sed lex. | Saturne et ses anneaux, photographie de Cassini |
 | Si vis pacem, para bellum. | Éruption solaire du 10 mai 2022, vidéo NASA SDO |
@@ -58,11 +58,15 @@ Les pages NASA/JPL, SVS et Webb indiquées comme sources originales par Commons 
 
 La vidéo **Yepun to the Universe** accompagne « Ad astra per ardua. ». Ce véritable time-lapse panoramique de la Voie lactée a été filmé au VLT, à Paranal. Crédit intégral : **ESO/C. Malin (christophmalin.com)**. La [notice officielle](https://www.eso.org/public/videos/uhd-cm-vlt2014-3/) décrit les prises de vues réelles et propose le fichier H.264 natif **3840 × 2160 à 25 images/s**. L’empreinte SHA-256 publiée par ESO a été vérifiée après téléchargement. La [politique officielle ESO](https://www.eso.org/public/copyright/), inspectée, place ces vidéos sous **CC BY 4.0** et autorise leur adaptation avec attribution visible.
 
-L’extrait de **2 à 12,25 secondes** reçoit un recadrage, une colorimétrie et les textes existants. Les exports sont à **60 images/s par conversion de cadence**, sans prétendre à une captation native à 60 images/s. Aucun objet ou ciel 3D n’est ajouté. Les autres plans gardent leur rendu original à 24 images/s, agrandi pour l’export 4K ; leur détail natif n’augmente pas. Le portrait est un recadrage de la source paysage. Les treize citations, traductions, auteurs, durées et la musique continue sont identiques.
+L’extrait de **2 à 12,25 secondes** reçoit un recadrage, une colorimétrie et les textes existants. Les exports sont à **60 images/s par conversion de cadence**, sans prétendre à une captation native à 60 images/s. Aucun objet ou ciel 3D n’est ajouté. Les autres plans, hormis le dé réanimé ci-dessous, gardent leur rendu original à 24 images/s, agrandi pour l’export 4K ; leur détail natif n’augmente pas. Le portrait est un recadrage de la source paysage. Les treize citations, traductions, auteurs, durées et la musique continue sont identiques.
 
 Les vidéos **Robin Bird**, **Wheat Field** et **Waves** proviennent du dépôt miroir `tanersener/ffmpeg-video-slideshow-scripts`, fixé au commit `91d766eb231566215f66204a34bcc2b7221c2648`. Son README nomme ces trois vidéos et les déclare dans le domaine public, séparément de la licence du logiciel. Les pages primaires Pixabay n’ont pas été directement consultées ; les notices conservent cette distinction. Les vidéos **flower** et **stream-of-water** sont distribuées par MDN, au commit `13024db581b08fae11a0ca229497198b9b0534e7`, sous **CC0-1.0**.
 
-Le **dé déjà présent**, qui accompagne « Alea jacta est. », est la seule animation d’objet originale encore utilisée dans ce montage. Il reste crédité comme une création Blender du projet. Les anciens plans de dague, bougie, cadran solaire, monolithes, bouclier et traversée Tycho sont conservés dans le dépôt pour les versions antérieures et ne sont plus utilisés dans le film actuel.
+Le **dé déjà présent**, qui accompagne « Alea jacta est. », est la seule animation d’objet originale encore utilisée dans ce montage. La nouvelle animation conserve son maillage en ivoire à points creusés, le plateau en ardoise et les lumières existantes : **aucun objet ni décor supplémentaire n’est créé**. Le lancer comporte une phase en vol, des rotations sur plusieurs axes, des contacts à **1,00, 1,72 et 2,15 secondes**, puis un balancement amorti jusqu’à **3,35 secondes**. Le dé et la caméra restent ensuite immobiles jusqu’à la fin du plan. Il s’agit d’une trajectoire artistique avec arcs balistiques et appui calculé sur le maillage, **pas d’une simulation Bullet**.
+
+La source du dé est rendue nativement en **1920 × 1080**. La trajectoire est échantillonnée à **60 Hz** ; le rendu conserve une pose sur deux pendant le mouvement, soit **30 images/s**, et inclut la pose exacte de fin de mouvement : **102 images PNG** au total. Les poses actives utilisent quatre échantillons EEVEE ; la pose finale, tenue à l’écran, en utilise seize. Le fichier de **6,65 secondes et 399 images à 60 images/s** duplique simplement la cadence de ces rendus : **aucune interpolation optique ni synthèse d’images intermédiaires**. La source 1080p est agrandie dans les exports 4K ; elle n’est pas présentée comme un rendu natif 4K ou 60 images/s.
+
+Le dé reste crédité comme une création Blender du projet. Les anciens plans de dague, bougie, cadran solaire, monolithes, bouclier et traversée Tycho sont conservés dans le dépôt pour les versions antérieures et ne sont plus utilisés dans le film actuel.
 
 Les vidéos générées, leurs scripts et leurs notices de provenance sont versionnés dans [`generated/`](generated/README.md). Les auteurs, liens et licences de l’ensemble des médias figurent dans [la page des crédits](../media-credits.html) et dans `source-files.json`.
 
@@ -84,7 +88,26 @@ python3 film/build_film.py film/edit.json film/render/portrait --portrait
 
 `source-files.json` fixe les URL, les empreintes et les notices de licence des ressources externes. `edit.json` documente les quinze plans, leurs extraits, les ralentis, les mouvements, les titres et la musique. `chapters.json` contient les treize citations et les repères de navigation du lecteur. Les sources téléchargées et exports de travail sont ignorés par Git ; les vidéos originales générées et leurs scripts sont versionnés. `build_film.py` refuse d’écraser une sortie finale existante.
 
-L’animation du dé est déjà incluse. Les scripts des créations antérieures sont conservés à titre d’archive dans [`generated/README.md`](generated/README.md) ; ils ne doivent pas servir à ajouter de nouveaux objets ou décors en 3D au film.
+### Refaire uniquement le plan du dé
+
+Le dé rendu est déjà inclus ; Blender n’est nécessaire que pour le réanimer. Depuis la racine du dépôt, après préparation des sources ci-dessus, utiliser de nouveaux dossiers de travail :
+
+```sh
+mkdir -p /tmp/latin-blender-cache/mesa
+XDG_CACHE_HOME=/tmp/latin-blender-cache \
+MESA_SHADER_CACHE_DIR=/tmp/latin-blender-cache/mesa \
+LP_NUM_THREADS=4 blender -b -t 4 \
+  --python film/generated/dice/create_scene.py -- \
+  --output film/render/new-dice --render
+python3 film/generated/dice/encode_clip.py --output film/render/new-dice
+python3 film/replace_dice_shot.py film/render/new-film --source film/render/new-dice/dice.mp4
+```
+
+Les valeurs par défaut sont 1920 × 1080, quatre échantillons EEVEE et `--render-step 2`. La dernière pose reçoit au moins seize échantillons. Les images, la scène Blender et les vérifications sont écrites dans le dossier `--output`, sans remplacer les ressources livrées du dépôt. L’encodeur et le remplacement local refusent d’écraser leurs vidéos finales existantes.
+
+`replace_dice_shot.py` produit les versions paysage et portrait à partir des exports 4K/60 du commit de référence indiqué dans son code. Il reconstruit les deux fondus du plan et ne réencode que les groupes d’images H.264 qui l’encadrent, soit environ douze secondes. Les images encodées et leurs horodatages hors de cette fenêtre sont conservés ; **tous les paquets AAC de la musique restent identiques**. Les citations, les autres recettes de plans et la durée de 105 secondes sont contrôlées. Les rapports `verification-landscape.json` et `verification-portrait.json` documentent ces vérifications. `--format landscape` ou `--format portrait` permet de traiter un seul format.
+
+Les scripts des créations antérieures restent disponibles à titre d’archive dans [`generated/README.md`](generated/README.md) ; ils ne doivent pas servir à ajouter de nouveaux objets ou décors en 3D au film.
 
 Les vidéos conservent leur mouvement natif, avec les ralentis et interpolations indiqués dans `edit.json`. `depth_motion.py` applique à certains plans photographiques NASA des rotations autour des axes X/Y et une projection perspective, avec déplacement en profondeur et dérive lente. Cet effet anime des plans photographiques et ne reconstruit pas leur géométrie physique. Les quinze plans se raccordent par des fondus de **0,65 seconde** ; les citations sont composées au-dessus pour rester lisibles.
 

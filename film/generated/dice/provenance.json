@@ -1,28 +1,34 @@
 {
-  "type": "original procedural 3D art",
-  "title": "Alea \u2014 ivory die on charcoal slate",
-  "creator": "Original scene created for Latinquote",
-  "source_assets": "All geometry, materials, lighting and animation are original procedural work created in Blender. No stock, archive, NASA, external imagery, words or logos.",
+  "type": "animation of the existing original procedural die",
+  "title": "Alea — ivory die, airborne throw, impacts and settling",
+  "creator": "LATIN project",
+  "source_assets": "Existing ivory die mesh with inset pips, slate, lights and camera retained. No additional objects or environment.",
   "software": [
     "Blender 4.3.2 EEVEE Next",
     "FFmpeg"
   ],
   "delivered_file": "dice.mp4",
   "delivery_resolution": [
-    1280,
-    720
+    1920,
+    1080
   ],
   "native_render_resolution": [
-    960,
-    540
+    1920,
+    1080
   ],
-  "delivery_fps": 24,
-  "source_fps": "12 fps during fall, 6 fps during settled camera push",
-  "frames": 160,
-  "duration_seconds": 6.666666666666667,
-  "processing": "51 original rendered frames with adaptive timing; motion interpolation to 24 fps and Lanczos upscaling.",
+  "delivery_fps": 60,
+  "source_fps": 30.0,
+  "rendered_frames": 102,
+  "frames": 399,
+  "duration_seconds": 6.65,
   "has_audio": false,
+  "processing": "Genuine per-pose renders; cadence duplication only, without optical flow. The stationary final pose is held after 3.35 seconds. Existing scene only.",
+  "animation": "Ballistic launch with multi-axis tumble; contacts at 1.00, 1.72 and 2.15 seconds; damped edge rocking until 3.35 seconds. Convex mesh support sampled at 60 Hz.",
+  "render_samples": 4,
+  "stationary_pose_samples": 16,
+  "motion_blur": false,
+  "minimum_floor_clearance": 0.008000000000000007,
   "reproducible_scene_script": "create_scene.py",
   "reproducible_encode_script": "encode_clip.py",
-  "scene_file": "scene.blend"
+  "sha256": "2ecf9021716de47421f90c6fd9a6eb84fca704f9f2209b836f99306cf53cb864"
 }

@@ -4,9 +4,9 @@
   const root = document.documentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const MEDIA = 'assets/latin-intro.mp4?v=11';
+  const MEDIA = 'assets/latin-intro.mp4?v=12';
   const POSTER = 'assets/latin-intro-poster.webp?v=10';
-  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=11';
+  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=12';
   const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=10';
   const LOAD_TIMEOUT_MS = 12000;
   const HIDE_DELAY_MS = 2600;

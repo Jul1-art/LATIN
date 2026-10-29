@@ -1,5 +1,6 @@
 {
-  "base_commit": "b69621ca8473191b981a50f66e56de24cc8a1ca7",
+  "base_commit": "e04203a2a4c451c8e3bcd8dc9e56e52db28487a1",
+  "change": "Existing Alea die animation only: sharper multi-axis throw, diminishing bounces and damped settling. No new scene objects.",
   "unchanged": {
     "quote_translation_author_entries": 13,
     "other_scene_entries": 14,
@@ -7,13 +8,48 @@
     "music_recipe": true,
     "duration_seconds": 105
   },
+  "source": {
+    "type": "animation of the existing original procedural die",
+    "title": "Alea — ivory die, airborne throw, impacts and settling",
+    "creator": "LATIN project",
+    "source_assets": "Existing ivory die mesh with inset pips, slate, lights and camera retained. No additional objects or environment.",
+    "software": [
+      "Blender 4.3.2 EEVEE Next",
+      "FFmpeg"
+    ],
+    "delivered_file": "dice.mp4",
+    "delivery_resolution": [
+      1920,
+      1080
+    ],
+    "native_render_resolution": [
+      1920,
+      1080
+    ],
+    "delivery_fps": 60,
+    "source_fps": 30.0,
+    "rendered_frames": 102,
+    "frames": 399,
+    "duration_seconds": 6.65,
+    "has_audio": false,
+    "processing": "Genuine per-pose renders; cadence duplication only, without optical flow. The stationary final pose is held after 3.35 seconds. Existing scene only.",
+    "animation": "Ballistic launch with multi-axis tumble; contacts at 1.00, 1.72 and 2.15 seconds; damped edge rocking until 3.35 seconds. Convex mesh support sampled at 60 Hz.",
+    "render_samples": 4,
+    "stationary_pose_samples": 16,
+    "motion_blur": false,
+    "minimum_floor_clearance": 0.008000000000000007,
+    "reproducible_scene_script": "create_scene.py",
+    "reproducible_encode_script": "encode_clip.py",
+    "sha256": "2ecf9021716de47421f90c6fd9a6eb84fca704f9f2209b836f99306cf53cb864"
+  },
   "audio_packet_sha256": "6384817a9968d4801cdb5197cc77c3c0d6565eacb32ef50301a55e2ff5953843",
   "original_audio_packet_hash_matches_both_exports": true,
+  "audio_timing_and_priming_identical": true,
   "exports": [
     {
       "path": "assets/latin-intro.mp4",
-      "bytes": 97382882,
-      "sha256": "772fd209b48467a5d4c1563eeef92d25e160c3bd2ff478631ae6660d26bbe376",
+      "bytes": 96342987,
+      "sha256": "2f22a29e0e3f55775d8eefa6a4b51dd3954c0a3ee071715171d4bb18f613543b",
       "streams": [
         {
           "codec_type": "video",
@@ -29,12 +65,23 @@
           "duration": "105.000000",
           "nb_frames": "4923"
         }
-      ]
+      ],
+      "changed_background_interval_seconds": [
+        14.8,
+        21.450000000000003
+      ],
+      "reencoded_gop_interval_seconds": [
+        11.55,
+        23.433333333333334
+      ],
+      "outside_gops_encoded_picture_hashes_match": true,
+      "outside_gops_pts_dts_identical": true,
+      "replacement_window_decodes_without_errors": true
     },
     {
       "path": "assets/latin-intro-mobile.mp4",
-      "bytes": 73211644,
-      "sha256": "66a28b60c4dae5dfeaa1b1abfacada66bf5ae13e43e505cc3e7098e7cc3bc3bd",
+      "bytes": 72205576,
+      "sha256": "2bc118094627a93600e599aa914d1ebfd4ea784940975bb691c29c5001814f7c",
       "streams": [
         {
           "codec_type": "video",
@@ -50,7 +97,18 @@
           "duration": "105.000000",
           "nb_frames": "4923"
         }
-      ]
+      ],
+      "changed_background_interval_seconds": [
+        14.8,
+        21.450000000000003
+      ],
+      "reencoded_gop_interval_seconds": [
+        11.516666666666667,
+        23.333333333333332
+      ],
+      "outside_gops_encoded_picture_hashes_match": true,
+      "outside_gops_pts_dts_identical": true,
+      "replacement_window_decodes_without_errors": true
     }
   ],
   "browser": [
@@ -61,8 +119,12 @@
       "duration": 105,
       "muted": false,
       "volume": 1,
-      "time": 94,
-      "errors": []
+      "verified_times": [
+        16.2,
+        18.5
+      ],
+      "errors": [],
+      "media_failures": []
     },
     {
       "mobile": true,
@@ -71,8 +133,12 @@
       "duration": 105,
       "muted": false,
       "volume": 1,
-      "time": 94,
-      "errors": []
+      "verified_times": [
+        16.2,
+        18.5
+      ],
+      "errors": [],
+      "media_failures": []
     }
   ]
 }
