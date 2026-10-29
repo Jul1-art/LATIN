@@ -120,14 +120,14 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 @keyframes arrow-pass { 0% { transform: translate(0, 0); } 40% { transform: translate(22px, -22px); } 41% { transform: translate(-22px, 22px); } 100% { transform: translate(0, 0); } }
 .empty-state { text-align: center; font-size: 16px; line-height: 1.8; color: var(--muted); padding: 70px 20px; border-bottom: 1px solid var(--line); }
 
-/* Plain monumental type, with a staggered bounce on interaction. */
+/* Plain monumental type: each letter bounces when the pointer enters it. */
 .site-footer { background: var(--ink); color: var(--paper); overflow: clip; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-block: 30px; border-bottom: 1px solid #ffffff20; }
 .footer-top .text-button { color: #c9cbbf; font-size: 11px; }
 .film-credits-link { font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top { display: flex; align-items: center; gap: 14px; font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top .icon { width: 17px; height: 17px; transform: rotate(-90deg); }
-.footer-word { position: relative; display: block; width: 100%; padding: 85px 0 0; background: transparent; text-align: left; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; outline-offset: -2px; }
+.footer-word { position: relative; display: block; width: 100%; padding: 85px 0 0; background: transparent; text-align: left; cursor: default; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; }
 .footer-word-base { display: flex; justify-content: space-between; align-items: flex-end; padding-right: .055em; }
 .footer-word-base { color: var(--paper); }
 .footer-letter { display: block; transform-origin: center bottom; }
@@ -135,7 +135,6 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
   .footer-word { line-height: 1; }
   .footer-letter { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
-.footer-word:focus-visible { outline-color: var(--paper); }
 
 /* Native dialog focus handling, with motion controlled in script.js. */
 .reader { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; padding: 0 6%; margin: 0; border: 0; color: var(--paper); background: var(--ink); color-scheme: dark; overscroll-behavior: contain; }

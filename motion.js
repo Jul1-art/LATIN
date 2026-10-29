@@ -15,7 +15,6 @@
     const revealed = new WeakSet();
     const footerBaseLetters = footerWord ? [...footerWord.querySelectorAll('.footer-word-base .footer-letter')] : [];
     const footerBounces = new Map();
-    let lastFooterLetter = null;
     const ease = 'cubic-bezier(.16,1,.3,1)';
     const supported = typeof Element.prototype.animate === 'function' && typeof IntersectionObserver === 'function' && typeof requestAnimationFrame === 'function';
     const tilt = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -121,15 +120,8 @@
       if (enabled && !sceneFrame) sceneFrame = requestAnimationFrame(updateScene);
     }
 
-    function bounceFooterLetter(letter, delay = 0, restart = false) {
-      if (!enabled || !letter) return;
-      const previous = footerBounces.get(letter);
-      if (previous) {
-        if (!restart) return;
-        previous.cancel();
-        animations.delete(previous);
-        footerBounces.delete(letter);
-      }
+    function bounceFooterLetter(letter) {
+      if (!enabled || footerBounces.has(letter)) return;
       const lift = Math.min(42, Math.max(18, letter.offsetHeight * 0.16));
       const direction = Number(letter.dataset.position) % 2 ? 1 : -1;
       const animation = animate(letter, [
@@ -141,14 +133,10 @@
         { offset: 0.87, transform: 'translate3d(0,0,0) scale(1.02,.98)' },
         { offset: 0.94, transform: `translate3d(0,${-lift * 0.10}px,0)` },
         { offset: 1, transform: 'translate3d(0,0,0) scale(1,1)' }
-      ], { duration: 900, delay, easing: 'linear' }, () => {
+      ], { duration: 900, easing: 'linear' }, () => {
         if (footerBounces.get(letter) === animation) footerBounces.delete(letter);
       });
       if (animation) footerBounces.set(letter, animation);
-    }
-
-    function bounceFooter(restart = false) {
-      footerBaseLetters.forEach((letter, index) => bounceFooterLetter(letter, index * 55, restart));
     }
 
     function updatePointers() {
@@ -181,7 +169,6 @@
       pointerFrame = 0;
       footerBounces.forEach(animation => { animation.cancel(); animations.delete(animation); });
       footerBounces.clear();
-      lastFooterLetter = null;
       tilt.x = tilt.y = tilt.targetX = tilt.targetY = 0;
       if (portrait) {
         portrait.style.setProperty('--portrait-rx', '0deg');
@@ -245,23 +232,21 @@
       });
     }
 
-    if (footerWord) {
-      footerWord.addEventListener('pointerenter', event => {
+    // React to the letters themselves, never the empty footer padding or a click.
+    footerBaseLetters.forEach(letter => {
+      let hovered = false;
+      const onHover = event => {
         if (!enabled || !precisePointer.matches || event.pointerType === 'touch') return;
-        lastFooterLetter = null;
-        bounceFooter();
-      }, { passive: true });
-      footerWord.addEventListener('pointermove', event => {
-        if (!enabled || !precisePointer.matches || event.pointerType === 'touch') return;
-        const x = event.clientX - footerWord.getBoundingClientRect().left;
-        const letter = footerBaseLetters.find(item => x >= item.offsetLeft && x <= item.offsetLeft + item.offsetWidth);
-        if (letter && letter !== lastFooterLetter) bounceFooterLetter(letter);
-        lastFooterLetter = letter;
-      }, { passive: true });
-      footerWord.addEventListener('pointerleave', () => { lastFooterLetter = null; });
-      footerWord.addEventListener('focus', () => bounceFooter());
-      footerWord.addEventListener('click', () => bounceFooter(true));
-    }
+        // Font ink can be hit-tested outside the trimmed letter box.
+        const rect = letter.getBoundingClientRect();
+        const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+        if (inside && !hovered) bounceFooterLetter(letter);
+        hovered = inside;
+      };
+      letter.addEventListener('pointerenter', onHover, { passive: true });
+      letter.addEventListener('pointermove', onHover, { passive: true });
+      letter.addEventListener('pointerleave', () => { hovered = false; });
+    });
 
     if (list && typeof MutationObserver === 'function') {
       new MutationObserver(records => {
