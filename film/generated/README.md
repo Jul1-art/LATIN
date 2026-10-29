@@ -1,6 +1,6 @@
 # Séquences originales LATIN
 
-Ces sept vidéos sont livrées directement avec le dépôt et utilisées par `../edit.json`. Le montage principal n’a pas besoin de Blender pour les lire ou les assembler.
+Ces sept vidéos originales sont conservées dans le dépôt. Le montage actuel utilise le dé, la dague, la bougie et le cadran solaire. Les monolithes, le bouclier et la traversée Tycho appartiennent à une version précédente : ils ont été remplacés respectivement par Saturne, le Soleil SDO et les Piliers de la Création JWST. Le montage principal n’a pas besoin de Blender pour lire ou assembler les quatre séquences actives.
 
 | Séquence | Citation | Fabrication |
 |---|---|---|

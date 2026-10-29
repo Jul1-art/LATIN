@@ -44,16 +44,23 @@ def music_mix(music, index, duration):
     audio = f'[{index}:a]'
     if duration > available:
         crossfade = float(music.get('loop_crossfade_seconds', 4))
-        if crossfade <= 0 or duration > available * 2 - crossfade:
-            raise SystemExit('Music needs another documented repeat for this duration.')
-        # Independent inputs let acrossfade consume the second recording after
-        # the first. Splitting one live input can truncate it at the overlap.
-        inputs += ['-threads', '1', '-ss', str(start), '-i', music['path']]
-        filters.append(f'[{index}:a]asetpts=PTS-STARTPTS[loopa]')
-        filters.append(f'[{index+1}:a]asetpts=PTS-STARTPTS[loopb]')
-        filters.append(f'[loopa][loopb]acrossfade=d={crossfade}:c1=tri:c2=tri[music]')
+        # Extend an energetic interior phrase, rather than playing the track's
+        # closing cadence and restarting its quiet opening halfway through.
+        loop_in = float(music.get('loop_in_seconds', 44))
+        loop_out = float(music.get('loop_out_seconds', 68))
+        if not 0 < crossfade < loop_in < loop_out < available:
+            raise SystemExit('Music needs valid interior loop points and crossfade.')
+        extended = available + loop_out - loop_in - crossfade
+        tempo = extended / duration
+        if not .95 <= tempo <= 1.05:
+            raise SystemExit('Music needs another documented interior repeat for this duration.')
+        # Separate decoders allow the overlapping phrases to advance freely.
+        inputs += ['-threads', '1', '-ss', str(start + loop_in), '-i', music['path']]
+        filters.append(f'[{index}:a]atrim=duration={loop_out},asetpts=PTS-STARTPTS[loopa]')
+        filters.append(f'[{index+1}:a]atrim=duration={available-loop_in},asetpts=PTS-STARTPTS[loopb]')
+        filters.append(f'[loopa][loopb]acrossfade=d={crossfade}:c1=qsin:c2=qsin,atempo={tempo:.12f}[music]')
         audio = '[music]'
-    filters.append(f'{audio}atrim=duration={duration},asetpts=PTS-STARTPTS,loudnorm=I=-18:TP=-1.5:LRA=9,afade=t=in:st=0:d=1.5,afade=t=out:st={duration-3}:d=3[sound]')
+    filters.append(f'{audio}apad=whole_dur={duration},atrim=duration={duration},asetpts=PTS-STARTPTS,loudnorm=I=-18:TP=-1.5:LRA=9,afade=t=in:st=0:d=1.5,afade=t=out:st={duration-3}:d=3[sound]')
     return inputs, filters
 
 
@@ -122,7 +129,12 @@ def main():
                     canvas = f'scale={width*2}:{height*2}:force_original_aspect_ratio=decrease,pad={width*2}:{height*2}:(ow-iw)/2:(oh-ih)/2:black'
                 else:
                     canvas = f'scale={width*2}:{height*2}:force_original_aspect_ratio=increase,crop={width*2}:{height*2}'
-                video_filter = f'{crop}{canvas},zoompan=z=\'{z}\':x=\'iw/2-iw/zoom/2\':y=\'ih/2-ih/zoom/2\':d=1:s={width}x{height}:fps={FPS}'
+                # Decode and frame very large telescope photographs once. The
+                # lossless canvas avoids decoding a 120MP JPEG for every frame.
+                still = work / f'canvas-{index:02}.png'
+                run(['ffmpeg', '-hide_banner', '-v', 'error', '-threads', '2', '-i', clip['path'], '-vf', f'{crop}{canvas}', '-filter_threads', '2', '-frames:v', '1', '-threads', '2', str(still)])
+                inputs = ['-loop', '1', '-framerate', str(FPS), '-i', str(still)]
+                video_filter = f'zoompan=z=\'{z}\':x=\'iw/2-iw/zoom/2\':y=\'ih/2-ih/zoom/2\':d=1:s={width}x{height}:fps={FPS}'
             else:
                 video_filter = f'{crop}setpts=(PTS-STARTPTS)/{speed}'
                 if clip.get('interpolate'):

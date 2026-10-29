@@ -4,10 +4,10 @@
   const root = document.documentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const MEDIA = 'assets/latin-intro.mp4?v=7';
-  const POSTER = 'assets/latin-intro-poster.webp?v=7';
-  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=7';
-  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=7';
+  const MEDIA = 'assets/latin-intro.mp4?v=8';
+  const POSTER = 'assets/latin-intro-poster.webp?v=8';
+  const MOBILE_MEDIA = 'assets/latin-intro-mobile.mp4?v=8';
+  const MOBILE_POSTER = 'assets/latin-intro-mobile-poster.webp?v=8';
   const LOAD_TIMEOUT_MS = 12000;
   const HIDE_DELAY_MS = 2600;
   let current = null;
@@ -624,7 +624,7 @@
       state.settings.append(tabs, state.playbackSettings, state.chapterSettings);
       state.panel.append(state.seek, row, state.settings);
       state.overlay.append(state.panel);
-      fetch(new URL('film/chapters.json?v=7', document.baseURI), { signal: state.events.signal })
+      fetch(new URL('film/chapters.json?v=8', document.baseURI), { signal: state.events.signal })
         .then(response => { if (!response.ok) throw new Error('Chapters unavailable'); return response.json(); })
         .then(data => {
           if (!isActive(state) || !Array.isArray(data.chapters)) return;

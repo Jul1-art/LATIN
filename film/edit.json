@@ -30,7 +30,12 @@
       "motion": "native",
       "saturation": 0.92,
       "speed": 0.87,
-      "portrait_crop_source": [200, 0, 406, 720],
+      "portrait_crop_source": [
+        200,
+        0,
+        406,
+        720
+      ],
       "title": "Un salut au monde — rouge-gorge"
     },
     {
@@ -65,24 +70,41 @@
       "title": "NASA — empreinte Apollo dans le régolithe"
     },
     {
-      "path": "film/generated/still-lifes/dura-lex.mp4",
+      "path": "film/sources/saturn-cassini.jpg",
       "duration": 7.65,
-      "source_url": "https://github.com/Jul1-art/LATIN/tree/main/film/generated/still-lifes",
-      "license": "Original animation created for the LATIN project",
-      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
-      "motion": "native",
-      "saturation": 0.96,
-      "title": "Dura lex — la pierre demeure"
+      "source_url": "https://commons.wikimedia.org/wiki/File:Saturn_during_Equinox.jpg",
+      "license": "Public domain — NASA (PD-USGov-NASA)",
+      "license_url": "https://commons.wikimedia.org/w/index.php?title=File:Saturn_during_Equinox.jpg&oldid=1281661591",
+      "title": "Saturn during Equinox — Cassini PIA11141",
+      "saturation": 0.98,
+      "type": "image",
+      "zoom": 0.12,
+      "framing": "fit",
+      "motion": "orbital-depth",
+      "portrait_crop_source": [
+        1100,
+        0,
+        2400,
+        2232
+      ]
     },
     {
-      "path": "film/generated/still-lifes/si-vis-pacem.mp4",
+      "path": "film/sources/solar-flare-304.webm",
       "duration": 8.65,
-      "source_url": "https://github.com/Jul1-art/LATIN/tree/main/film/generated/still-lifes",
-      "license": "Original animation created for the LATIN project",
-      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Solar_X1_5_flare_-_May_10,_2022_(SVS5005_-_20220510_FlareX15_AIA304_PSF_2048p30).webm",
+      "license": "Public domain — NASA (PD-USGov-NASA)",
+      "license_url": "https://commons.wikimedia.org/w/index.php?title=File:Solar_X1_5_flare_-_May_10,_2022_(SVS5005_-_20220510_FlareX15_AIA304_PSF_2048p30).webm&oldid=1065571301",
+      "title": "Solar X1.5 flare — May 10, 2022, SDO AIA 304 PSF (SVS5005)",
+      "saturation": 0.98,
+      "start": 12,
+      "speed": 1,
       "motion": "native",
-      "saturation": 0.96,
-      "title": "Si vis pacem — bouclier de bronze"
+      "portrait_crop_source": [
+        0,
+        0,
+        650,
+        1080
+      ]
     },
     {
       "path": "film/sources/wheat.mp4",
@@ -153,15 +175,28 @@
       "title": "Audacibus — ouvrir l’horizon"
     },
     {
-      "path": "film/generated/starfield/star-flight.mp4",
+      "path": "film/sources/pillars-webb.jpg",
       "duration": 10.25,
-      "source_url": "https://github.com/Jul1-art/LATIN/tree/main/film/generated/starfield",
-      "license": "Original animation created for the LATIN project",
-      "license_url": "https://github.com/Jul1-art/LATIN/blob/main/film/generated/README.md",
-      "motion": "native",
-      "saturation": 0.96,
-      "title": "Ad astra — traversée de directions stellaires NASA",
-      "source_data": "NASA Tycho Star Map. Directions/colors sampled from the map; depths and camera trajectory are artistic, not measured stellar distances."
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pillars_of_Creation_(NIRCam_Image).jpg",
+      "license": "Public domain — NASA/STScI Webb; source credit required",
+      "license_url": "https://commons.wikimedia.org/w/index.php?title=File:Pillars_of_Creation_(NIRCam_Image).jpg&oldid=1277547910",
+      "title": "Pillars of Creation — JWST NIRCam",
+      "saturation": 0.98,
+      "type": "image",
+      "zoom": 0.18,
+      "motion": "orbital-depth",
+      "crop_source": [
+        0,
+        1700,
+        8422,
+        4738
+      ],
+      "portrait_crop_source": [
+        0,
+        0,
+        8422,
+        14588
+      ]
     },
     {
       "path": "film/sources/earth-blue.jpg",
@@ -196,7 +231,9 @@
     "license_evidence": "Repository contains music MP3s, cover PNGs, and root CC0 LICENSE, no software. Original catalog not reached due network policy; mirrored source license inspected.",
     "path": "film/music/adventure.mp3",
     "start": 0,
-    "loop_crossfade_seconds": 4
+    "loop_crossfade_seconds": 4,
+    "loop_in_seconds": 44,
+    "loop_out_seconds": 68
   },
   "titles": [
     {
@@ -326,6 +363,6 @@
   ],
   "width": 1280,
   "height": 720,
-  "notes": "Each quotation has its own visual subject. Apollo bootprint is used only for Veni vidi vici; the MDN flower only for Carpe diem. NASA Earth remains only under the LATIN opening and ending. Other scenes mix original 3D illustration, genuine nature footage and an interpretive NASA Tycho data visualization. All thirteen Latin quotes, translations and authors remain exactly unchanged.",
+  "notes": "Each quotation has its own visual subject. Apollo bootprint is used only for Veni vidi vici; the MDN flower only for Carpe diem. NASA Earth remains only under the LATIN opening and ending. Dura lex uses Cassini Saturn; Si vis pacem uses genuine SDO solar footage; Ad astra uses the detailed JWST NIRCam Pillars of Creation image with an artistic perspective camera movement. All thirteen Latin quotes, translations and authors remain exactly unchanged. Music extends an interior phrase and resolves only at the film end.",
   "motion": "orbital-depth"
 }
