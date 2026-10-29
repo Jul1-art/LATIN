@@ -127,13 +127,23 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 .film-credits-link { font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top { display: flex; align-items: center; gap: 14px; font-size: 11px; color: #c9cbbf; padding-block: 14px; }
 .back-top .icon { width: 17px; height: 17px; transform: rotate(-90deg); }
-.footer-word { position: relative; display: block; width: 100%; padding: 85px 0 0; background: transparent; text-align: left; cursor: default; font-size: clamp(90px, 25vw, 380px); line-height: .68; font-weight: 600; letter-spacing: -.07em; }
+.footer-word { position: relative; display: block; width: 100%; padding: 85px 0 0; background: transparent; text-align: left; cursor: default; font-size: clamp(90px, 25vw, 380px); line-height: .75; font-weight: 600; letter-spacing: -.07em; }
 .footer-word-base { display: flex; justify-content: space-between; align-items: flex-end; padding-right: .055em; }
 .footer-word-base { color: var(--paper); }
-.footer-letter { display: block; transform-origin: center bottom; }
-@supports (text-box-trim: trim-both) {
-  .footer-word { line-height: 1; }
-  .footer-letter { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.footer-letter { display: block; }
+.footer-glyph { display: block; pointer-events: none; transform-origin: center bottom; --bounce-height: clamp(18px, 3vw, 42px); --bounce-tilt: -2deg; }
+.footer-letter:nth-child(even) .footer-glyph { --bounce-tilt: 2deg; }
+@media (prefers-reduced-motion: no-preference) {
+  .footer-letter:hover > .footer-glyph { animation: footer-letter-bounce .9s linear; }
+}
+@keyframes footer-letter-bounce {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  12% { transform: translateY(0) scale(1.08, .90); animation-timing-function: cubic-bezier(.2,.65,.35,1); }
+  35% { transform: translateY(calc(-1 * var(--bounce-height))) rotate(var(--bounce-tilt)) scale(.96, 1.07); animation-timing-function: cubic-bezier(.55,0,.8,.4); }
+  55% { transform: translateY(0) scale(1.06, .93); animation-timing-function: cubic-bezier(.2,.65,.35,1); }
+  72% { transform: translateY(calc(-.38 * var(--bounce-height))) rotate(calc(-.4 * var(--bounce-tilt))) scale(.99, 1.03); animation-timing-function: cubic-bezier(.55,0,.8,.4); }
+  87% { transform: translateY(0) scale(1.02, .98); }
+  94% { transform: translateY(calc(-.1 * var(--bounce-height))); }
 }
 
 /* Native dialog focus handling, with motion controlled in script.js. */
@@ -233,6 +243,6 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
-  .portrait-parallax, .portrait-frame img, .featured-type, .footer-letter { transform: none !important; }
+  .portrait-parallax, .portrait-frame img, .featured-type, .footer-letter, .footer-glyph { transform: none !important; }
   .featured-fill { clip-path: none !important; }
 }

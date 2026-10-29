@@ -8,13 +8,10 @@
     const portrait = document.querySelector('.portrait-frame');
     const portraitImage = document.querySelector('.portrait-parallax > img');
     const featured = document.querySelector('.featured');
-    const footerWord = document.querySelector('#footer-word');
     const list = document.querySelector('#quote-list');
     const animations = new Set();
     const pendingReveals = new Map();
     const revealed = new WeakSet();
-    const footerBaseLetters = footerWord ? [...footerWord.querySelectorAll('.footer-word-base .footer-letter')] : [];
-    const footerBounces = new Map();
     const ease = 'cubic-bezier(.16,1,.3,1)';
     const supported = typeof Element.prototype.animate === 'function' && typeof IntersectionObserver === 'function' && typeof requestAnimationFrame === 'function';
     const tilt = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -95,7 +92,6 @@
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
       document.querySelectorAll('.quote-item, .collection-heading').forEach(prepareReveal);
-      if (footerWord) prepareReveal(footerWord);
     }
 
     function updateScene() {
@@ -118,25 +114,6 @@
 
     function queueScene() {
       if (enabled && !sceneFrame) sceneFrame = requestAnimationFrame(updateScene);
-    }
-
-    function bounceFooterLetter(letter) {
-      if (!enabled || footerBounces.has(letter)) return;
-      const lift = Math.min(42, Math.max(18, letter.offsetHeight * 0.16));
-      const direction = Number(letter.dataset.position) % 2 ? 1 : -1;
-      const animation = animate(letter, [
-        { offset: 0, transform: 'translate3d(0,0,0) scale(1,1)' },
-        { offset: 0.12, transform: 'translate3d(0,0,0) scale(1.08,.90)', easing: 'cubic-bezier(.2,.65,.35,1)' },
-        { offset: 0.35, transform: `translate3d(0,${-lift}px,0) rotate(${direction * 2}deg) scale(.96,1.07)`, easing: 'cubic-bezier(.55,0,.8,.4)' },
-        { offset: 0.55, transform: 'translate3d(0,0,0) scale(1.06,.93)', easing: 'cubic-bezier(.2,.65,.35,1)' },
-        { offset: 0.72, transform: `translate3d(0,${-lift * 0.38}px,0) rotate(${-direction * 0.8}deg) scale(.99,1.03)`, easing: 'cubic-bezier(.55,0,.8,.4)' },
-        { offset: 0.87, transform: 'translate3d(0,0,0) scale(1.02,.98)' },
-        { offset: 0.94, transform: `translate3d(0,${-lift * 0.10}px,0)` },
-        { offset: 1, transform: 'translate3d(0,0,0) scale(1,1)' }
-      ], { duration: 900, easing: 'linear' }, () => {
-        if (footerBounces.get(letter) === animation) footerBounces.delete(letter);
-      });
-      if (animation) footerBounces.set(letter, animation);
     }
 
     function updatePointers() {
@@ -167,8 +144,6 @@
     function resetPointers() {
       cancelAnimationFrame(pointerFrame);
       pointerFrame = 0;
-      footerBounces.forEach(animation => { animation.cancel(); animations.delete(animation); });
-      footerBounces.clear();
       tilt.x = tilt.y = tilt.targetX = tilt.targetY = 0;
       if (portrait) {
         portrait.style.setProperty('--portrait-rx', '0deg');
@@ -231,22 +206,6 @@
         queuePointers();
       });
     }
-
-    // React to the letters themselves, never the empty footer padding or a click.
-    footerBaseLetters.forEach(letter => {
-      let hovered = false;
-      const onHover = event => {
-        if (!enabled || event.pointerType === 'touch') return;
-        // Font ink can be hit-tested outside the trimmed letter box.
-        const rect = letter.getBoundingClientRect();
-        const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
-        if (inside && !hovered) bounceFooterLetter(letter);
-        hovered = inside;
-      };
-      letter.addEventListener('pointerenter', onHover, { passive: true });
-      letter.addEventListener('pointermove', onHover, { passive: true });
-      letter.addEventListener('pointerleave', () => { hovered = false; });
-    });
 
     if (list && typeof MutationObserver === 'function') {
       new MutationObserver(records => {
