@@ -120,6 +120,144 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
 @keyframes arrow-pass { 0% { transform: translate(0, 0); } 40% { transform: translate(22px, -22px); } 41% { transform: translate(-22px, 22px); } 100% { transform: translate(0, 0); } }
 .empty-state { text-align: center; font-size: 16px; line-height: 1.8; color: var(--muted); padding: 70px 20px; border-bottom: 1px solid var(--line); }
 
+/* Familiar words, rediscovered: an editorial space for everyday Latin. */
+.everyday-jump { display: inline-flex; align-items: center; gap: 13px; margin-top: 27px; padding-block: 8px; font-size: 11px; color: var(--muted); }
+.everyday-jump .icon { width: 15px; height: 15px; transform: rotate(90deg); transition: transform .4s var(--ease-out); }
+.everyday-jump:hover { color: var(--ink); }
+.everyday-jump:hover .icon { transform: rotate(90deg) translateX(4px); }
+.everyday { border-top: 1px solid var(--line); padding-block: 100px 110px; }
+.everyday-heading { display: grid; grid-template-columns: 1.4fr 1fr; align-items: end; gap: 70px; margin-bottom: 56px; }
+.everyday-eyebrow, .everyday-category { font-size: 10px; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase; }
+.everyday-eyebrow { color: var(--muted); margin-bottom: 27px; }
+.everyday-eyebrow > span { margin-inline: 11px; color: #a5a69d; }
+.everyday-heading h2 { font-size: clamp(58px, 6.3vw, 88px); line-height: .98; letter-spacing: -.065em; }
+.everyday-heading h2 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.055em; }
+.everyday-intro { max-width: 32ch; padding-bottom: 5px; color: #62665e; font-size: 17px; line-height: 1.8; }
+.everyday-features { display: grid; grid-template-columns: 1.12fr 1fr; gap: 20px; }
+.everyday-feature { position: relative; min-width: 0; min-height: 475px; padding: 34px 38px 38px; overflow: hidden; border-radius: 5px; isolation: isolate; }
+.everyday h3, .everyday h4 { margin: 0; font-weight: 400; }
+.everyday-card-top { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+.everyday-index { font-size: 10px; font-variant-numeric: tabular-nums; opacity: .55; }
+.everyday-translation { font-family: var(--serif); font-size: 25px; font-style: italic; line-height: 1.4; letter-spacing: -.025em; }
+.everyday-description { font-size: 12px; line-height: 1.9; }
+.modern-audi { display: flex; flex-direction: column; background: #e8e9df; }
+.modern-audi .everyday-category { color: #59644e; }
+.audi-etymology { display: flex; align-items: center; gap: 20px; width: fit-content; margin-top: 55px; color: #666f60; font-size: 10px; }
+.audi-etymology > span:first-child { font: italic 19px var(--serif); }
+.audi-etymology .icon { width: 40px; height: 18px; transition: transform .6s var(--ease-out); }
+.modern-audi:hover .audi-etymology .icon { transform: translateX(7px); }
+.modern-audi h3 { width: fit-content; font-family: var(--serif); font-size: clamp(82px, 8.5vw, 122px); line-height: 1; letter-spacing: -.07em; margin-block: 3px 8px; }
+.modern-audi .everyday-description { max-width: 41ch; margin-top: 30px; color: #535b4c; }
+.modern-expecto { display: flex; flex-direction: column; justify-content: space-between; background: #172a30; color: #f3f6f0; }
+.modern-expecto .everyday-category, .modern-expecto .everyday-index { color: #c2d9d9; }
+.expecto-halo { position: absolute; z-index: -1; width: 380px; height: 380px; right: -175px; top: 20px; border: 1px solid #bbdfdd35; border-radius: 50%; box-shadow: 0 0 75px #b7e7e41a, inset 0 0 75px #b7e7e414; background: radial-gradient(circle at 50% 50%, #a2d3d114, transparent 70%); transition: transform 1.2s var(--ease-out); }
+.expecto-halo::before, .expecto-halo::after { content: ""; position: absolute; inset: 30px; border: 1px solid #bbdfdd16; border-radius: inherit; }
+.expecto-halo::after { inset: -30px; }
+.modern-expecto:hover .expecto-halo { transform: translate(-25px, 7px) scale(1.05); }
+.expecto-copy { position: relative; padding-top: 53px; }
+.modern-expecto h3 { font-family: var(--serif); font-size: clamp(45px, 4.9vw, 69px); line-height: 1.05; letter-spacing: -.055em; margin-bottom: 23px; }
+.modern-expecto h3 em { color: #b9d5d2; font-weight: 400; }
+.modern-expecto .everyday-translation { font-size: 22px; }
+.modern-expecto .everyday-description { color: #b5c6c7; max-width: 37ch; margin-top: 22px; }
+.everyday-notes { display: grid; grid-template-columns: 1fr 1fr; margin-block: 20px 38px; border-block: 1px solid var(--line); }
+.everyday-notes > article { min-width: 0; padding: 30px 36px 34px 0; }
+.everyday-notes > article + article { border-left: 1px solid var(--line); padding-left: 36px; padding-right: 0; }
+.everyday-notes .everyday-category { color: var(--muted); }
+.acer-definition, .etc-definition { display: flex; align-items: center; gap: 32px; margin-top: 35px; }
+.modern-acer h3 { font-family: var(--serif); font-size: clamp(50px, 5.4vw, 76px); letter-spacing: -.065em; }
+.everyday-notes .everyday-translation { font-size: 20px; }
+.everyday-notes .everyday-description { color: var(--muted); max-width: 30ch; margin-top: 11px; }
+.etc-mark { font-family: var(--serif); font-style: italic; font-size: clamp(54px, 5.8vw, 82px); letter-spacing: -.08em; color: #747e6f; }
+.modern-etc h3 { font-size: 15px; font-weight: 500; margin-bottom: 8px; letter-spacing: -.02em; }
+.modern-etc .everyday-translation { font-size: 18px; }
+.modern-asics { border-radius: 5px; background: #202824; color: #f0f3ed; padding: 32px 38px 25px; }
+.modern-asics .everyday-category, .modern-asics .everyday-index { color: #c0cec0; }
+.asics-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; padding-block: 34px 32px; }
+.asics-kicker { font-size: 11px; color: #b4c1b5; margin-bottom: 8px; }
+.asics-heading h3 { font-size: clamp(65px, 8.4vw, 114px); font-weight: 550; line-height: 1; letter-spacing: -.075em; }
+.asics-intro { font-family: var(--serif); font-size: clamp(25px, 3vw, 38px); line-height: 1.25; letter-spacing: -.04em; padding-bottom: 5px; }
+.asics-words { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; border-block: 1px solid #ffffff29; }
+.asics-words > div { position: relative; padding: 25px 18px; transition: background .4s; }
+.asics-words > div:first-child { padding-left: 0; }
+.asics-words > div + div { border-left: 1px solid #ffffff1f; }
+.asics-words dt { font-family: var(--serif); font-size: clamp(22px, 2.5vw, 33px); letter-spacing: -.04em; }
+.asics-words dt span { color: #c0d4b5; }
+.asics-words dd { margin: 9px 0 0; font-size: 11px; color: #b4c1b5; }
+.asics-words > div:hover { background: #ffffff06; }
+.asics-bottom { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; }
+.asics-bottom > p { max-width: 63ch; color: #b4c1b5; font-size: 11px; line-height: 1.8; }
+.asics-bottom .text-button { flex-shrink: 0; font-size: 11px; }
+.everyday-lexicon { padding-top: 60px; }
+.lexicon-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 25px; margin-bottom: 26px; }
+.lexicon-heading h3 { font-size: 25px; letter-spacing: -.045em; }
+.lexicon-heading > p { font-size: 11px; color: var(--muted); }
+.lexicon-entries { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.lexicon-entry { min-width: 0; padding: 0 27px 0 0; }
+.lexicon-entry + .lexicon-entry { border-left: 1px solid var(--line); padding-left: 27px; }
+.lexicon-entry:last-child { padding-right: 0; }
+.lexicon-entry summary { position: relative; list-style: none; cursor: pointer; padding: 28px 30px 26px 0; }
+.lexicon-entry summary::-webkit-details-marker { display: none; }
+.lexicon-entry summary::after { content: "+"; position: absolute; right: 0; top: 30px; font-size: 20px; font-weight: 300; color: #6a7464; }
+.lexicon-entry[open] summary::after { content: "−"; }
+.lexicon-entry summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.lexicon-entry h4 { font-family: var(--serif); font-size: clamp(27px, 2.6vw, 36px); line-height: 1.2; letter-spacing: -.04em; }
+.lexicon-meaning { display: block; font-family: var(--sans); font-size: 11px; color: var(--muted); line-height: 1.6; letter-spacing: 0; margin-top: 10px; }
+.lexicon-explanation { padding-bottom: 28px; font-size: 12px; line-height: 1.8; }
+.lexicon-example { margin-top: 12px; font-family: var(--serif); font-size: 15px; color: #62685b; }
+@media (max-width: 1000px) {
+  .everyday-heading { gap: 40px; }
+  .everyday-feature { padding: 28px; }
+  .modern-expecto h3 { font-size: clamp(42px, 5.5vw, 60px); }
+  .acer-definition, .etc-definition { gap: 22px; }
+  .everyday-notes .everyday-translation { font-size: 17px; }
+}
+@media (max-width: 760px) {
+  .everyday-jump { margin-top: 15px; }
+  .everyday { padding-block: 62px 65px; }
+  .everyday-heading { grid-template-columns: 1fr; gap: 25px; margin-bottom: 32px; }
+  .everyday-eyebrow { font-size: 9px; margin-bottom: 23px; }
+  .everyday-heading h2 { font-size: clamp(57px, 13vw, 78px); }
+  .everyday-intro { font-size: 14px; max-width: 37ch; line-height: 1.8; }
+  .everyday-features { grid-template-columns: 1fr; gap: 14px; }
+  .everyday-feature { min-height: 0; padding: 26px; }
+  .everyday-category { font-size: 9px; letter-spacing: .06em; }
+  .audi-etymology { margin-top: 37px; }
+  .modern-audi h3 { font-size: 100px; }
+  .modern-audi .everyday-translation { font-size: 25px; }
+  .modern-audi .everyday-description { margin-top: 24px; }
+  .expecto-copy { padding-top: 48px; }
+  .modern-expecto h3 { font-size: clamp(47px, 11vw, 68px); margin-bottom: 22px; }
+  .modern-expecto .everyday-translation { font-size: 21px; }
+  .expecto-halo { right: -190px; top: -5px; }
+  .everyday-notes { grid-template-columns: 1fr; margin-bottom: 24px; }
+  .everyday-notes > article { padding: 25px 0; }
+  .everyday-notes > article + article { padding: 25px 0; border-left: 0; border-top: 1px solid var(--line); }
+  .acer-definition, .etc-definition { margin-top: 22px; gap: 26px; }
+  .modern-acer h3 { font-size: 64px; }
+  .etc-mark { min-width: 104px; font-size: 72px; }
+  .everyday-notes .everyday-translation { font-size: 18px; }
+  .modern-asics { padding: 25px 24px 18px; }
+  .asics-heading { display: block; padding-block: 29px 23px; }
+  .asics-heading h3 { font-size: clamp(65px, 17vw, 100px); }
+  .asics-intro { font-size: 27px; margin-top: 23px; }
+  .asics-words { grid-template-columns: 1fr; }
+  .asics-words > div, .asics-words > div:first-child { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 14px 0; }
+  .asics-words > div + div { border-left: 0; border-top: 1px solid #ffffff1f; }
+  .asics-words dt { font-size: 26px; }
+  .asics-words dd { margin-top: 0; }
+  .asics-bottom { display: block; padding-top: 20px; }
+  .asics-bottom .text-button { margin-top: 8px; }
+  .everyday-lexicon { padding-top: 42px; }
+  .lexicon-heading { display: block; margin-bottom: 24px; }
+  .lexicon-heading h3 { font-size: 25px; }
+  .lexicon-heading > p { margin-top: 13px; line-height: 1.7; }
+  .lexicon-entries { grid-template-columns: 1fr; }
+  .lexicon-entry, .lexicon-entry + .lexicon-entry, .lexicon-entry:last-child { border-left: 0; border-bottom: 1px solid var(--line); padding: 0; }
+  .lexicon-entry summary { padding-block: 24px; }
+  .lexicon-entry summary::after { top: 25px; }
+  .lexicon-entry h4 { font-size: 32px; }
+}
+
 /* Plain monumental type: each letter bounces when the pointer enters it. */
 .site-footer { background: var(--ink); color: var(--paper); overflow: clip; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-block: 30px; border-bottom: 1px solid #ffffff20; }

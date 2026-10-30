@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F8F5F0">
-  <meta name="description" content="Le latin, pour la vie. Treize citations et leurs traductions.">
+  <meta name="description" content="Le latin, pour la vie. Treize citations et leurs traductions, des marques aux expressions du quotidien.">
   <title>LATIN — Pour la vie.</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="image" href="assets/roman-portrait.webp">
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=17">
   <script src="script.js?v=10" defer></script>
   <script src="intro.js?v=12" defer></script>
-  <script src="motion.js?v=16" defer></script>
+  <script src="motion.js?v=17" defer></script>
 </head>
 <body>
   <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -27,7 +27,7 @@
 
   <header class="site-header wrap" id="accueil">
     <a class="wordmark" href="#accueil" aria-label="LATIN, accueil"><svg class="logo-mark" aria-hidden="true"><use href="#icon-mark"/></svg>LATIN<span class="brand-period">.</span></a>
-    <nav class="main-nav" aria-label="Navigation principale"><a href="#accueil">Découvrir</a><a href="#citations">Les citations <span class="nav-count">13</span></a></nav>
+    <nav class="main-nav" aria-label="Navigation principale"><a href="#accueil">Découvrir</a><a href="#citations">Les citations <span class="nav-count">13</span></a><a href="#au-quotidien">Au quotidien</a></nav>
     <div class="header-actions"><button class="intro-replay" data-intro-replay aria-label="Revoir l’introduction" title="Revoir l’introduction"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg></button><button class="header-random" data-random>Au hasard <svg class="icon" aria-hidden="true"><use href="#icon-diagonal"/></svg></button></div>
   </header>
 
@@ -37,6 +37,7 @@
         <h1 id="hero-title"><span class="hero-line"><span class="hero-line-inner">Le latin.</span></span><span class="hero-line hero-line-accent"><span class="hero-line-inner">Pour la vie.</span></span></h1>
         <p class="hero-description">Deux mille ans. Toujours vivant.</p>
         <div class="hero-actions"><a class="button button-dark" href="#citations"><span>Explorer les citations</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><button class="hero-film-button" data-intro-replay><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>Voir le film</span><span class="film-duration">01:45</span></button></div>
+        <a class="everyday-jump" href="#au-quotidien">Et dans la vie d’aujourd’hui ? <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
       </div>
       <figure class="hero-visual"><div class="portrait-frame"><div class="portrait-parallax"><img src="assets/roman-portrait.webp" alt="Portrait sculptural d’un jeune Romain en marbre clair" width="1122" height="1402" fetchpriority="high"></div></div></figure>
     </section>
@@ -66,6 +67,64 @@
       <p class="empty-state" id="empty-state" hidden>Aucune citation trouvée.</p>
       <p class="sr-only" id="result-count" role="status"></p>
       <noscript><p>Activez JavaScript pour découvrir les treize citations et leur traduction.</p></noscript>
+    </section>
+
+    <section class="everyday" id="au-quotidien" aria-labelledby="everyday-title">
+      <div class="wrap">
+        <div class="everyday-heading">
+          <div><p class="everyday-eyebrow">Le latin au quotidien <span aria-hidden="true">/</span> VIII découvertes</p><h2 id="everyday-title">Le latin,<br><em>incognito.</em></h2></div>
+          <p class="everyday-intro">Sur une calandre, dans un sortilège ou au détour d’une phrase. On le croise partout. Et parfois, on le parle déjà.</p>
+        </div>
+
+        <div class="everyday-features">
+          <article class="everyday-feature modern-audi" aria-labelledby="audi-title">
+            <div class="everyday-card-top"><p class="everyday-category">Mobilité &amp; Ingénierie</p><span class="everyday-index" aria-hidden="true">01</span></div>
+            <div class="audi-etymology" aria-hidden="true"><span lang="de">Horch</span><svg class="icon"><use href="#icon-arrow"/></svg><span>latin</span></div>
+            <h3 id="audi-title" lang="la">Audi</h3>
+            <p class="everyday-translation">« Écoute ! »</p>
+            <p class="everyday-description">Le nom du constructeur traduit le mot allemand <span lang="de">« horch »</span>, impératif du verbe <span lang="de">horchen</span> : écouter. Le nom d’August Horch, le fondateur, devient ainsi Audi.</p>
+          </article>
+
+          <article class="everyday-feature modern-expecto" aria-labelledby="expecto-title">
+            <div class="everyday-card-top"><p class="everyday-category">Imaginaire populaire</p><span class="everyday-index" aria-hidden="true">02</span></div>
+            <div class="expecto-halo" aria-hidden="true"></div>
+            <div class="expecto-copy"><h3 id="expecto-title" lang="la">Expecto<br><em>Patronum</em></h3><p class="everyday-translation">« J’attends un protecteur »</p><p class="everyday-description">Dans l’univers de Harry Potter, quelques mots latins suffisent à invoquer une présence protectrice. Une langue ancienne, un imaginaire bien vivant.</p></div>
+          </article>
+        </div>
+
+        <div class="everyday-notes">
+          <article class="modern-acer" aria-labelledby="acer-title">
+            <div class="everyday-card-top"><p class="everyday-category">Technologie</p><span class="everyday-index" aria-hidden="true">03</span></div>
+            <div class="acer-definition"><h3 id="acer-title" lang="la">Acer</h3><div><p class="everyday-translation">« Vif &amp; Piquant »</p><p class="everyday-description">Derrière le nom familier de l’informatique, un adjectif latin : vif, aigu, piquant.</p></div></div>
+          </article>
+          <article class="modern-etc" aria-labelledby="etc-title">
+            <div class="everyday-card-top"><p class="everyday-category">Dans nos phrases</p><span class="everyday-index" aria-hidden="true">04</span></div>
+            <div class="etc-definition"><span class="etc-mark" aria-hidden="true">etc.</span><div><h3 id="etc-title" lang="la">Et cetera</h3><p class="everyday-translation">« Et toutes les autres choses »</p><p class="everyday-description">Trois lettres pour laisser la liste ouverte. Littéralement : « et les autres choses ».</p></div></div>
+          </article>
+        </div>
+
+        <article class="modern-asics" aria-labelledby="asics-title">
+          <div class="everyday-card-top"><p class="everyday-category">Philosophie &amp; Sport</p><span class="everyday-index" aria-hidden="true">05</span></div>
+          <div class="asics-heading"><div><p class="asics-kicker">Une marque. Cinq mots.</p><h3 id="asics-title">ASICS</h3></div><p class="asics-intro">Une âme saine<br>dans un corps sain.</p></div>
+          <dl class="asics-words" aria-label="Les cinq mots de la devise ASICS">
+            <div><dt lang="la"><span>A</span>nima</dt><dd>L’âme</dd></div>
+            <div><dt lang="la"><span>S</span>ana</dt><dd>Saine</dd></div>
+            <div><dt lang="la"><span>I</span>n</dt><dd>Dans</dd></div>
+            <div><dt lang="la"><span>C</span>orpore</dt><dd>Un corps</dd></div>
+            <div><dt lang="la"><span>S</span>ano</dt><dd>Sain</dd></div>
+          </dl>
+          <div class="asics-bottom"><p>Le nom assemble les initiales de <span lang="la">Anima Sana In Corpore Sano</span>, une variation de la célèbre maxime de Juvénal.</p><button class="text-button" data-quote="5">Lire la maxime <svg class="icon" aria-hidden="true"><use href="#icon-diagonal"/></svg></button></div>
+        </article>
+
+        <div class="everyday-lexicon" aria-labelledby="lexicon-title">
+          <div class="lexicon-heading"><h3 id="lexicon-title">Dans la conversation.</h3><p>Trois expressions à redécouvrir. Ouvrez-les.</p></div>
+          <div class="lexicon-entries">
+            <details class="lexicon-entry"><summary><h4><span lang="la">A priori</span><span class="lexicon-meaning">Au premier abord</span></h4></summary><div class="lexicon-explanation"><p>Avant l’expérience ou la vérification, à partir d’une première idée.</p><p class="lexicon-example">« A priori, cette idée devrait fonctionner. »</p></div></details>
+            <details class="lexicon-entry"><summary><h4><span lang="la">Vice versa</span><span class="lexicon-meaning">Ordre changé</span></h4></summary><div class="lexicon-explanation"><p>On inverse les rôles ou le sens de la relation : et réciproquement.</p><p class="lexicon-example">« Je t’aide, et vice versa. »</p></div></details>
+            <details class="lexicon-entry"><summary><h4><span lang="la">A contrario</span><span class="lexicon-meaning">Au contraire</span></h4></summary><div class="lexicon-explanation"><p>On examine le cas opposé pour en tirer une autre conclusion.</p><p class="lexicon-example">Une expression pour raisonner par opposition.</p></div></details>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

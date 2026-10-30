@@ -91,7 +91,7 @@
           animation.play();
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-      document.querySelectorAll('.quote-item, .collection-heading').forEach(prepareReveal);
+      document.querySelectorAll('.quote-item, .collection-heading, .everyday-heading, .everyday-feature, .everyday-notes > article, .modern-asics, .everyday-lexicon').forEach(prepareReveal);
     }
 
     function updateScene() {
