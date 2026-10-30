@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { IconArrow, IconPlay } from './Icons';
 
 interface HeroProps {
@@ -6,35 +6,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenFilm }) => {
-  const portraitRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ rx: 0, ry: 0, y: 0 });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!portraitRef.current) return;
-      const rect = portraitRef.current.getBoundingClientRect();
-      const height = window.innerHeight;
-      const progress = Math.max(-1, Math.min(1, (height / 2 - rect.top - rect.height / 2) / ((height + rect.height) / 2)));
-      const travel = Math.min(25, rect.height * 0.018);
-      setTilt((prev) => ({ ...prev, y: progress * travel }));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === 'touch' || !portraitRef.current) return;
-    const rect = portraitRef.current.getBoundingClientRect();
-    const rx = Math.max(-2, Math.min(2, (-(e.clientY - rect.top - rect.height / 2) / rect.height) * 3.5));
-    const ry = Math.max(-2, Math.min(2, ((e.clientX - rect.left - rect.width / 2) / rect.width) * 3.5));
-    setTilt((prev) => ({ ...prev, rx, ry }));
-  };
-
-  const handlePointerLeave = () => {
-    setTilt((prev) => ({ ...prev, rx: 0, ry: 0 }));
-  };
 
   const renderBouncyText = (text: string) => {
     return text.split('').map((char, idx) => (
@@ -85,29 +56,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenFilm }) => {
           Et dans la vie d’aujourd’hui ? <IconArrow />
         </a>
       </div>
-      <figure className="hero-visual">
-        <div
-          ref={portraitRef}
-          className="portrait-frame hero-portrait-glow"
-          onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerLeave}
-        >
-          <div
-            className="portrait-parallax"
-            style={{
-              transform: `translate3d(0, ${tilt.y.toFixed(2)}px, 0) rotateX(${tilt.rx.toFixed(3)}deg) rotateY(${tilt.ry.toFixed(3)}deg)`,
-            }}
-          >
-            <img
-              src={`${import.meta.env.BASE_URL}assets/roman-portrait.webp`}
-              alt="Portrait sculptural d’un jeune Romain en marbre clair"
-              width="1122"
-              height="1402"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </figure>
     </section>
   );
 };
