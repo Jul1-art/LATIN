@@ -1,0 +1,24 @@
+{
+  "title": "Adventure",
+  "artist": "Rafael Krux, CinematicWaves.com",
+  "album": "FreePD Music",
+  "duration_seconds": 84.7238,
+  "license": "CC0-1.0",
+  "license_url": "https://github.com/0lhi/FreePD/blob/cf011c7016595833b550a88ff127f089188b25f8/LICENSE",
+  "source_url": "https://github.com/0lhi/FreePD/blob/cf011c7016595833b550a88ff127f089188b25f8/Epic/Adventure.mp3",
+  "download_url": "https://raw.githubusercontent.com/0lhi/FreePD/cf011c7016595833b550a88ff127f089188b25f8/Epic/Adventure.mp3",
+  "original_catalog": "https://freepd.com/epic.php",
+  "sha256": "18432184e1a3acf8095b8b45b688fe08f7afb2447fc6e3adc98cc944c541a733",
+  "license_evidence": "Repository contains music MP3s, cover PNGs, and root CC0 LICENSE, no software. Original catalog not reached due network policy; mirrored source license inspected.",
+  "film_mix": {
+    "duration_seconds": 105,
+    "loop_in_seconds": 44,
+    "loop_out_seconds": 68,
+    "crossfade_seconds": 4,
+    "crossfade_curve": "qsin equal power",
+    "tempo_factor": 0.99736952381,
+    "opening_fade_seconds": 1.5,
+    "final_fade_seconds": 3,
+    "description": "An interior orchestral phrase is extended before the closing cadence. The ending and quiet opening are never crossfaded into each other mid-film. Minor tempo fit preserves pitch and fills the full105-second timeline."
+  }
+}

@@ -240,19 +240,19 @@ export const FilmModal: React.FC<FilmModalProps> = ({
         className="latin-film-video"
         playsInline
         preload="metadata"
-        poster="/assets/latin-intro-poster.webp"
+        poster={`${import.meta.env.BASE_URL}assets/latin-intro-poster.webp`}
         onLoadedMetadata={() => {
           if (videoRef.current && Number.isFinite(videoRef.current.duration)) {
             setDuration(videoRef.current.duration);
           }
         }}
         onEnded={() => setMode('ended')}
-        src="/assets/latin-intro.mp4"
+        src={`${import.meta.env.BASE_URL}assets/latin-intro.mp4`}
       />
 
       <audio
         ref={audioRef}
-        src="/film/music/adventure.mp3"
+        src={`${import.meta.env.BASE_URL}film/music/adventure.mp3`}
         preload="metadata"
       />
 

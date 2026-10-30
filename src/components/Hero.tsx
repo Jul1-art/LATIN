@@ -99,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenFilm }) => {
             }}
           >
             <img
-              src="/assets/roman-portrait.webp"
+              src={`${import.meta.env.BASE_URL}assets/roman-portrait.webp`}
               alt="Portrait sculptural d’un jeune Romain en marbre clair"
               width="1122"
               height="1402"
