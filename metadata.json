@@ -1,0 +1,8 @@
+{
+  "name": "LATIN — Pour la vie",
+  "description": "Le latin, pour la vie. Treize citations et leurs traductions, des marques aux expressions du quotidien.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

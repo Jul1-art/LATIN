@@ -1,3 +1,11 @@
+node_modules/
+dist/
+.playwright-cli/
+.aistudio/
+.env
+.env.local
+.DS_Store
+
 film/sources/
 film/render/
 __pycache__/
