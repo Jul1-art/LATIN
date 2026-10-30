@@ -14,6 +14,7 @@ export const App: React.FC = () => {
   const [selectedQuoteIndex, setSelectedQuoteIndex] = useState<number | null>(null);
   const [isFilmOpen, setIsFilmOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'credits'>('home');
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleRandomQuote = () => {
     const current = selectedQuoteIndex ?? 0;
@@ -35,33 +36,48 @@ export const App: React.FC = () => {
     }
   }, []);
 
+  const handleViewChange = (newView: 'home' | 'credits') => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentView(newView);
+      setIsTransitioning(false);
+    }, 400);
+  };
+
   if (currentView === 'credits') {
-    return <CreditsView onClose={() => setCurrentView('home')} />;
+    return (
+      <div className={isTransitioning ? 'view-transition-out' : 'view-transition-in'}>
+        <CreditsView onClose={() => handleViewChange('home')} />
+      </div>
+    );
   }
 
   return (
     <>
-      <a className="skip-link" href="#citations">
-        Aller aux citations
-      </a>
+      <div className={isTransitioning ? 'view-transition-out' : 'view-transition-in'}>
+        <a className="skip-link" href="#citations">
+          Aller aux citations
+        </a>
 
-      <Header
-        onOpenFilm={() => setIsFilmOpen(true)}
-        onRandomQuote={handleRandomQuote}
-      />
+        <Header
+          onOpenFilm={() => setIsFilmOpen(true)}
+          onRandomQuote={handleRandomQuote}
+        />
 
-      <main>
-        <Hero onOpenFilm={() => setIsFilmOpen(true)} />
-        <Featured onOpenQuote={handleOpenQuote} />
-        <Collection onOpenQuote={handleOpenQuote} />
-        <Everyday onOpenQuote={handleOpenQuote} />
-      </main>
+        <main>
+          <Hero onOpenFilm={() => setIsFilmOpen(true)} />
+          <Featured onOpenQuote={handleOpenQuote} />
+          <Collection onOpenQuote={handleOpenQuote} />
+          <Everyday onOpenQuote={handleOpenQuote} />
+        </main>
 
-      <Footer
-        onOpenFilm={() => setIsFilmOpen(true)}
-        onOpenCredits={() => setCurrentView('credits')}
-      />
+        <Footer
+          onOpenFilm={() => setIsFilmOpen(true)}
+          onOpenCredits={() => handleViewChange('credits')}
+        />
+      </div>
 
+      {/* Modals are outside the transition wrapper so they work normally */}
       <ReaderModal
         isOpen={selectedQuoteIndex !== null}
         quoteIndex={selectedQuoteIndex ?? 0}
@@ -74,7 +90,7 @@ export const App: React.FC = () => {
         onClose={() => setIsFilmOpen(false)}
         onOpenCredits={() => {
           setIsFilmOpen(false);
-          setCurrentView('credits');
+          handleViewChange('credits');
         }}
       />
     </>
