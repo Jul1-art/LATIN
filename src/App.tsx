@@ -8,13 +8,12 @@ import { Footer } from './components/Footer';
 import { ReaderModal } from './components/ReaderModal';
 import { FilmModal } from './components/FilmModal';
 import { CreditsView } from './components/CreditsView';
-import { StatsDashboard } from './components/StatsDashboard';
 import { QUOTES } from './data/quotes';
 
 export const App: React.FC = () => {
   const [selectedQuoteIndex, setSelectedQuoteIndex] = useState<number | null>(null);
   const [isFilmOpen, setIsFilmOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'credits' | 'dashboard'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'credits'>('home');
 
   const handleRandomQuote = () => {
     const current = selectedQuoteIndex ?? 0;
@@ -61,7 +60,6 @@ export const App: React.FC = () => {
       <Footer
         onOpenFilm={() => setIsFilmOpen(true)}
         onOpenCredits={() => setCurrentView('credits')}
-        onOpenDashboard={() => setCurrentView('dashboard')}
       />
 
       <ReaderModal
@@ -79,10 +77,6 @@ export const App: React.FC = () => {
           setCurrentView('credits');
         }}
       />
-
-      {currentView === 'dashboard' && (
-        <StatsDashboard onClose={() => setCurrentView('home')} />
-      )}
     </>
   );
 };

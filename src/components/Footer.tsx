@@ -4,13 +4,11 @@ import { IconPlay, IconArrow } from './Icons';
 interface FooterProps {
   onOpenFilm: () => void;
   onOpenCredits: () => void;
-  onOpenDashboard: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenFilm,
   onOpenCredits,
-  onOpenDashboard,
 }) => {
   const letters = ['L', 'A', 'T', 'I', 'N'];
   const [bouncingIndices, setBouncingIndices] = useState<number[]>([]);
@@ -50,14 +48,6 @@ export const Footer: React.FC<FooterProps> = ({
             >
               Crédits du film
             </button>
-            <button
-              type="button"
-              className="film-credits-link"
-              onClick={onOpenDashboard}
-              title="Statistiques de consultation"
-            >
-              Statistiques
-            </button>
           </div>
           <a className="back-top" href="#accueil">
             Tout en haut <IconArrow />
@@ -96,4 +86,3 @@ export const Footer: React.FC<FooterProps> = ({
     </footer>
   );
 };
-
