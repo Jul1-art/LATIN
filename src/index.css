@@ -505,12 +505,21 @@ h2 { font-size: clamp(40px, 4.2vw, 61px); line-height: 1.09; font-weight: 500; l
   .main-nav { display: none; }
   .header-actions { gap: 8px; }
   .header-random { gap: 12px; font-size: 11px; }
-  .hero { grid-template-columns: 1fr; gap: 38px; padding-block: 48px 55px; }
+  .hero { grid-template-columns: 1fr; gap: 32px; padding-block: 40px 50px; text-align: center; }
   .hero-copy { padding: 0; }
-  h1 { font-size: clamp(63px, 13vw, 98px); line-height: 1.03; letter-spacing: -.07em; }
-  .hero-actions { gap: 10px; }
-  .hero-film-button { min-height: 50px; padding: 13px 16px; font-size: 11px; }
-  .hero-description { margin: 23px 0 25px; font-size: 14px; }
+  h1 { font-size: clamp(48px, 10vw, 80px); line-height: 1.05; letter-spacing: -.06em; }
+  .hero-actions { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 16px; 
+    width: 100%; 
+    margin-top: 24px;
+  }
+  .hero-film-button { min-height: 48px; padding: 12px 18px; font-size: 11px; width: 100%; max-width: 280px; }
+  .button { min-height: 48px; font-size: 11px; padding: 14px 20px; gap: 12px; width: 100%; max-width: 280px; }
+  .hero-description { margin: 20px 0 24px; font-size: 15px; }
+  .everyday-jump { justify-content: center; margin-top: 28px; }
   .button { min-height: 50px; font-size: 11px; padding: 15px 20px; gap: 28px; }
   .portrait-frame img { height: auto; max-height: 500px; aspect-ratio: 1; object-position: 50% 42%; }
   .featured-inner { padding-block: 57px 20px; }
