@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Featured } from './components/Featured';
@@ -26,6 +26,15 @@ export const App: React.FC = () => {
   const handleOpenQuote = (index: number) => {
     setSelectedQuoteIndex(index);
   };
+
+  // Ouvrir la vidéo automatiquement au chargement
+  useEffect(() => {
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+    if (!hasSeenIntro) {
+      setIsFilmOpen(true);
+      sessionStorage.setItem('hasSeenIntro', 'true');
+    }
+  }, []);
 
   if (currentView === 'credits') {
     return <CreditsView onClose={() => setCurrentView('home')} />;

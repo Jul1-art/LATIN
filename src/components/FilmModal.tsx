@@ -39,6 +39,34 @@ export const FilmModal: React.FC<FilmModalProps> = ({
   const [controlsVisible, setControlsVisible] = useState(true);
   const hideTimerRef = useRef<number | null>(null);
 
+  // Auto-play when modal opens
+  useEffect(() => {
+    if (isOpen && videoRef.current) {
+      const playVideo = async () => {
+        try {
+          if (videoRef.current) {
+            videoRef.current.currentTime = 0;
+            await videoRef.current.play();
+          }
+          if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+            await audioRef.current.play();
+          }
+          setMode('playing');
+        } catch {
+          // Autoplay fallback
+        }
+      };
+      playVideo();
+    } else if (!isOpen) {
+      // Pause when modal closes
+      if (videoRef.current) videoRef.current.pause();
+      if (audioRef.current) audioRef.current.pause();
+      setMode('paused');
+    }
+  }, [isOpen]);
+
+
   const formatTime = (secs: number) => {
     const s = Math.max(0, Math.floor(Number.isFinite(secs) ? secs : 0));
     return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;

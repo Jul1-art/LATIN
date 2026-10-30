@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconLogoMark, IconPlay, IconDiagonal } from './Icons';
+import { IconLogoMark, IconDiagonal } from './Icons';
 
 interface HeaderProps {
   onOpenFilm: () => void;
@@ -22,15 +22,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFilm, onRandomQuote }) => 
         <a href="#au-quotidien" className="nav-link">Au quotidien</a>
       </nav>
       <div className="header-actions">
-        <button
-          type="button"
-          className="intro-replay header-btn-replay"
-          onClick={onOpenFilm}
-          aria-label="Revoir l’introduction"
-          title="Revoir l’introduction"
-        >
-          <IconPlay className="icon" />
-        </button>
         <button
           type="button"
           className="header-random header-btn-random"
